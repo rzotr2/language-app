@@ -1,22 +1,28 @@
-import express, { Request, Response } from "express";
-import userRoutes from "./routes/userRoutes";
+import express from "express";
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { connectDB } from "./config/db";
+import authRouter from './routes/auth';
+import usersRouter from './routes/users';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: 'http://localhost:5173', // або '*' для всіх
+    origin: "http://localhost:5173",
     methods: ['GET','POST','PUT','DELETE'],
-    allowedHeaders: ['Content-Type','Authorization']
+    allowedHeaders: ['Content-Type','Authorization'],
+    credentials: true,
 }));
 
 app.use(express.json());
-app.use("/api", userRoutes);
+app.use(cookieParser());
 
-app.get("/", (req: Request, res: Response) => {
-    res.send("Welcome to the Node.js + TypeScript API!");
+app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
+
+app.get('/', (_req, res) => {
+    res.send('Welcome to the API');
 });
 
 const connectToDB = async () => {

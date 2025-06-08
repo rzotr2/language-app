@@ -1,36 +1,172 @@
-import logo from '../assets/logo.svg';
+import logo from '../assets/svg/logo.svg';
+import { Link } from "react-router";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { DropdownMenu } from "radix-ui";
+import { FiMenu } from "react-icons/fi";
+import userLogo from "../assets/svg/userLogo.svg";
+import { findUserById } from "../services/users.ts";
+import type { User } from "../models/user.ts";
 
 export default function HeaderGeneral() {
+    const [currentUser, setCurrentUser] = useState<User | null>();
+    const [loading, setLoading] = useState<boolean>(false);
+    const itemClassName =
+        "relative flex cursor-default select-none items-center rounded-sm px-4 py-2 text-sm outline-none transition-colors " +
+        "focus:bg-slate-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50";
+
+    useEffect(() => {
+        (async () => {
+            setLoading(true);
+            try {
+                const data = await axios.get('/api/auth/me');
+                const user = await findUserById(data.data.id);
+                if (user) {
+                    localStorage.setItem("currentUserId", user._id);
+                    setCurrentUser(user);
+                }
+            } catch (err) {
+                setCurrentUser(null);
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, []);
+
     return (
         <>
-            <nav className="w-full py-2 md:py-3 px-3 shadow-sm items-center">
+            <nav className="w-full py-2 px-1 md:py-3 md:px-3 shadow-sm items-center">
                 <div className="w-full flex items-center justify-between px-2 md:px-6">
-                    <div className="flex items-center gap-3">
-                        <a href="#">
-                            <img src={logo} alt="Language App logo"/>
-                        </a>
-                        <h1 className="text-xl md:text-2xl font-semibold">Language App</h1>
-                    </div>
+                    <Link to="/" className="flex items-center gap-3">
+                        <img src={logo} alt="Language App logo"/>
+                        <h1 className="text-xl md:text-2xl font-semibold cursor-default">Language App</h1>
+                    </Link>
                     <ul className="md:flex space-x-8 hidden font-medium md:items-center">
                         <li><a href="#" className="cursor-pointer hover:underline">About Me</a></li>
                         <li><a href="#" className="cursor-pointer hover:underline">Projects</a></li>
                         <li><a href="#" className="cursor-pointer hover:underline">Resume</a></li>
-                        <li><a href="#" className="cursor-pointer hover:underline">Contact</a></li>
+                        <li>
+                            {loading ? (
+                                <div role="status" className="min-w-[50px] flex justify-center">
+                                    <div className="Buttons"></div>
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            ) : (
+                                <>
+                                    {currentUser ? (
+                                        <DropdownMenu.Root>
+                                            <DropdownMenu.Trigger className="focus:outline-0 flex gap-2 px-2 items-center text-gray-900 rounded-full
+                                                                    hover:text-blue-600 md:me-0 ring-4 ring-gray-100">
+                                                <img src={userLogo} alt="user logo" className="h-7"/>
+                                                <svg className="w-2.5 h-2.5" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                    <path stroke="currentColor" strokeLinecap="round"
+                                                          strokeLinejoin="round"
+                                                          strokeWidth="2" d="m1 1 4 4 4-4"/>
+                                                </svg>
+                                            </DropdownMenu.Trigger>
+                                            <DropdownMenu.Portal>
+                                                <DropdownMenu.Content
+                                                    className="z-50 min-w-[12rem] overflow-hidden rounded-lg border border-slate-200 bg-gray-200 py-1"
+                                                    align="center"
+                                                    sideOffset={12}
+                                                >
+                                                    <DropdownMenu.Item className={itemClassName}>
+                                                        <span className="text-sm font-bold">
+                                                            {currentUser.email}
+                                                        </span>
+                                                    </DropdownMenu.Item>
+                                                    <DropdownMenu.Item className={itemClassName}>
+                                                        Manage account
+                                                    </DropdownMenu.Item>
+                                                    <DropdownMenu.Item className={itemClassName}>
+                                                        Feedback
+                                                    </DropdownMenu.Item>
+                                                    <DropdownMenu.Separator className="bg-gray-900"/>
+                                                    <DropdownMenu.Item className={itemClassName}>
+                                                        <Link
+                                                            to="http://localhost:5000/api/auth/logout"
+                                                            className="text-red-500"
+                                                        >
+                                                            Sign Out
+                                                        </Link>
+                                                    </DropdownMenu.Item>
+                                                </DropdownMenu.Content>
+                                            </DropdownMenu.Portal>
+                                        </DropdownMenu.Root>
+                                    ) : (
+                                        <Link to="/login"
+                                              className="text-white bg-blue-700 hover:bg-blue-800
+                                        focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2">
+                                            Log in
+                                        </Link>
+                                    )}
+                                </>
+                            )}
+                        </li>
                     </ul>
-                    <a href="https://github.com/rzotr2/language-app"
-                       className="flex gap-3 hover:underline hover:scale-110 transition-transform duration-300 items-center">
-                        <svg height="32" aria-hidden="true" viewBox="0 0 24 24" version="1.1" width="32"
-                             data-view-component="true" className="hidden md:block">
-                            <path
-                                d="M12 1C5.9225 1 1 5.9225 1 12C1 16.8675 4.14875 20.9787 8.52125 22.4362C9.07125 22.5325 9.2775 22.2025 9.2775 21.9137C9.2775 21.6525 9.26375 20.7862 9.26375 19.865C6.5 20.3737 5.785 19.1912 5.565 18.5725C5.44125 18.2562 4.905 17.28 4.4375 17.0187C4.0525 16.8125 3.5025 16.3037 4.42375 16.29C5.29 16.2762 5.90875 17.0875 6.115 17.4175C7.105 19.0812 8.68625 18.6137 9.31875 18.325C9.415 17.61 9.70375 17.1287 10.02 16.8537C7.5725 16.5787 5.015 15.63 5.015 11.4225C5.015 10.2262 5.44125 9.23625 6.1425 8.46625C6.0325 8.19125 5.6475 7.06375 6.2525 5.55125C6.2525 5.55125 7.17375 5.2625 9.2775 6.67875C10.1575 6.43125 11.0925 6.3075 12.0275 6.3075C12.9625 6.3075 13.8975 6.43125 14.7775 6.67875C16.8813 5.24875 17.8025 5.55125 17.8025 5.55125C18.4075 7.06375 18.0225 8.19125 17.9125 8.46625C18.6138 9.23625 19.04 10.2125 19.04 11.4225C19.04 15.6437 16.4688 16.5787 14.0213 16.8537C14.42 17.1975 14.7638 17.8575 14.7638 18.8887C14.7638 20.36 14.75 21.5425 14.75 21.9137C14.75 22.2025 14.9563 22.5462 15.5063 22.4362C19.8513 20.9787 23 16.8537 23 12C23 5.9225 18.0775 1 12 1Z"></path>
-                        </svg>
-                        <h2 className="hidden md:block font-semibold">GitHub</h2>
-                    </a>
                     <div className="md:hidden">
-                        <a className="text-4xl font-semibold" href="#">&#8801;</a>
+                        <DropdownMenu.Root>
+                            <DropdownMenu.Trigger className="focus:outline-0 flex gap-2 items-center text-gray-900 rounded-full
+                                hover:text-blue-600 md:me-0">
+                                <span className="text-3xl font-semibold"><FiMenu/></span>
+                            </DropdownMenu.Trigger>
+                            <DropdownMenu.Portal>
+                                <DropdownMenu.Content
+                                    className="z-50 mt-1 min-w-[12rem] overflow-hidden rounded-lg border border-slate-200 bg-gray-200 py-1"
+                                    align="start"
+                                    sideOffset={12}
+                                >
+                                    {currentUser && (
+                                        <DropdownMenu.Item className={itemClassName}>
+                                            <span className="text-sm font-bold">
+                                                {currentUser.email}
+                                            </span>
+                                        </DropdownMenu.Item>
+                                    )}
+                                    {currentUser && (
+                                        <DropdownMenu.Item className={itemClassName}>
+                                            Manage account
+                                        </DropdownMenu.Item>
+                                    )}
+                                    <DropdownMenu.Item className={itemClassName}>
+                                        Feedback
+                                    </DropdownMenu.Item>
+                                    <DropdownMenu.Item className={itemClassName} asChild>
+                                        {currentUser ? (
+                                            <Link
+                                                to="http://localhost:5000/api/auth/logout"
+                                                className="text-red-500 w-full h-full block"
+                                            >
+                                                Sign Out
+                                            </Link>
+                                        ) : (
+                                            <Link to="/login" className="w-full h-full">
+                                                Log in
+                                            </Link>
+                                        )}
+                                    </DropdownMenu.Item>
+                                </DropdownMenu.Content>
+                            </DropdownMenu.Portal>
+                        </DropdownMenu.Root>
                     </div>
                 </div>
             </nav>
+            <div className="w-full md:hidden">
+                <ul className="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm shadow-md
+                    py-1 text-center w-full rounded-md items-center justify-center">
+                    <li>
+                        <a href="#" className="text-gray-900 hover:underline"
+                           aria-current="page">About me</a>
+                    </li>
+                    <li>
+                        <a href="#" className="text-gray-900 hover:underline">Projects</a>
+                    </li>
+                    <li>
+                        <a href="#" className="text-gray-900 hover:underline">Resume</a>
+                    </li>
+                </ul>
+            </div>
         </>
     )
 }
