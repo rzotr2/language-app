@@ -23,6 +23,7 @@ export default function HeaderGeneral() {
                 const user = await findUserById(data.data.id);
                 if (user) {
                     localStorage.setItem("currentUserId", user._id);
+                    localStorage.setItem("currentUserLanguage", user.language);
                     setCurrentUser(user);
                 }
             } catch (err) {

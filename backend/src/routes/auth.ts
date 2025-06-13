@@ -5,6 +5,7 @@ import User from "../models/user";
 import { sendUser } from "../services/users";
 
 const router = Router();
+
 interface User {
     email: string;
     password: string;

@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import ukraine from "../assets/svg/flags/ukraine.svg"
-import deutschland from "../assets/svg/flags/deutschland.svg"
-import spain from "../assets/svg/flags/spain.svg"
-import france from "../assets/svg/flags/france.svg"
-import us from "../assets/svg/flags/us.svg"
-import poland from "../assets/svg/flags/polland.svg"
+import ukraine from "../../assets/svg/flags/ukraine.svg"
+import deutschland from "../../assets/svg/flags/deutschland.svg"
+import spain from "../../assets/svg/flags/spain.svg"
+import france from "../../assets/svg/flags/france.svg"
+import us from "../../assets/svg/flags/us.svg"
+import poland from "../../assets/svg/flags/polland.svg"
 import {IoChevronBackOutline} from "react-icons/io5";
 
 type LanguageChooseProps = {
-    getSelectedLanguage: (selectedLanguage: string) => void;
+    getSelectedNativeLanguage: (selectedLanguage?: string, back?: boolean) => void;
     show: boolean;
 }
 
@@ -27,13 +27,13 @@ const languages: Lang[] = [
     { id: 'pl', label: 'Polish', img: poland },
 ]
 
-export default function LanguageChoose(props: LanguageChooseProps) {
+export default function NativeLanguageChoose(props: LanguageChooseProps) {
     const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
 
     return (
-        <div className={`${props.show ? "md:h-[480px] flex flex-col justify-between" : "w-0 h-0 overflow-hidden"}`}>
-            <h3 className="text-lg mb-4 md:mb-7 md:text-xl font-semibold">
-                Choose a language to start with:
+        <div className={`${props.show ? "sm:h-[500px] flex flex-col justify-between" : "w-0 h-0 overflow-hidden"}`}>
+            <h3 className="text-sm mb-4 md:mb-7 md:text-xl font-semibold">
+                What language do you speak?
             </h3>
 
             <div className="container mx-auto flex items-center md:flex-row justify-center flex-wrap pb-5">
@@ -61,17 +61,19 @@ export default function LanguageChoose(props: LanguageChooseProps) {
                 })}
             </div>
             <div className="flex justify-center items-center gap-5">
-                <button aria-disabled={true}
-                    className="group text-sm font-medium flex items-center text-gray-400"
+                <button
+                    className="group text-sm font-medium flex items-center cursor-pointer"
+                    onClick={() => props.getSelectedNativeLanguage(undefined, true)}
                 >
-                    <IoChevronBackOutline className="transition-all text-lg" />
-                    <span className="cursor-not-allowed text-lg">Back</span>
+                    <IoChevronBackOutline className="transition-all group-hover:pe-1 group-hover:scale-125
+                     group-hover:text-blue-500 text-lg" />
+                    <span className="transition-colors group-hover:text-blue-500 text-lg">Back</span>
                 </button>
                 <button type="button"
                         disabled={!selectedLanguage}
                         onClick={() => {
                             if (selectedLanguage) {
-                                props.getSelectedLanguage(selectedLanguage as string);
+                                props.getSelectedNativeLanguage(selectedLanguage, false);
                             }
                         }}
                         className={`font-medium rounded-lg text-sm px-5 py-2.5 text-white 

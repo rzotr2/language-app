@@ -11,8 +11,8 @@ export default function TopicsChoose(props: TopicsChooseProps) {
     const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
 
     return (
-        <div className={`${props.show ? "md:h-[480px] flex flex-col justify-between" : "w-0 h-0 overflow-hidden"}`}>
-            <h3 className="text-lg mb-4 md:mb-7 md:text-xl font-semibold">
+        <div className={`${props.show ? "sm:h-[500px] flex flex-col justify-between" : "w-0 h-0 overflow-hidden"}`}>
+            <h3 className="text-sm mb-4 md:mb-7 md:text-xl font-semibold">
                 What are you interested in?
             </h3>
             <div className="mb-6 md:w-2/3 mx-auto">

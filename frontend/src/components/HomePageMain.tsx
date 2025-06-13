@@ -3,8 +3,22 @@ import { BiTask } from "react-icons/bi";
 import { LuBrainCircuit } from "react-icons/lu";
 import { FiMessageSquare } from "react-icons/fi";
 import { Link } from "react-router";
+import {useEffect, useState} from "react";
 
 function HomePageMain() {
+    const [currentUserLanguage, setCurrentLanguage] = useState<string | null>(null);
+
+    useEffect(() => {
+        (async () => {
+            const lang = localStorage.getItem("currentUserLanguage");
+            if (lang) {
+                setCurrentLanguage(lang);
+            } else {
+                setCurrentLanguage(null);
+            }
+        })();
+    }, []);
+
     return (
         <>
             <section className="container mx-auto mt-1 md:mt-8 flex flex-col md:flex-row items-center justify-center">
@@ -21,7 +35,7 @@ function HomePageMain() {
                         Master a new language, one step at a time
                     </p>
                     <div className="mt-5">
-                        <Link to="/main" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                        <Link to={currentUserLanguage ? "/workpage" : "/main"} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
                             focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
                             dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
                             dark:focus:ring-blue-800 cursor-pointer">
@@ -33,7 +47,7 @@ function HomePageMain() {
                     <h3 className="text-lg font-semibold py-1">Learn a language online</h3>
                     <span>Practice different exercises with AI. It`s better than any other websites. Just give it a try and you`ll see!</span>
                     <div className="mt-5">
-                        <Link to="/main" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                        <Link to={currentUserLanguage ? "/workpage" : "/main"} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
                             focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
                             dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
                             dark:focus:ring-blue-800 cursor-pointer">
@@ -88,7 +102,7 @@ function HomePageMain() {
                 </div>
                 <h2 className="text-3xl font-bold pt-10 md:pt-15">Ready to start your journey?</h2>
                 <div className="my-5">
-                    <Link to="/main" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                    <Link to={currentUserLanguage ? "/workpage" : "/main"} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
                             focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
                             dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
                             dark:focus:ring-blue-800 cursor-pointer">

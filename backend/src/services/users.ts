@@ -28,7 +28,14 @@ export async function findUserById(id: string){
     return User.findOne({_id: id});
 }
 
-export async function updateUser(user: { id: string, language: string, level: string, interests: string, goals: string }){
-    const { id, language, level, interests, goals } = user;
-    return User.findByIdAndUpdate(id, { language, level, interests, goals }, {new: true});
+export async function updateUser(user: {
+    id: any;
+    languageToLearn: any;
+    nativeLanguage: any;
+    level: any;
+    interests: any;
+    goals: any
+}){
+    const { id, languageToLearn, nativeLanguage, level, interests, goals } = user;
+    return User.findByIdAndUpdate(id, { languageToLearn, nativeLanguage, level, interests, goals }, {new: true});
 }

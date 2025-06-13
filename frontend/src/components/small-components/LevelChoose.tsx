@@ -11,8 +11,8 @@ export default function LevelChoose(props: LanguageChooseProps) {
     const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
 
     return (
-        <div className={`${props.show ? "md:h-[480px] flex flex-col justify-between" : "w-0 h-0 overflow-hidden"}`}>
-            <h3 className="text-lg mb-4 md:mb-7 md:text-xl font-semibold">
+        <div className={`${props.show ? "sm:h-[500px] flex flex-col justify-between" : "w-0 h-0 overflow-hidden"}`}>
+            <h3 className="text-sm mb-4 md:mb-7 md:text-xl font-semibold">
                 Choose your current language level:
             </h3>
             <div className="mb-6 md:w-2/3 mx-auto">
@@ -20,7 +20,7 @@ export default function LevelChoose(props: LanguageChooseProps) {
                     <RadioCards.Root columns={{ initial: "1", sm: "2" }}
                                      onValueChange={(value) => setSelectedLevel(value)}
                     >
-                        <RadioCards.Item value="1">
+                        <RadioCards.Item value="A-1">
                             <Flex direction="column" width="100%">
                                 <p className="font-bold">A1 – Beginner</p>
                                 <p>
@@ -29,7 +29,7 @@ export default function LevelChoose(props: LanguageChooseProps) {
                                 </p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="2">
+                        <RadioCards.Item value="A-2">
                             <Flex direction="column" width="100%">
                                 <p className="font-bold">A2 – Elementary</p>
                                 <p>
@@ -38,7 +38,7 @@ export default function LevelChoose(props: LanguageChooseProps) {
                                 </p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="3">
+                        <RadioCards.Item value="B-1">
                             <Flex direction="column" width="100%">
                                 <p className="font-bold">B1 – Intermediate</p>
                                 <p>
@@ -47,7 +47,7 @@ export default function LevelChoose(props: LanguageChooseProps) {
                                 </p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="4">
+                        <RadioCards.Item value="B-2">
                             <Flex direction="column" width="100%">
                                 <p className="font-bold">B2 – Upper-Intermediate</p>
                                 <p>
@@ -56,7 +56,7 @@ export default function LevelChoose(props: LanguageChooseProps) {
                                 </p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="5">
+                        <RadioCards.Item value="C-1">
                             <Flex direction="column" width="100%">
                                 <p className="font-bold">C1 – Advanced</p>
                                 <p>
@@ -65,7 +65,7 @@ export default function LevelChoose(props: LanguageChooseProps) {
                                 </p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="6">
+                        <RadioCards.Item value="C-2">
                             <Flex direction="column" width="100%">
                                 <p className="font-bold">C2 – Proficient</p>
                                 <p>

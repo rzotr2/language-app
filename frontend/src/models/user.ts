@@ -2,7 +2,8 @@ export type User = {
     id?: string;
     email: string;
     password: string;
-    language?: string;
+    nativeLanguage?: string;
+    languageToLearn?: string;
     level?: string;
     interests?: string;
     goals?: string;

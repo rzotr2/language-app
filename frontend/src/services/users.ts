@@ -1,8 +1,8 @@
 import axios from "axios";
 import type { User } from "../models/user.ts";
 
-axios.defaults.baseURL = 'http://localhost:5000'
-axios.defaults.withCredentials = true
+axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.withCredentials = true;
 
 export const signUp = (newUser: User) => {
     return axios.post("/api/auth/signup", newUser);

@@ -1,11 +1,12 @@
-import LanguageChoose from "./LanguageChoose.tsx";
-import { useState } from "react";
-import LevelChoose from "./LevelChoose.tsx";
-import TopicsChoose from "./TopicsChoose.tsx";
-import GoalsChoose from "./GoalsChoose.tsx";
+import NativeLanguageChoose from "./small-components/NativeLanguageChoose.tsx";
+import {useRef, useState} from "react";
+import LevelChoose from "./small-components/LevelChoose.tsx";
+import TopicsChoose from "./small-components/TopicsChoose.tsx";
+import GoalsChoose from "./small-components/GoalsChoose.tsx";
 import { findUserById, updateUser } from "../services/users.ts";
 import type { User } from "../models/user.ts";
 import {useNavigate} from "react-router";
+import DesiredLanguageChoose from "./small-components/DesiredLanguageChoose.tsx";
 
 type MainPageMainProps = {
     getIsLoading: (isLoading: boolean) => void;
@@ -14,23 +15,46 @@ type MainPageMainProps = {
 function MainPageMain({getIsLoading}: MainPageMainProps) {
     const navigate = useNavigate();
 
-    const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
+    const [selectedNativeLanguage, setSelectedNativeLanguage] = useState<string | null>(null);
+    const [selectedLanguageToLearn, setSelectedLanguageToLearn] = useState<string | null>(null);
     const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
     const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
     const [activeStep, setActiveStep] = useState(0);
+    const levelRef = useRef<HTMLDivElement>(null);
+    const topicsRef = useRef<HTMLDivElement>(null);
+    const goalsRef = useRef<HTMLDivElement>(null);
 
-    const getSelectedLanguage = (language: string) => {
-        setSelectedLanguage(language);
+    const getSelectedLanguageToLearn = (languageToLearn: string) => {
+        setSelectedLanguageToLearn(languageToLearn);
         setActiveStep(1);
+    };
+
+    const getSelectedNativeLanguage = (nativeLanguage?: string, back?: boolean) => {
+        if (nativeLanguage !== undefined) {
+            setSelectedNativeLanguage(nativeLanguage);
+            setActiveStep(activeStep + 1);
+            setTimeout(() => {
+                levelRef.current?.scrollIntoView({ behavior: "smooth" });
+            }, 50);
+        }
+        if (back) {
+            setActiveStep(activeStep - 1);
+        }
     };
 
     const getSelectedLevel = (level?: string, back?: boolean) => {
         if (level !== undefined) {
             setSelectedLevel(level);
             setActiveStep(activeStep + 1);
+            setTimeout(() => {
+                topicsRef.current?.scrollIntoView({ behavior: "smooth" });
+            }, 50);
         }
         if (back) {
             setActiveStep(activeStep - 1);
+            setTimeout(() => {
+                levelRef.current?.scrollIntoView({ behavior: "smooth" });
+            }, 50);
         }
     };
 
@@ -38,37 +62,47 @@ function MainPageMain({getIsLoading}: MainPageMainProps) {
         if (topic !== undefined) {
             setSelectedTopic(topic);
             setActiveStep(activeStep + 1);
+            setTimeout(() => {
+                goalsRef.current?.scrollIntoView({ behavior: "smooth" });
+            }, 50);
         }
         if (back) {
             setActiveStep(activeStep - 1);
+            setTimeout(() => {
+                levelRef.current?.scrollIntoView({ behavior: "smooth" });
+            }, 50);
         }
     }
 
     const getSelectedGoal = async (goal?: string, back?: boolean)=> {
-        getIsLoading(true);
         if (back) {
             setActiveStep(activeStep - 1);
-        }
+            setTimeout(() => {
+                topicsRef.current?.scrollIntoView({ behavior: "smooth" });
+            }, 50);
+        } else {
+            getIsLoading(true);
+            const userId = localStorage.getItem("currentUserId");
+            if (userId) {
+                const existingUser: User = await findUserById(userId);
+                if (existingUser) {
+                    const newUser = {
+                        ...existingUser,
+                        id: userId,
+                        languageToLearn: selectedLanguageToLearn!,
+                        nativeLanguage: selectedNativeLanguage!,
+                        level: selectedLevel!,
+                        interests: selectedTopic!,
+                        goals: goal!,
 
-        const userId = localStorage.getItem("currentUserId");
-        if (userId) {
-            const existingUser: User = await findUserById(userId);
-            if (existingUser) {
-                const newUser = {
-                    ...existingUser,
-                    id: userId,
-                    language: selectedLanguage!,
-                    level: selectedLevel!,
-                    interests: selectedTopic!,
-                    goals: goal!,
+                    };
+                    await updateUser(newUser);
+                    setTimeout(() => {
+                        navigate("/workpage");
+                        getIsLoading(false);
+                    }, 1500);
 
-                };
-                await updateUser(newUser);
-                setTimeout(() => {
-                    navigate("/workpage");
-                    getIsLoading(false);
-                }, 1500);
-
+                }
             }
         }
     }
@@ -92,10 +126,17 @@ function MainPageMain({getIsLoading}: MainPageMainProps) {
                     className="md:py-10 py-5 px-5 text-center font-bold"
                 >
                     <div className="flex items-center justify-center">
-                        <LanguageChoose getSelectedLanguage={getSelectedLanguage} show={activeStep === 0} />
-                        <LevelChoose getSelectedLevel={getSelectedLevel} show={activeStep === 1} />
-                        <TopicsChoose getSelectedTopic={getSelectedTopic} show={activeStep === 2} />
-                        <GoalsChoose getSelectedGoal={getSelectedGoal} show={activeStep === 3} />
+                        <DesiredLanguageChoose getSelectedLanguageToLearn={getSelectedLanguageToLearn} show={activeStep === 0} />
+                        <NativeLanguageChoose getSelectedNativeLanguage={getSelectedNativeLanguage} show={activeStep === 1} />
+                        <div ref={levelRef}>
+                            <LevelChoose getSelectedLevel={getSelectedLevel} show={activeStep === 2} />
+                        </div>
+                        <div ref={topicsRef}>
+                            <TopicsChoose getSelectedTopic={getSelectedTopic} show={activeStep === 3} />
+                        </div>
+                        <div ref={goalsRef}>
+                            <GoalsChoose getSelectedGoal={getSelectedGoal} show={activeStep === 4} />
+                        </div>
                     </div>
                 </section>
             </div>

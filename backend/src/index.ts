@@ -4,6 +4,7 @@ import cors from 'cors';
 import { connectDB } from "./config/db";
 import authRouter from './routes/auth';
 import usersRouter from './routes/users';
+import aiRouter from './routes/ai';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/ai', aiRouter);
 
 app.get('/', (_req, res) => {
     res.send('Welcome to the API');

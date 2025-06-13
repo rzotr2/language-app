@@ -50,14 +50,16 @@ router.get("/:id", async (req: Request, res: Response) => {
 });
 
 router.post("/update", async (req: Request, res: Response) => {
-    const { id, language, level, interests, goals } = req.body;
+    const { id, languageToLearn, nativeLanguage, level, interests, goals } = req.body;
     if (!id) {
         res.status(400).json({ message: 'Id is required' });
         return;
     }
 
     try {
-        const updatedUser = await updateUser({ id, language, level, interests, goals });
+        const updatedUser = await updateUser({
+            id, languageToLearn, nativeLanguage, level, interests, goals
+        });
         if (!updatedUser) {
             res.status(404).json({ message: 'User not found' });
             return;
