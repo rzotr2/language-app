@@ -87,3 +87,16 @@ export type CheckEssayProps = {
     text: string | null;
     topic: string
 }
+
+export type FirstPageType = {
+    total_results: number;
+}
+
+export type PexelsResponsePhoto = {
+    src: { landscape: string };
+    alt: string
+}
+
+export type PexelsResponse = {
+    photos: PexelsResponsePhoto[];
+}

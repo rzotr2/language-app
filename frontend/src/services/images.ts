@@ -1,24 +1,29 @@
-import {createClient, type ErrorResponse, type PhotosWithTotalResults} from 'pexels';
+import type { FirstPageType, PexelsResponse } from "../types";
 
-const token = import.meta.env.VITE_PEXELS_APIKEY;
+const token: string = import.meta.env.VITE_PEXELS_APIKEY;
 
-const client = createClient(token);
 const query = "people"
 const perPage = 15;
 
 export const getRandomImage = async () => {
-    const firstPage = await client.photos.search({ query, per_page: 1, page: 1 });
+    const firstPage: FirstPageType = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=1`, {
+        headers: {
+            "Authorization": token
+        }
+    }).then(res => res.json());
 
-    if ((firstPage as ErrorResponse).error) {
-        throw (new Error("ERROR IMAGE"));
-    } else {
-        const totalResults = (firstPage as PhotosWithTotalResults).total_results;
+    const totalResults = firstPage.total_results;
 
-        const randomIndex = Math.floor(Math.random() * totalResults);
+    const randomIndex = Math.floor(Math.random() * totalResults);
 
-        const page = Math.floor(randomIndex / perPage) + 1;
-        const indexOnPage = randomIndex % perPage;
+    const page = Math.floor(randomIndex / perPage) + 1;
+    const indexOnPage = randomIndex % perPage;
 
-        return (await client.photos.search({query, per_page: perPage, page}) as PhotosWithTotalResults).photos[indexOnPage];
-    }
+    const response: PexelsResponse = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=${perPage}&page=${page}`, {
+        headers: {
+            "Authorization": token
+        }
+    }).then(res => res.json());
+
+    return response.photos[indexOnPage];
 };
