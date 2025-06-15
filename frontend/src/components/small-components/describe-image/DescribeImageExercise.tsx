@@ -34,7 +34,7 @@ export const DescribeImageExercise = (
             nativeLanguage: nativeLanguage,
             languageToLearn: languageToLearn,
             description: currentDescription as string,
-            img: image.alt
+            img: image.alt ?? "no image"
         }
 
         if (currentDescription) {
@@ -65,7 +65,7 @@ export const DescribeImageExercise = (
                 Focus on the setting, actions, and details.
             </div>
             <div className="space-y-5 px-3 sm:px-5 mt-3">
-                <img src={image.src} alt={image.alt} className="" />
+                <img src={image.src} alt={image.alt || "no image"} className="" />
                 <label htmlFor="message"
                        className="font-bold text-gray-900">
                     Enter what you see:

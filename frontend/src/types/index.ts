@@ -64,8 +64,8 @@ export type QuizCard = {
 }
 
 export type PhotoType = {
-    src: string;
-    alt: string;
+    src?: string;
+    alt?: string | null;
 }
 
 export type CheckDescriptionProps = {

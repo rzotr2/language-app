@@ -158,17 +158,19 @@ function WorkPageMain({getIsLoading}: WorkPageMainProps) {
                 });
                 break;
             } case "imageDesc": {
-                getRandomImage().then(data => {
-                    const photo: PhotoType = {
-                        src: data.src.landscape,
-                        alt: data.alt,
-                    }
-                    setCurrentPhoto(photo);
-                    getIsLoading(false);
-                    setTimeout(() => {
-                        anchorRef.current?.scrollIntoView({ behavior: "smooth" });
-                    }, 100);
-                });
+                getRandomImage()
+                    .then(data => {
+                        const photo: PhotoType = {
+                            src: data.src.landscape,
+                            alt: data.alt,
+                        }
+                        setCurrentPhoto(photo);
+                        getIsLoading(false);
+                        setTimeout(() => {
+                            anchorRef.current?.scrollIntoView({ behavior: "smooth" });
+                        }, 100)
+                    })
+                    .catch(err => console.log(err));
                 break;
             } case "essay": {
                 generateEssayTopic(propertiesObj).then(data => {
@@ -281,7 +283,7 @@ function WorkPageMain({getIsLoading}: WorkPageMainProps) {
                                     >
                                         <RadioCards.Item value="translation">
                                             <Flex direction="column" width="100%">
-                                                <p className="font-bold">Translate Sentences</p>
+                                                <p className="font-bold">Translate Text</p>
                                                 <p>Practice translating sentences between your native and target language.</p>
                                             </Flex>
                                         </RadioCards.Item>
@@ -328,7 +330,7 @@ function WorkPageMain({getIsLoading}: WorkPageMainProps) {
                 </section>
                 <section id="exercise-area" className={`${currentText || blanksArray || cardsArray || 
                 quizCards || currentPhoto || currentTopic ? 
-                    "duration-500 font-bold mx-auto max-w-[98%] md:max-w-[60vw] shadow-md my-3"
+                    "duration-500 font-bold mx-auto max-w-[98%] md:max-w-[75vw] lg:max-w-[55vw] shadow-md my-3"
                     : "h-0 overflow-hidden"}`} ref={anchorRef}>
                     {currentText && (
                         <TextTranslation getIsLoading={getIsLoading}

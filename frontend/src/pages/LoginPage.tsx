@@ -1,11 +1,12 @@
 import { type FormEvent, useState } from "react";
-import { Box, Tabs } from "@radix-ui/themes";
+import { Box, Callout, Tabs } from "@radix-ui/themes";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import { Link, useNavigate } from "react-router";
 import { signUp, findUser, loginUser } from "../services/users.ts";
 import axios from "axios";
+import { BiInfoCircle } from "react-icons/bi";
 
 function LoginPage() {
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}$/;
@@ -46,6 +47,7 @@ function LoginPage() {
         setValidPassword(true);
         setError(null);
         setLoading(false);
+        setAuthSuccess(false);
     };
 
     const handleLoginSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -136,7 +138,14 @@ function LoginPage() {
                                                block w-full p-2.5 focus:outline-0 mb-1"
                                                placeholder="email@example.com" required/>
                                         {!validEmail && (
-                                            <span className="text-red-500">{errors.email}</span>
+                                            <Callout.Root color="red" size="1" className="mt-2 mb-4">
+                                                <Callout.Icon>
+                                                    <BiInfoCircle />
+                                                </Callout.Icon>
+                                                <Callout.Text>
+                                                    {errors.email}
+                                                </Callout.Text>
+                                            </Callout.Root>
                                         )}
                                     </div>
                                     <div className="mb-1">
@@ -167,14 +176,35 @@ function LoginPage() {
                                             </div>
                                         </div>
                                         {!validPassword && (
-                                            <span className="text-red-500">{errors.password}</span>
+                                            <Callout.Root color="red" size="1" className="mt-2 mb-4">
+                                                <Callout.Icon>
+                                                    <BiInfoCircle />
+                                                </Callout.Icon>
+                                                <Callout.Text>
+                                                    {errors.password}
+                                                </Callout.Text>
+                                            </Callout.Root>
                                         )}
                                     </div>
                                     {error && (
-                                        <span className="text-red-500">{error}</span>
+                                        <Callout.Root color="red" size="1" className="mt-2 mb-4">
+                                            <Callout.Icon>
+                                                <BiInfoCircle />
+                                            </Callout.Icon>
+                                            <Callout.Text>
+                                                {error}
+                                            </Callout.Text>
+                                        </Callout.Root>
                                     )}
                                     {authSuccess && (
-                                        <span className="text-green-500">Successfully logged in. Redirecting...</span>
+                                        <Callout.Root color="green">
+                                            <Callout.Icon>
+                                                <BiInfoCircle />
+                                            </Callout.Icon>
+                                            <Callout.Text>
+                                                Successfully logged in. Redirecting...
+                                            </Callout.Text>
+                                        </Callout.Root>
                                     )}
                                     <div className="flex items-center justify-end gap-5 mt-5">
                                         <Link
@@ -228,7 +258,14 @@ function LoginPage() {
                                                block w-full p-2.5 focus:outline-0 mb-1"
                                                placeholder="email@example.com" required/>
                                         {!validEmail && (
-                                            <span className="text-red-500">{errors.email}</span>
+                                            <Callout.Root color="red" size="1" className="mt-2 mb-4">
+                                                <Callout.Icon>
+                                                    <BiInfoCircle />
+                                                </Callout.Icon>
+                                                <Callout.Text>
+                                                    {errors.email}
+                                                </Callout.Text>
+                                            </Callout.Root>
                                         )}
                                     </div>
                                     <div className="mb-5">
@@ -259,7 +296,14 @@ function LoginPage() {
                                             </div>
                                         </div>
                                         {!validPassword && (
-                                            <span className="text-red-500">{errors.password}</span>
+                                            <Callout.Root color="red" size="1" className="mt-2 mb-4">
+                                                <Callout.Icon>
+                                                    <BiInfoCircle />
+                                                </Callout.Icon>
+                                                <Callout.Text>
+                                                    {errors.password}
+                                                </Callout.Text>
+                                            </Callout.Root>
                                         )}
                                     </div>
                                     <div className="mb-5">
@@ -286,16 +330,44 @@ function LoginPage() {
                                         </div>
                                         <div className="flex flex-col gap-2">
                                             {signupPassword !== confirmPassword && confirmFieldTouched && (
-                                                <span className="text-red-500">Your passwords should match</span>
+                                                <Callout.Root color="red" size="1" className="mt-2 mb-4">
+                                                    <Callout.Icon>
+                                                        <BiInfoCircle />
+                                                    </Callout.Icon>
+                                                    <Callout.Text>
+                                                        Your passwords should match
+                                                    </Callout.Text>
+                                                </Callout.Root>
                                             )}
                                             {userAlreadyExists && (
-                                                <span className="text-red-600 font-medium">Email is already registered</span>
+                                                <Callout.Root color="red" size="1" className="mt-2 mb-4">
+                                                    <Callout.Icon>
+                                                        <BiInfoCircle />
+                                                    </Callout.Icon>
+                                                    <Callout.Text>
+                                                        Email is already taken.
+                                                    </Callout.Text>
+                                                </Callout.Root>
                                             )}
                                             {error && (
-                                                <span className="text-red-500">{error}</span>
+                                                <Callout.Root color="red" size="1" className="mt-2 mb-4">
+                                                    <Callout.Icon>
+                                                        <BiInfoCircle />
+                                                    </Callout.Icon>
+                                                    <Callout.Text>
+                                                        {error}
+                                                    </Callout.Text>
+                                                </Callout.Root>
                                             )}
                                             {authSuccess && (
-                                                <span className="text-green-500">Successfully signed up. Redirecting...</span>
+                                                <Callout.Root color="green">
+                                                    <Callout.Icon>
+                                                        <BiInfoCircle />
+                                                    </Callout.Icon>
+                                                    <Callout.Text>
+                                                        Successfully signed up. Redirecting...
+                                                    </Callout.Text>
+                                                </Callout.Root>
                                             )}
                                         </div>
                                     </div>
