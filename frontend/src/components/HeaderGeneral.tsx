@@ -73,20 +73,24 @@ export default function HeaderGeneral() {
                                                     sideOffset={12}
                                                 >
                                                     <DropdownMenu.Item className={itemClassName}>
-                                                        <span className="text-sm font-bold">
+                                                        <span className="text-sm font-bold px-4 py-2">
                                                             {currentUser.email}
                                                         </span>
                                                     </DropdownMenu.Item>
                                                     <DropdownMenu.Item className={itemClassName}>
-                                                        Manage account
+                                                        <Link to="#" className="px-4 py-2">
+                                                            Manage account
+                                                        </Link>
                                                     </DropdownMenu.Item>
                                                     <DropdownMenu.Item className={itemClassName}>
-                                                        Feedback
+                                                        <Link to="#" className="px-4 py-2">
+                                                            Feedback
+                                                        </Link>
                                                     </DropdownMenu.Item>
                                                     <DropdownMenu.Separator className="bg-gray-900"/>
                                                     <DropdownMenu.Item className={itemClassName}>
                                                         <Link
-                                                            to="http://localhost:5000/api/auth/logout"
+                                                            to="91.108.122.94:8000/api/auth/logout"
                                                             className="text-red-500"
                                                         >
                                                             Sign Out
@@ -98,7 +102,7 @@ export default function HeaderGeneral() {
                                     ) : (
                                         <Link to="/login"
                                               className="text-white bg-blue-700 hover:bg-blue-800
-                                        focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2">
+                                        focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
                                             Log in
                                         </Link>
                                     )}

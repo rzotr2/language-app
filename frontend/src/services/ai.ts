@@ -6,7 +6,7 @@ import type {
     DefaultPropsForGeneration,
 } from "../types";
 
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = '91.108.122.94:8000';
 axios.defaults.withCredentials = true;
 
 export const generate = (text: string) => {
