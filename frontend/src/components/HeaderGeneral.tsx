@@ -20,7 +20,7 @@ export default function HeaderGeneral() {
         (async () => {
             setLoading(true);
             try {
-                const data = await axios.get('/auth/me');
+                const data = await axios.get('api/auth/me');
                 const user = await findUserById(data.data.id);
                 if (user) {
                     localStorage.setItem("currentUserId", user._id);
@@ -37,7 +37,7 @@ export default function HeaderGeneral() {
 
     const logOut = async () => {
         try {
-            await axios.get('auth/logout');
+            await axios.get('api/auth/logout');
             navigate("/login");
             setCurrentUser(null);
         } catch (err) {
