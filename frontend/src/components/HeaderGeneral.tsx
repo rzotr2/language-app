@@ -90,7 +90,7 @@ export default function HeaderGeneral() {
                                                     <DropdownMenu.Separator className="bg-gray-900"/>
                                                     <DropdownMenu.Item className={itemClassName}>
                                                         <Link
-                                                            to="/api/auth/logout"
+                                                            to="91.108.122.94:8000/api/auth/logout"
                                                             className="text-red-500 px-4 py-2"
                                                         >
                                                             Sign Out
@@ -144,7 +144,7 @@ export default function HeaderGeneral() {
                                     <DropdownMenu.Item className={itemClassName} asChild>
                                         {currentUser ? (
                                             <Link
-                                                to="/api/auth/logout"
+                                                to="91.108.122.94:8000/api/auth/logout"
                                                 className="text-red-500 px-4 py-2"
                                             >
                                                 Sign Out
