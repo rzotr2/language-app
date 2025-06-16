@@ -12,8 +12,8 @@ export default function HeaderGeneral() {
     const [currentUser, setCurrentUser] = useState<User | null>();
     const [loading, setLoading] = useState<boolean>(false);
     const itemClassName =
-        "relative flex cursor-default select-none items-center rounded-sm px-4 py-2 text-sm outline-none transition-colors " +
-        "focus:bg-slate-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50";
+        "relative flex select-none items-center rounded-sm text-sm outline-none transition-colors " +
+        "focus:bg-slate-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 cursor-pointer";
 
     useEffect(() => {
         (async () => {
@@ -33,10 +33,6 @@ export default function HeaderGeneral() {
             }
         })();
     }, []);
-
-    const logOut = () => {
-        return axios.get("/api/auth/logout");
-    }
 
     return (
         <>
@@ -94,8 +90,8 @@ export default function HeaderGeneral() {
                                                     <DropdownMenu.Separator className="bg-gray-900"/>
                                                     <DropdownMenu.Item className={itemClassName}>
                                                         <Link
-                                                            to="91.108.122.94:8000/api/auth/logout"
-                                                            className="text-red-500"
+                                                            to="/api/auth/logout"
+                                                            className="text-red-500 px-4 py-2"
                                                         >
                                                             Sign Out
                                                         </Link>
@@ -128,28 +124,31 @@ export default function HeaderGeneral() {
                                 >
                                     {currentUser && (
                                         <DropdownMenu.Item className={itemClassName}>
-                                            <span className="text-sm font-bold px-4 py-2 block w-full">
+                                            <span className="px-4 py-2 block w-full">
                                                 {currentUser.email}
                                             </span>
                                         </DropdownMenu.Item>
                                     )}
                                     {currentUser && (
                                         <DropdownMenu.Item className={itemClassName}>
-                                            <span className="text-sm font-bold px-4 py-2 block w-full">
+                                            <span className="px-4 py-2 block w-full">
                                                 Manage account
                                             </span>
                                         </DropdownMenu.Item>
                                     )}
                                     <DropdownMenu.Item className={itemClassName}>
-                                        <span className="text-sm font-bold px-4 py-2 block w-full">
+                                        <span className="px-4 py-2 block w-full">
                                                 Feedback
                                             </span>
                                     </DropdownMenu.Item>
                                     <DropdownMenu.Item className={itemClassName} asChild>
                                         {currentUser ? (
-                                            <button onClick={logOut}>
-                                                Log out
-                                            </button>
+                                            <Link
+                                                to="/api/auth/logout"
+                                                className="text-red-500 px-4 py-2"
+                                            >
+                                                Sign Out
+                                            </Link>
                                         ) : (
                                             <Link to="/login" className="w-full h-full px-4 py-2">
                                                 Log in
