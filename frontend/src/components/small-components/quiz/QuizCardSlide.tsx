@@ -1,10 +1,10 @@
 import { type PropsWithChildren, useState } from "react";
 import type { QuizCard } from "../../../types";
-import {TiTick} from "react-icons/ti";
-import {RxCross2} from "react-icons/rx";
-import {CustomTooltip} from "../CustomTooltip.tsx";
+import { TiTick } from "react-icons/ti";
+import { RxCross2 } from "react-icons/rx";
+import { CustomTooltip } from "../CustomTooltip.tsx";
 
-type QuizCardSlideProps = PropsWithChildren & {card: QuizCard, number: number};
+type QuizCardSlideProps = PropsWithChildren & { card: QuizCard; number: number };
 
 const letters = ["A", "B", "C", "D"];
 
@@ -15,7 +15,7 @@ export const QuizCardSlide = (props: QuizCardSlideProps) => {
     const handleClick = (index: number) => {
         setShowAnswer(true);
         setCurrentIndex(index);
-    }
+    };
 
     return (
         <div>
@@ -26,7 +26,10 @@ export const QuizCardSlide = (props: QuizCardSlideProps) => {
                 <div className="max-w-11/12 flex-1 flex items-center gap-3">
                     <p className="text-white font-bold">{props.card.question}</p>
                     {showAnswer && (
-                        <CustomTooltip type="hint" text={props.card.explanation} />
+                        <CustomTooltip
+                            type="hint"
+                            text={props.card.explanation}
+                        />
                     )}
                 </div>
             </div>
@@ -57,14 +60,18 @@ export const QuizCardSlide = (props: QuizCardSlideProps) => {
                             className={`flex gap-2 p-2 rounded-md w-full cursor-pointer bg-white items-center ${borderClass}`}
                             disabled={showAnswer}
                         >
-                            <span className={`${textClass} text-start`}>{`${letters[index]}.`}</span>
+                            <span
+                                className={`${textClass} text-start`}
+                            >{`${letters[index]}.`}</span>
                             <span className={`${textClass} text-start`}>{option}</span>
                             {showAnswer && isCorrect && <TiTick className="text-blue-700" />}
-                            {showAnswer && isSelected && !isCorrect && <RxCross2 className="text-neutral-500" />}
+                            {showAnswer && isSelected && !isCorrect && (
+                                <RxCross2 className="text-neutral-500" />
+                            )}
                         </button>
                     );
                 })}
             </div>
         </div>
-    )
-}
+    );
+};

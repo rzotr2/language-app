@@ -6,5 +6,5 @@ export default function FooterGeneral() {
                 <p>Developed by Pavlo Lukin</p>
             </div>
         </>
-    )
+    );
 }

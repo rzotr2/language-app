@@ -10,93 +10,79 @@ export type DefaultPropsForGeneration = {
     exerciseNumber?: string;
     goals?: string;
     interests?: string;
-}
+};
 
-export type ExerciseType =
-    | "translation"
-    | "blanks"
-    | "cards"
-    | "quiz"
-    | "imageDesc"
-    | "essay"
+export type ExerciseType = "translation" | "blanks" | "cards" | "quiz" | "imageDesc" | "essay";
 
 export type CheckTranslationProps = {
     nativeLanguage: string | null;
     languageToLearn: string | null;
     text: string;
-    translationText: string | null
-}
+    translationText: string | null;
+};
 
 export type LanguageOption = {
     value: string;
-    label: string
-}
+    label: string;
+};
 
-export type BlanksArray = {
+export type Blank = {
     id: number;
     sentence: string;
     options: string[];
-    answer: string,
-    explanation: string
-}
-
-export type CardsArray = {
-    id: number;
-    sentence: string;
-    options: string[];
-    answer: string,
-    explanation: string
-}
+    answer: string;
+    explanation: string;
+};
 
 export type FlipCardType = {
     word: string;
     translation: string;
     meaning: string;
     example: string;
-    transcription: string
-}
+    transcription: string;
+};
 
 export type QuizCard = {
     question: string;
     options: string[];
     answer: string;
     explanation: string;
-}
+};
 
 export type PhotoType = {
     src?: string;
     alt?: string | null;
-}
+};
 
 export type CheckDescriptionProps = {
     nativeLanguage: string;
     languageToLearn: string;
     description: string;
-    img: string
-}
+    img: string;
+};
 
 export type EssayType = {
     topic: string;
     plan: string[];
-    hint: string
-}
+    hint: string;
+};
 
 export type CheckEssayProps = {
     nativeLanguage: string;
     languageToLearn: string;
     text: string | null;
-    topic: string
-}
+    topic: string;
+};
 
 export type FirstPageType = {
     total_results: number;
-}
+};
 
 export type PexelsResponsePhoto = {
     src: { landscape: string };
-    alt: string
-}
+    alt: string;
+};
 
 export type PexelsResponse = {
     photos: PexelsResponsePhoto[];
-}
+};

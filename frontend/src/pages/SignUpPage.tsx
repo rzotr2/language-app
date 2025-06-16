@@ -3,17 +3,19 @@ import { IoChevronBackOutline } from "react-icons/io5";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import { Link, useNavigate } from "react-router";
-import { loginUser } from "../services/users.ts";
+import { signUp, findUser } from "../services/users.ts";
+import axios from "axios";
 import { BiInfoCircle } from "react-icons/bi";
 import { useAuthState } from "../../store/users.ts";
 import { useForm } from "react-hook-form";
 
 type Inputs = {
-    email: string;
-    password: string;
+    signUpEmail: string;
+    signUpPassword: string;
+    confirmPassword: string;
 };
 
-function LoginPage() {
+function SignUpPage() {
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}$/;
     const passwordRegex = /^.{8,}$/;
 
@@ -26,32 +28,42 @@ function LoginPage() {
         formState: { errors },
     } = useForm<Inputs>();
 
-    const { showPassword, error, authSuccess, setField, resetFields } = useAuthState();
+    const {
+        showPassword,
+        showConfirmPassword,
+        userAlreadyExists,
+        error,
+        authSuccess,
+        setField,
+        resetFields,
+    } = useAuthState();
 
-    const handleLoginSubmit = async () => {
-        loginUser({
-            email: watch("email"),
-            password: watch("password"),
-        })
-            .then((user) => {
-                setField("authSuccess", true);
-                setField("error", null);
-                setTimeout(() => {
-                    if (user.data.goals) {
-                        navigate("/workpage");
-                    } else {
-                        navigate("/main");
-                    }
-                    resetFields();
-                }, 1500);
+    const handleSignupSubmit = () => {
+        findUser(watch("signUpEmail"))
+            .then(() => {
+                setField("userAlreadyExists", true);
             })
             .catch((err) => {
-                if (err.response) {
-                    setField("error", err.response.data);
-                } else if (err.request) {
-                    setField("error", "No response from server");
+                if (axios.isAxiosError(err) && err.response) {
+                    if (err.response.status === 404) {
+                        setField("userAlreadyExists", false);
+                        console.log(watch("signUpEmail"));
+                        signUp({
+                            email: watch("signUpEmail"),
+                            password: watch("signUpPassword"),
+                        }).then(() => {
+                            setField("authSuccess", true);
+                            setField("error", null);
+                            setTimeout(() => {
+                                navigate("/main");
+                                resetFields();
+                            }, 1500);
+                        });
+                    } else {
+                        setField("error", err.response.data.message);
+                    }
                 } else {
-                    setField("error", err.message);
+                    setField("error", "No response from server");
                 }
             });
     };
@@ -61,30 +73,30 @@ function LoginPage() {
             <div className="w-[100vw] h-[100vh] flex justify-center items-center">
                 <div className="w-[300px]">
                     <div className="flex w-full border-gray-400 border-b-1 mb-4 text-sm items-center gap-2">
-                        <div className="p-1.5 border-b-1 border-blue-600">
-                            <button className="px-1 py-0.5 hover:bg-gray-100 rounded-sm font-semibold">
-                                Login
-                            </button>
-                        </div>
                         <div className="p-1.5">
                             <Link
-                                to="/signup"
+                                to="/login"
                                 className="px-1 py-0.5 hover:bg-gray-100 rounded-sm"
                             >
-                                Sign up
+                                Login
                             </Link>
                         </div>
+                        <div className="p-1.5 border-b-1 border-blue-600">
+                            <button className="px-1 py-0.5 hover:bg-gray-100 rounded-sm font-semibold">
+                                Sign up
+                            </button>
+                        </div>
                     </div>
-                    <form onSubmit={handleSubmit(handleLoginSubmit)}>
-                        <div className="mb-2">
+                    <form onSubmit={handleSubmit(handleSignupSubmit)}>
+                        <div className="mb-5">
                             <label
                                 htmlFor="email"
-                                className="block mb-1 text-sm font-medium text-gray-900"
+                                className="block mb-2 text-sm font-medium text-gray-900"
                             >
                                 Your email
                             </label>
                             <input
-                                {...register("email", {
+                                {...register("signUpEmail", {
                                     required: "This field is required",
                                     pattern: { value: emailRegex, message: "Wrong email format" },
                                 })}
@@ -94,7 +106,7 @@ function LoginPage() {
                                 placeholder="email@example.com"
                                 required
                             />
-                            {errors.email && (
+                            {errors.signUpEmail && (
                                 <Callout.Root
                                     color="red"
                                     size="1"
@@ -103,11 +115,11 @@ function LoginPage() {
                                     <Callout.Icon>
                                         <BiInfoCircle />
                                     </Callout.Icon>
-                                    <Callout.Text>{errors.email.message}</Callout.Text>
+                                    <Callout.Text>{errors.signUpEmail.message}</Callout.Text>
                                 </Callout.Root>
                             )}
                         </div>
-                        <div className="mb-1">
+                        <div className="mb-5">
                             <label
                                 htmlFor="password"
                                 className="block mb-2 text-sm font-medium text-gray-900"
@@ -116,11 +128,12 @@ function LoginPage() {
                             </label>
                             <div className="bg-gray-50 border border-gray-300 items-center rounded-lg w-full flex justify-between">
                                 <input
-                                    {...register("password", {
+                                    {...register("signUpPassword", {
                                         pattern: {
                                             value: passwordRegex,
                                             message: "Password must be at least 8 characters long",
                                         },
+                                        required: "Password is required",
                                     })}
                                     type={showPassword ? "text" : "password"}
                                     id="password"
@@ -139,7 +152,7 @@ function LoginPage() {
                                     )}
                                 </div>
                             </div>
-                            {errors.password && (
+                            {errors.signUpPassword && (
                                 <Callout.Root
                                     color="red"
                                     size="1"
@@ -148,31 +161,95 @@ function LoginPage() {
                                     <Callout.Icon>
                                         <BiInfoCircle />
                                     </Callout.Icon>
-                                    <Callout.Text>{errors.password.message}</Callout.Text>
+                                    <Callout.Text>{errors.signUpPassword.message}</Callout.Text>
                                 </Callout.Root>
                             )}
                         </div>
-                        {error && (
-                            <Callout.Root
-                                color="red"
-                                size="1"
-                                className="mt-2 mb-4"
+                        <div className="mb-5">
+                            <label
+                                htmlFor="confirmPassword"
+                                className="block mb-2 text-sm font-medium text-gray-900"
                             >
-                                <Callout.Icon>
-                                    <BiInfoCircle />
-                                </Callout.Icon>
-                                <Callout.Text>{error}</Callout.Text>
-                            </Callout.Root>
-                        )}
-                        {authSuccess && (
-                            <Callout.Root color="green">
-                                <Callout.Icon>
-                                    <BiInfoCircle />
-                                </Callout.Icon>
-                                <Callout.Text>Successfully logged in. Redirecting...</Callout.Text>
-                            </Callout.Root>
-                        )}
-                        <div className="flex items-center justify-end gap-5 mt-5">
+                                Confirm your password
+                            </label>
+                            <div className="bg-gray-50 border border-gray-300 items-center rounded-lg w-full flex justify-between mb-1">
+                                <input
+                                    {...register("confirmPassword", {
+                                        validate: (value: string) =>
+                                            value === watch("signUpPassword") ||
+                                            "Passwords should match",
+                                    })}
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    id="confirmPassword"
+                                    className="text-gray-900 text-sm rounded-lg focus:outline-0 block w-full p-2.5"
+                                    required
+                                    placeholder="Confirm password"
+                                />
+                                <div
+                                    className="p-2 cursor-pointer"
+                                    onClick={() =>
+                                        setField("showConfirmPassword", !showConfirmPassword)
+                                    }
+                                >
+                                    {showConfirmPassword ? (
+                                        <IoMdEye className="text-xl" />
+                                    ) : (
+                                        <IoMdEyeOff className="text-xl" />
+                                    )}
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                {errors.confirmPassword && (
+                                    <Callout.Root
+                                        color="red"
+                                        size="1"
+                                        className="mt-2 mb-4"
+                                    >
+                                        <Callout.Icon>
+                                            <BiInfoCircle />
+                                        </Callout.Icon>
+                                        <Callout.Text>
+                                            {errors.confirmPassword.message}
+                                        </Callout.Text>
+                                    </Callout.Root>
+                                )}
+                                {userAlreadyExists && (
+                                    <Callout.Root
+                                        color="red"
+                                        size="1"
+                                        className="mt-2 mb-4"
+                                    >
+                                        <Callout.Icon>
+                                            <BiInfoCircle />
+                                        </Callout.Icon>
+                                        <Callout.Text>Email is already taken.</Callout.Text>
+                                    </Callout.Root>
+                                )}
+                                {error && (
+                                    <Callout.Root
+                                        color="red"
+                                        size="1"
+                                        className="mt-2 mb-4"
+                                    >
+                                        <Callout.Icon>
+                                            <BiInfoCircle />
+                                        </Callout.Icon>
+                                        <Callout.Text>{error}</Callout.Text>
+                                    </Callout.Root>
+                                )}
+                                {authSuccess && (
+                                    <Callout.Root color="green">
+                                        <Callout.Icon>
+                                            <BiInfoCircle />
+                                        </Callout.Icon>
+                                        <Callout.Text>
+                                            Successfully signed up. Redirecting...
+                                        </Callout.Text>
+                                    </Callout.Root>
+                                )}
+                            </div>
+                        </div>
+                        <div className="space-x-5 flex items-center justify-end">
                             <Link
                                 to="/"
                                 className="group text-sm font-medium flex items-center"
@@ -207,7 +284,7 @@ function LoginPage() {
                                         />
                                     </svg>
                                 )}
-                                Log in
+                                Sign up
                             </button>
                         </div>
                     </form>
@@ -217,4 +294,4 @@ function LoginPage() {
     );
 }
 
-export default LoginPage;
+export default SignUpPage;

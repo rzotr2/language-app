@@ -20,8 +20,11 @@ export function DifficultyChoose({
                     key={diff.value}
                     className={`
                         flex items-center gap-4 px-5 h-12 rounded-xl cursor-pointer border
-                        transition ${value === diff.value? "bg-blue-50 border-blue-400" 
-                        : "bg-gray-50 border-transparent hover:bg-blue-100"}`}
+                        transition ${
+                            value === diff.value
+                                ? "bg-blue-50 border-blue-400"
+                                : "bg-gray-50 border-transparent hover:bg-blue-100"
+                        }`}
                 >
                     <input
                         type="radio"

@@ -9,12 +9,12 @@ import type {
 axios.defaults.withCredentials = true;
 
 export const generate = (text: string) => {
-    return axios.get("api/ai/generate", {params: {text: text}});
-}
+    return axios.get("api/ai/generate", { params: { text: text } });
+};
 
 export const generateText = (props: DefaultPropsForGeneration) => {
     return generate(
-    `Generate a text for translation practice based on my preferences below. 
+        `Generate a text for translation practice based on my preferences below. 
             The information is listed in priority order (1 = highest priority) (general prompt, aka preferences
             has the highest priority!!!:
             1. Preferences: ${props.generalPrompt}.
@@ -34,7 +34,7 @@ export const generateText = (props: DefaultPropsForGeneration) => {
                 "native": "Ukrainian",
                 "target": "English"
               }
-            }`
+            }`,
     );
 };
 
@@ -75,7 +75,7 @@ export const checkTranslation = (props: CheckTranslationProps) => {
                     Context:  
                     - I translated from ${props.nativeLanguage} to ${props.languageToLearn}.  
                     - Original text: ${props.text}  
-                    - My translation: ${props.translationText}`
+                    - My translation: ${props.translationText}`,
     );
 };
 
@@ -96,7 +96,7 @@ export const generateBlanks = (props: DefaultPropsForGeneration) => {
                     "answer": the correct answer (string),
                     "explanation": a short explanation (1-2 sentences) why the answer is correct in ${props.selectedNativeLanguage?.value} (if empty, use ${props.nativeLanguage}).
                 
-                Output only the JSON array, nothing else. Without any "'''json etc.". Do not include any comments or explanations outside the array.`
+                Output only the JSON array, nothing else. Without any "'''json etc.". Do not include any comments or explanations outside the array.`,
     );
 };
 
@@ -121,7 +121,7 @@ export const generateCards = (props: DefaultPropsForGeneration) => {
                     }
                 ]
                 
-                Output only the JSON array, nothing else. Without any "'''json etc." Do not include any comments or explanations outside the array.`
+                Output only the JSON array, nothing else. Without any "'''json etc." Do not include any comments or explanations outside the array.`,
     );
 };
 
@@ -145,7 +145,7 @@ export const generateQuizCards = (props: DefaultPropsForGeneration) => {
                     }
                 ]
                 
-                Output only the JSON array, nothing else. Without any "'''json etc." Do not include any comments or explanations outside the array.`
+                Output only the JSON array, nothing else. Without any "'''json etc." Do not include any comments or explanations outside the array.`,
     );
 };
 
@@ -210,7 +210,7 @@ export const checkImageDescription = (props: CheckDescriptionProps) => {
                 - My description: ${props.description}
                 - My native language: ${props.nativeLanguage}
                 - Target language: ${props.languageToLearn}
-        `
+        `,
     );
 };
 
@@ -227,7 +227,7 @@ export const generateEssayTopic = (props: DefaultPropsForGeneration) => {
                     "plan": ["first point", "second point", "third point", "fourth point"],
                     "hint": "one short sentence with a general hint (what to use, what to pay attention to, etc.)"
                   }
-                - Do not include any explanations, comments, or code blocks. DO NOT mention the blurred face in the response.`
+                - Do not include any explanations, comments, or code blocks. DO NOT mention the blurred face in the response.`,
     );
 };
 
@@ -268,6 +268,6 @@ export const checkEssay = (props: CheckEssayProps) => {
                 Context:  
                 - I wrote an essay in: ${props.languageToLearn}  
                 - My native language: ${props.nativeLanguage}  
-                - Essay topic: ${props.topic}`
+                - Essay topic: ${props.topic}`,
     );
 };

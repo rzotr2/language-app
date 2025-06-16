@@ -1,18 +1,18 @@
 import NativeLanguageChoose from "./small-components/NativeLanguageChoose.tsx";
-import {useRef, useState} from "react";
+import { type RefObject, useRef, useState } from "react";
 import LevelChoose from "./small-components/LevelChoose.tsx";
 import TopicsChoose from "./small-components/TopicsChoose.tsx";
 import GoalsChoose from "./small-components/GoalsChoose.tsx";
 import { findUserById, updateUser } from "../services/users.ts";
 import type { User } from "../models/user.ts";
-import {useNavigate} from "react-router";
+import { useNavigate } from "react-router";
 import DesiredLanguageChoose from "./small-components/DesiredLanguageChoose.tsx";
 
 type MainPageMainProps = {
     getIsLoading: (isLoading: boolean) => void;
-}
+};
 
-function MainPageMain({getIsLoading}: MainPageMainProps) {
+function MainPageMain({ getIsLoading }: MainPageMainProps) {
     const navigate = useNavigate();
 
     const [selectedNativeLanguage, setSelectedNativeLanguage] = useState<string | null>(null);
@@ -24,6 +24,12 @@ function MainPageMain({getIsLoading}: MainPageMainProps) {
     const topicsRef = useRef<HTMLDivElement>(null);
     const goalsRef = useRef<HTMLDivElement>(null);
 
+    const navigateToAnchor = (component: RefObject<HTMLDivElement | null>) => {
+        setTimeout(() => {
+            component?.current?.scrollIntoView({ behavior: "smooth" });
+        }, 50);
+    };
+
     const getSelectedLanguageToLearn = (languageToLearn: string) => {
         setSelectedLanguageToLearn(languageToLearn);
         setActiveStep(1);
@@ -33,9 +39,7 @@ function MainPageMain({getIsLoading}: MainPageMainProps) {
         if (nativeLanguage !== undefined) {
             setSelectedNativeLanguage(nativeLanguage);
             setActiveStep(activeStep + 1);
-            setTimeout(() => {
-                levelRef.current?.scrollIntoView({ behavior: "smooth" });
-            }, 50);
+            navigateToAnchor(levelRef);
         }
         if (back) {
             setActiveStep(activeStep - 1);
@@ -46,40 +50,30 @@ function MainPageMain({getIsLoading}: MainPageMainProps) {
         if (level !== undefined) {
             setSelectedLevel(level);
             setActiveStep(activeStep + 1);
-            setTimeout(() => {
-                topicsRef.current?.scrollIntoView({ behavior: "smooth" });
-            }, 50);
+            navigateToAnchor(topicsRef);
         }
         if (back) {
             setActiveStep(activeStep - 1);
-            setTimeout(() => {
-                levelRef.current?.scrollIntoView({ behavior: "smooth" });
-            }, 50);
+            navigateToAnchor(levelRef);
         }
     };
 
-    const getSelectedTopic = (topic?: string, back?: boolean)=> {
+    const getSelectedTopic = (topic?: string, back?: boolean) => {
         if (topic !== undefined) {
             setSelectedTopic(topic);
             setActiveStep(activeStep + 1);
-            setTimeout(() => {
-                goalsRef.current?.scrollIntoView({ behavior: "smooth" });
-            }, 50);
+            navigateToAnchor(goalsRef);
         }
         if (back) {
             setActiveStep(activeStep - 1);
-            setTimeout(() => {
-                levelRef.current?.scrollIntoView({ behavior: "smooth" });
-            }, 50);
+            navigateToAnchor(levelRef);
         }
-    }
+    };
 
-    const getSelectedGoal = async (goal?: string, back?: boolean)=> {
+    const getSelectedGoal = async (goal?: string, back?: boolean) => {
         if (back) {
             setActiveStep(activeStep - 1);
-            setTimeout(() => {
-                topicsRef.current?.scrollIntoView({ behavior: "smooth" });
-            }, 50);
+            navigateToAnchor(topicsRef);
         } else {
             getIsLoading(true);
             const userId = localStorage.getItem("currentUserId");
@@ -94,18 +88,16 @@ function MainPageMain({getIsLoading}: MainPageMainProps) {
                         level: selectedLevel!,
                         interests: selectedTopic!,
                         goals: goal!,
-
                     };
                     await updateUser(newUser);
                     setTimeout(() => {
                         navigate("/workpage");
                         getIsLoading(false);
                     }, 1500);
-
                 }
             }
         }
-    }
+    };
 
     return (
         <>
@@ -115,33 +107,48 @@ function MainPageMain({getIsLoading}: MainPageMainProps) {
                     text-white py-4 md:py-10 px-5 text-center"
                 >
                     <div className="container mx-auto">
-                        <h2 className="text-4xl font-bold py-2 md:py-2">Learn a language with AI</h2>
+                        <h2 className="text-4xl font-bold py-2 md:py-2">
+                            Learn a language with AI
+                        </h2>
                         <p className="text-lg py-2 md:py-2">
                             Practice through personalized exercises generated by artificial
                             intelligence.
                         </p>
                     </div>
                 </section>
-                <section
-                    className="md:py-10 py-5 px-5 text-center font-bold"
-                >
+                <section className="md:py-10 py-5 px-5 text-center font-bold">
                     <div className="flex items-center justify-center">
-                        <DesiredLanguageChoose getSelectedLanguageToLearn={getSelectedLanguageToLearn} show={activeStep === 0} />
-                        <NativeLanguageChoose getSelectedNativeLanguage={getSelectedNativeLanguage} show={activeStep === 1} />
+                        <DesiredLanguageChoose
+                            getSelectedLanguageToLearn={getSelectedLanguageToLearn}
+                            show={activeStep === 0}
+                        />
+                        <NativeLanguageChoose
+                            getSelectedNativeLanguage={getSelectedNativeLanguage}
+                            show={activeStep === 1}
+                        />
                         <div ref={levelRef}>
-                            <LevelChoose getSelectedLevel={getSelectedLevel} show={activeStep === 2} />
+                            <LevelChoose
+                                getSelectedLevel={getSelectedLevel}
+                                show={activeStep === 2}
+                            />
                         </div>
                         <div ref={topicsRef}>
-                            <TopicsChoose getSelectedTopic={getSelectedTopic} show={activeStep === 3} />
+                            <TopicsChoose
+                                getSelectedTopic={getSelectedTopic}
+                                show={activeStep === 3}
+                            />
                         </div>
                         <div ref={goalsRef}>
-                            <GoalsChoose getSelectedGoal={getSelectedGoal} show={activeStep === 4} />
+                            <GoalsChoose
+                                getSelectedGoal={getSelectedGoal}
+                                show={activeStep === 4}
+                            />
                         </div>
                     </div>
                 </section>
             </div>
         </>
-    )
+    );
 }
 
-export default MainPageMain
+export default MainPageMain;

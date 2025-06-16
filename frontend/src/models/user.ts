@@ -7,4 +7,4 @@ export type User = {
     level?: string;
     interests?: string;
     goals?: string;
-}
+};

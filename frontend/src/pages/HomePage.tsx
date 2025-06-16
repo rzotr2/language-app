@@ -9,7 +9,7 @@ function HomePage() {
             <HomePageMain />
             <FooterGeneral />
         </>
-    )
+    );
 }
 
-export default HomePage
+export default HomePage;

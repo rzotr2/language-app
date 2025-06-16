@@ -3,7 +3,7 @@ import { BiTask } from "react-icons/bi";
 import { LuBrainCircuit } from "react-icons/lu";
 import { FiMessageSquare } from "react-icons/fi";
 import { Link } from "react-router";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 function HomePageMain() {
     const [currentUserLanguage, setCurrentLanguage] = useState<string | null>(null);
@@ -24,9 +24,9 @@ function HomePageMain() {
             <section className="container mx-auto mt-1 md:mt-8 flex flex-col md:flex-row items-center justify-center">
                 <div className="text-white mx-4 md:mx-8 md:w-2/3 hidden md:block md:mb-10">
                     <p className="text-lg font-bold md:text-2xl md:font-semibold text-gray-800">
-                        Start your language journey with interactive exercises and real-life practice.
-                        Build your skills step by step in a supportive, engaging environment designed for learners of
-                        all levels.
+                        Start your language journey with interactive exercises and real-life
+                        practice. Build your skills step by step in a supportive, engaging
+                        environment designed for learners of all levels.
                     </p>
                     <div className="w-full md:flex justify-center md:justify-start hidden ">
                         <div className="w-full md:w-48 border-b-1 border-gray-600 mt-2 mb-3 md:mt-4 md:mb-6"></div>
@@ -35,30 +35,41 @@ function HomePageMain() {
                         Master a new language, one step at a time
                     </p>
                     <div className="mt-5">
-                        <Link to={currentUserLanguage ? "/workpage" : "/main"} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                        <Link
+                            to={currentUserLanguage ? "/workpage" : "/main"}
+                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
                             focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
                             dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
-                            dark:focus:ring-blue-800 cursor-pointer">
+                            dark:focus:ring-blue-800 cursor-pointer"
+                        >
                             Get started
                         </Link>
                     </div>
                 </div>
                 <div className="block md:hidden my-4 text-center px-3">
                     <h3 className="text-lg font-semibold py-1">Learn a language online</h3>
-                    <span>Practice different exercises with AI. It`s better than any other websites. Just give it a try and you`ll see!</span>
+                    <span>
+                        Practice different exercises with AI. It`s better than any other websites.
+                        Just give it a try and you`ll see!
+                    </span>
                     <div className="mt-5">
-                        <Link to={currentUserLanguage ? "/workpage" : "/main"} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                        <Link
+                            to={currentUserLanguage ? "/workpage" : "/main"}
+                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
                             focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
                             dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
-                            dark:focus:ring-blue-800 cursor-pointer">
+                            dark:focus:ring-blue-800 cursor-pointer"
+                        >
                             Get started
                         </Link>
                     </div>
                 </div>
                 <div className="w-full">
-                    <img className="w-[100%] p-2 md:p-0 md:max-w-2xl md:mt-0  md:h-auto"
-                         src={languages}
-                         alt="Image"/>
+                    <img
+                        className="w-[100%] p-2 md:p-0 md:max-w-2xl md:mt-0  md:h-auto"
+                        src={languages}
+                        alt="Image"
+                    />
                 </div>
             </section>
             <section
@@ -73,45 +84,54 @@ function HomePageMain() {
                     </p>
                 </div>
             </section>
-            <section
-                className="mt-2 py-4 md:py-10 px-5 text-center"
-            >
-                <div className="container mx-auto flex flex-col items-center md:flex-row justify-center
-                        flex-wrap md:flex-nowrap">
+            <section className="mt-2 py-4 md:py-10 px-5 text-center">
+                <div
+                    className="container mx-auto flex flex-col items-center md:flex-row justify-center
+                        flex-wrap md:flex-nowrap"
+                >
                     <div className="w-2/3 md:w-2/6 flex items-center flex-col">
                         <BiTask className="text-7xl mb-1 md:mb-3" />
                         <div className="flex flex-col items-center">
                             <p className="font-semibold">Improve your skills</p>
-                            <p className="md:w-4/5">Enhance your reading and listening skills with interactive tasks</p>
+                            <p className="md:w-4/5">
+                                Enhance your reading and listening skills with interactive tasks
+                            </p>
                         </div>
                     </div>
                     <div className="w-2/3 md:w-2/6 flex items-center flex-col">
                         <LuBrainCircuit className="text-7xl mb-1 md:mb-3" />
                         <div className="flex flex-col items-center">
                             <p className="font-semibold">Sharpen your knowledge</p>
-                            <p className="md:w-4/5">Deepen your grammar and vocabulary with AI challenges</p>
+                            <p className="md:w-4/5">
+                                Deepen your grammar and vocabulary with AI challenges
+                            </p>
                         </div>
                     </div>
                     <div className="w-2/3 md:w-2/6 flex items-center flex-col">
                         <FiMessageSquare className="text-7xl mb-1 md:mb-3" />
                         <div className="flex flex-col items-center">
                             <p className="font-semibold">Practice conversation</p>
-                            <p className="md:w-4/5">Engage in realistic dialogues to improve your speaking fluency</p>
+                            <p className="md:w-4/5">
+                                Engage in realistic dialogues to improve your speaking fluency
+                            </p>
                         </div>
                     </div>
                 </div>
                 <h2 className="text-3xl font-bold pt-10 md:pt-15">Ready to start your journey?</h2>
                 <div className="my-5">
-                    <Link to={currentUserLanguage ? "/workpage" : "/main"} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                    <Link
+                        to={currentUserLanguage ? "/workpage" : "/main"}
+                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
                             focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
                             dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
-                            dark:focus:ring-blue-800 cursor-pointer">
+                            dark:focus:ring-blue-800 cursor-pointer"
+                    >
                         Get started
                     </Link>
                 </div>
             </section>
         </>
-    )
+    );
 }
 
 export default HomePageMain;
