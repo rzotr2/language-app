@@ -34,6 +34,10 @@ export default function HeaderGeneral() {
         })();
     }, []);
 
+    const logOut = () => {
+        return axios.get("/api/auth/logout");
+    }
+
     return (
         <>
             <nav className="w-full py-2 px-1 md:py-3 md:px-3 shadow-sm items-center">
@@ -124,29 +128,30 @@ export default function HeaderGeneral() {
                                 >
                                     {currentUser && (
                                         <DropdownMenu.Item className={itemClassName}>
-                                            <span className="text-sm font-bold">
+                                            <span className="text-sm font-bold px-4 py-2 block w-full">
                                                 {currentUser.email}
                                             </span>
                                         </DropdownMenu.Item>
                                     )}
                                     {currentUser && (
                                         <DropdownMenu.Item className={itemClassName}>
-                                            Manage account
+                                            <span className="text-sm font-bold px-4 py-2 block w-full">
+                                                Manage account
+                                            </span>
                                         </DropdownMenu.Item>
                                     )}
                                     <DropdownMenu.Item className={itemClassName}>
-                                        Feedback
+                                        <span className="text-sm font-bold px-4 py-2 block w-full">
+                                                Feedback
+                                            </span>
                                     </DropdownMenu.Item>
                                     <DropdownMenu.Item className={itemClassName} asChild>
                                         {currentUser ? (
-                                            <Link
-                                                to="91.108.122.94:8000/api/auth/logout"
-                                                className="text-red-500 w-full h-full block"
-                                            >
-                                                Sign Out
-                                            </Link>
+                                            <button onClick={logOut}>
+                                                Log out
+                                            </button>
                                         ) : (
-                                            <Link to="/login" className="w-full h-full">
+                                            <Link to="/login" className="w-full h-full px-4 py-2">
                                                 Log in
                                             </Link>
                                         )}
