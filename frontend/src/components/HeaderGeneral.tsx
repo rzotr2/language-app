@@ -89,12 +89,12 @@ export default function HeaderGeneral() {
                                                     </DropdownMenu.Item>
                                                     <DropdownMenu.Separator className="bg-gray-900"/>
                                                     <DropdownMenu.Item className={itemClassName}>
-                                                        <Link
-                                                            to="91.108.122.94:8000/api/auth/logout"
-                                                            className="text-red-500 px-4 py-2"
-                                                        >
-                                                            Sign Out
-                                                        </Link>
+                                                        <button className="text-red-500 px-4 py-2"
+                                                            onClick={() => {
+                                                            window.location.href = '/api/auth/logout';
+                                                        }}>
+                                                            Logout
+                                                        </button>
                                                     </DropdownMenu.Item>
                                                 </DropdownMenu.Content>
                                             </DropdownMenu.Portal>
@@ -143,12 +143,12 @@ export default function HeaderGeneral() {
                                     </DropdownMenu.Item>
                                     <DropdownMenu.Item className={itemClassName} asChild>
                                         {currentUser ? (
-                                            <Link
-                                                to="91.108.122.94:8000/api/auth/logout"
-                                                className="text-red-500 px-4 py-2"
-                                            >
-                                                Sign Out
-                                            </Link>
+                                            <button className="text-red-500 px-4 py-2"
+                                                    onClick={() => {
+                                                        window.location.href = '/api/auth/logout';
+                                                    }}>
+                                                Logout
+                                            </button>
                                         ) : (
                                             <Link to="/login" className="w-full h-full px-4 py-2">
                                                 Log in
