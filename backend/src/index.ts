@@ -38,5 +38,5 @@ const connectToDB = async () => {
 
 app.listen(PORT, () => {
     connectToDB();
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT} in ${process.env.MODE} mode`);
 });
