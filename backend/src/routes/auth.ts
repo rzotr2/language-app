@@ -93,7 +93,7 @@ router.get('/me', (req: Request, res: Response) => {
     } catch {
         res.status(401).json("Unauthorized. Access denied");
     }
-});
+})
 
 router.get('/logout', (_req: Request, res: Response) => {
     res
@@ -103,7 +103,7 @@ router.get('/logout', (_req: Request, res: Response) => {
             sameSite: 'lax',
             path: '/'
         })
-        .redirect('http://91.108.122.94:8000/login');
-});
+    res.status(200).json({message: "Success. Logging out"});
+})
 
 export default router;

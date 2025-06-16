@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import {findUser, findUserById, updateUser} from "../services/users";
+import { findUser, findUserById, updateUser } from "../services/users";
 
 const router = Router();
 
@@ -28,6 +28,7 @@ router.get("/", async (req: Request, res: Response) => {
 
 router.get("/:id", async (req: Request, res: Response) => {
     const id = req.query.id;
+
     if (!id) {
         res.status(400).json({ message: 'User is not logged in' });
         return;

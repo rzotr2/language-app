@@ -6,11 +6,11 @@ import type {
     DefaultPropsForGeneration,
 } from "../types";
 
-axios.defaults.baseURL = '91.108.122.94:8000';
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
 
 export const generate = (text: string) => {
-    return axios.get("/api/ai/generate", {params: {text: text}});
+    return axios.get("ai/generate", {params: {text: text}});
 }
 
 export const generateText = (props: DefaultPropsForGeneration) => {

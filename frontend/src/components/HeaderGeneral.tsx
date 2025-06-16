@@ -1,5 +1,5 @@
 import logo from '../assets/svg/logo.svg';
-import { Link } from "react-router";
+import {Link, useNavigate} from "react-router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DropdownMenu } from "radix-ui";
@@ -11,15 +11,16 @@ import type { User } from "../models/user.ts";
 export default function HeaderGeneral() {
     const [currentUser, setCurrentUser] = useState<User | null>();
     const [loading, setLoading] = useState<boolean>(false);
+    const navigate = useNavigate();
     const itemClassName =
-        "relative flex select-none items-center rounded-sm text-sm outline-none transition-colors " +
-        "focus:bg-slate-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 cursor-pointer";
+        "relative flex cursor-default select-none items-center rounded-sm px-4 py-2 text-sm outline-none transition-colors " +
+        "focus:bg-slate-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50";
 
     useEffect(() => {
         (async () => {
             setLoading(true);
             try {
-                const data = await axios.get('/api/auth/me');
+                const data = await axios.get('/auth/me');
                 const user = await findUserById(data.data.id);
                 if (user) {
                     localStorage.setItem("currentUserId", user._id);
@@ -33,6 +34,16 @@ export default function HeaderGeneral() {
             }
         })();
     }, []);
+
+    const logOut = async () => {
+        try {
+            await axios.get('auth/logout');
+            navigate("/login");
+            setCurrentUser(null);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     return (
         <>
@@ -73,27 +84,26 @@ export default function HeaderGeneral() {
                                                     sideOffset={12}
                                                 >
                                                     <DropdownMenu.Item className={itemClassName}>
-                                                        <span className="text-sm font-bold px-4 py-2">
+                                                        <span className="text-sm font-bold">
                                                             {currentUser.email}
                                                         </span>
                                                     </DropdownMenu.Item>
                                                     <DropdownMenu.Item className={itemClassName}>
-                                                        <Link to="#" className="px-4 py-2">
-                                                            Manage account
-                                                        </Link>
+                                                        Manage account
                                                     </DropdownMenu.Item>
                                                     <DropdownMenu.Item className={itemClassName}>
-                                                        <Link to="#" className="px-4 py-2">
-                                                            Feedback
-                                                        </Link>
+                                                        Feedback
                                                     </DropdownMenu.Item>
                                                     <DropdownMenu.Separator className="bg-gray-900"/>
                                                     <DropdownMenu.Item className={itemClassName}>
-                                                        <button className="text-red-500 px-4 py-2"
-                                                            onClick={() => {
-                                                            window.location.href = '/api/auth/logout';
-                                                        }}>
-                                                            Logout
+                                                        {/*<Link*/}
+                                                        {/*    to="http://localhost:5000/api/auth/logout"*/}
+                                                        {/*    className="text-red-500"*/}
+                                                        {/*>*/}
+                                                        {/*    Sign Out*/}
+                                                        {/*</Link>*/}
+                                                        <button onClick={logOut} className="text-red-500 px-4 py-2">
+                                                            Sign out
                                                         </button>
                                                     </DropdownMenu.Item>
                                                 </DropdownMenu.Content>
@@ -102,7 +112,7 @@ export default function HeaderGeneral() {
                                     ) : (
                                         <Link to="/login"
                                               className="text-white bg-blue-700 hover:bg-blue-800
-                                                focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
+                                        focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2">
                                             Log in
                                         </Link>
                                     )}
@@ -124,33 +134,26 @@ export default function HeaderGeneral() {
                                 >
                                     {currentUser && (
                                         <DropdownMenu.Item className={itemClassName}>
-                                            <span className="px-4 py-2 block w-full">
+                                            <span className="text-sm font-bold">
                                                 {currentUser.email}
                                             </span>
                                         </DropdownMenu.Item>
                                     )}
                                     {currentUser && (
                                         <DropdownMenu.Item className={itemClassName}>
-                                            <span className="px-4 py-2 block w-full">
-                                                Manage account
-                                            </span>
+                                            Manage account
                                         </DropdownMenu.Item>
                                     )}
                                     <DropdownMenu.Item className={itemClassName}>
-                                        <span className="px-4 py-2 block w-full">
-                                                Feedback
-                                            </span>
+                                        Feedback
                                     </DropdownMenu.Item>
                                     <DropdownMenu.Item className={itemClassName} asChild>
                                         {currentUser ? (
-                                            <button className="text-red-500 px-4 py-2"
-                                                    onClick={() => {
-                                                        window.location.href = '/api/auth/logout';
-                                                    }}>
-                                                Logout
+                                            <button onClick={logOut} className="text-red-500 px-4 py-2">
+                                                Sign out
                                             </button>
                                         ) : (
-                                            <Link to="/login" className="w-full h-full px-4 py-2">
+                                            <Link to="/login" className="w-full h-full">
                                                 Log in
                                             </Link>
                                         )}
