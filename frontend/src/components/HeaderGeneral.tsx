@@ -102,7 +102,7 @@ export default function HeaderGeneral() {
                                     ) : (
                                         <Link to="/login"
                                               className="text-white bg-blue-700 hover:bg-blue-800
-                                        focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
+                                                focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
                                             Log in
                                         </Link>
                                     )}
@@ -140,7 +140,7 @@ export default function HeaderGeneral() {
                                     <DropdownMenu.Item className={itemClassName} asChild>
                                         {currentUser ? (
                                             <Link
-                                                to="http://localhost:5000/api/auth/logout"
+                                                to="91.108.122.94:8000/api/auth/logout"
                                                 className="text-red-500 w-full h-full block"
                                             >
                                                 Sign Out

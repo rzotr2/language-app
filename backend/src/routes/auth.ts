@@ -103,7 +103,7 @@ router.get('/logout', (_req: Request, res: Response) => {
             sameSite: 'lax',
             path: '/'
         })
-        .redirect('http://localhost:5173/login');
+        .redirect('http://91.108.122.94:8000/login');
 })
 
 export default router;
