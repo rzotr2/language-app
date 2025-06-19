@@ -5,10 +5,10 @@ import TopicsChoose from "./small-components/TopicsChoose.tsx";
 import GoalsChoose from "./small-components/GoalsChoose.tsx";
 import { findUserById, updateUser } from "../services/users.ts";
 import type { User } from "../models/user.ts";
-import { useNavigate } from "react-router";
+import { useNavigate } from "@tanstack/react-router";
 import DesiredLanguageChoose from "./small-components/DesiredLanguageChoose.tsx";
 import { useTranslation } from "react-i18next";
-import { useAuthState } from "../../store/users.ts";
+import { useAuthState } from "../../store/auth.ts";
 
 type MainPageMainProps = {
     getIsLoading: (isLoading: boolean) => void;
@@ -17,7 +17,7 @@ type MainPageMainProps = {
 function MainPageMain({ getIsLoading }: MainPageMainProps) {
     const navigate = useNavigate();
     const { t } = useTranslation();
-    const { currentUserData } = useAuthState();
+    const { currentUser, setFieldAuth } = useAuthState();
 
     const [selectedNativeLanguage, setSelectedNativeLanguage] = useState<string | null>(null);
     const [selectedLanguageToLearn, setSelectedLanguageToLearn] = useState<string | null>(null);
@@ -80,7 +80,7 @@ function MainPageMain({ getIsLoading }: MainPageMainProps) {
             navigateToAnchor(topicsRef);
         } else {
             getIsLoading(true);
-            const userId = currentUserData?._id;
+            const userId = currentUser?._id;
             if (userId) {
                 const existingUser: User = await findUserById(userId);
                 if (existingUser) {
@@ -94,8 +94,9 @@ function MainPageMain({ getIsLoading }: MainPageMainProps) {
                         goals: goal!,
                     };
                     await updateUser(newUser);
+                    setFieldAuth("currentUser", newUser);
                     setTimeout(() => {
-                        navigate("/workpage");
+                        navigate({ to: "/workPage" });
                         getIsLoading(false);
                     }, 1500);
                 }

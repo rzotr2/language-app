@@ -1,8 +1,13 @@
-import HeaderGeneral from "../components/HeaderGeneral.tsx";
-import FooterGeneral from "../components/FooterGeneral.tsx";
 import WorkPageMain from "../components/WorkPageMain.tsx";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { createFileRoute } from "@tanstack/react-router";
+import { checkUserAuth } from "../auth/auth.ts";
+
+export const Route = createFileRoute("/workPage")({
+    loader: () => checkUserAuth(location.pathname),
+    component: WorkPage,
+});
 
 function WorkPage() {
     const [loading, setLoading] = useState<boolean>(false);
@@ -25,13 +30,7 @@ function WorkPage() {
                     </div>
                 </div>
             )}
-            <div className="flex flex-col justify-between min-h-[100vh]">
-                <HeaderGeneral />
-                <WorkPageMain getIsLoading={getIsLoading} />
-                <FooterGeneral />
-            </div>
+            <WorkPageMain getIsLoading={getIsLoading} />
         </>
     );
 }
-
-export default WorkPage;

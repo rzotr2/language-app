@@ -1,2 +1,17 @@
+@import "./css/custom-components/loader.css";
+@import "./css/custom-components/button.css";
+@import "./css/custom-components/card.css";
+@import "./css/custom-components/collapsible.css";
 @import "tailwindcss";
 @import "@radix-ui/themes/styles.css";
+
+html {
+    scroll-behavior: smooth;
+}
+.radix-callout-text {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.5rem;
+}

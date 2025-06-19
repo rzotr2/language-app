@@ -8,10 +8,8 @@ import type {
     QuizCard,
 } from "../src/types";
 import { create } from "zustand";
-import { type User } from "../src/models/user";
 
 type State = {
-    currentUser: User | null;
     generalPrompt: string | null;
     nativeLanguage: string | null;
     selectedNativeLanguage: LanguageOption | null;
@@ -33,7 +31,6 @@ type State = {
 };
 
 export const useExerciseStore = create<State>((set) => ({
-    currentUser: null,
     generalPrompt: null,
     nativeLanguage: null,
     selectedNativeLanguage: null,

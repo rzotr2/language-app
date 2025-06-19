@@ -1,31 +1,29 @@
 import logo from "../assets/svg/logo.svg";
-import { Link, useNavigate } from "react-router";
-import { useEffect, useState } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
 import axios from "axios";
 import { DropdownMenu } from "radix-ui";
 import { FiMenu } from "react-icons/fi";
 import userLogo from "../assets/svg/userLogo.svg";
-import { findUserById } from "../services/users.ts";
 import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
 import { useTranslation } from "react-i18next";
 import { LanguageSelect } from "./small-components/LanguageSelect.tsx";
-import { useAuthState } from "../../store/users.ts";
+import { useAuthState } from "../../store/auth.ts";
 
 export default function HeaderGeneral() {
-    const [loading, setLoading] = useState<boolean>(false);
     const navigate = useNavigate();
     const itemClassName =
         "relative flex cursor-pointer select-none items-center rounded-sm text-sm outline-none transition-colors " +
         "focus:bg-slate-50 data-[disabled]:pointer-events-none data-[disabled]:bg-white hover:bg-gray-100";
 
-    const { currentUserData, setFieldAuth } = useAuthState();
+    const currentUser = useAuthState((state) => state.currentUser);
+    const setFieldAuth = useAuthState((state) => state.setFieldAuth);
     const { t } = useTranslation();
 
     const logOut = async () => {
         try {
             await axios.get("api/auth/logout");
-            navigate("/login");
-            setFieldAuth("currentUserData", null);
+            navigate({ to: "/loginPage" });
+            setFieldAuth("currentUser", null);
         } catch (err) {
             console.log(err);
         }
@@ -37,6 +35,7 @@ export default function HeaderGeneral() {
                 <div className="w-full flex items-center justify-between px-2 md:px-6">
                     <Link
                         to="/"
+                        from="/"
                         className="flex items-center gap-3"
                     >
                         <img
@@ -48,6 +47,9 @@ export default function HeaderGeneral() {
                         </h1>
                     </Link>
                     <ul className="md:flex space-x-8 hidden font-medium md:items-center">
+                        <li>
+                            <LanguageSelect />
+                        </li>
                         <li>
                             <a
                                 href="#"
@@ -73,105 +75,97 @@ export default function HeaderGeneral() {
                             </a>
                         </li>
                         <li>
-                            {loading ? (
-                                <div
-                                    role="status"
-                                    className="min-w-[50px] flex justify-center"
-                                >
-                                    <div className="Buttons"></div>
-                                    <span className="sr-only">{t("nav.loading")}</span>
-                                </div>
-                            ) : (
-                                <div className="flex items-center gap-3">
-                                    <LanguageSelect />
-                                    {currentUserData ? (
-                                        <DropdownMenu.Root>
-                                            <DropdownMenu.Trigger
-                                                className="focus:outline-0 flex gap-2 px-2 items-center text-gray-900 rounded-full
+                            <div className="flex items-center gap-3">
+                                {currentUser ? (
+                                    <DropdownMenu.Root>
+                                        <DropdownMenu.Trigger
+                                            className="focus:outline-0 flex gap-2 px-2 items-center text-gray-900 rounded-full
                                                                     hover:text-blue-600 md:me-0 ring-4 ring-gray-100 cursor-pointer"
-                                            >
-                                                <img
-                                                    src={userLogo}
-                                                    alt="user logo"
-                                                    className="h-7"
-                                                />
-                                                <svg
-                                                    className="w-2.5 h-2.5"
-                                                    aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 10 6"
-                                                >
-                                                    <path
-                                                        stroke="currentColor"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth="2"
-                                                        d="m1 1 4 4 4-4"
-                                                    />
-                                                </svg>
-                                            </DropdownMenu.Trigger>
-                                            <DropdownMenu.Portal>
-                                                <DropdownMenu.Content
-                                                    className="z-50 min-w-[12rem] overflow-hidden rounded-lg bg-white shadow-md
-                                                        border-gray-300 border-[0.1px] me-1"
-                                                    align="center"
-                                                    sideOffset={12}
-                                                >
-                                                    <DropdownMenu.Item
-                                                        className={itemClassName}
-                                                        disabled={true}
-                                                    >
-                                                        <div className="flex items-center mx-auto">
-                                                            <img
-                                                                src={userLogo}
-                                                                alt="user logo"
-                                                                className="h-6"
-                                                            />
-                                                            <span className="text-sm font-bold px-4 py-2 w-full h-full cursor-">
-                                                                {currentUserData.email}
-                                                            </span>
-                                                        </div>
-                                                    </DropdownMenu.Item>
-                                                    <DropdownMenuSeparator className="h-[1px] bg-gray-300" />
-                                                    <DropdownMenu.Item className={itemClassName}>
-                                                        <Link
-                                                            to="#"
-                                                            className="px-4 py-2 w-full h-full"
-                                                        >
-                                                            {t("nav.manageAccount")}
-                                                        </Link>
-                                                    </DropdownMenu.Item>
-                                                    <DropdownMenu.Item className={itemClassName}>
-                                                        <Link
-                                                            to="#"
-                                                            className="px-4 py-2 w-full h-full"
-                                                        >
-                                                            {t("nav.feedback")}
-                                                        </Link>
-                                                    </DropdownMenu.Item>
-                                                    <DropdownMenu.Item className={itemClassName}>
-                                                        <button
-                                                            onClick={logOut}
-                                                            className="text-red-500 px-4 py-2 w-full h-full text-start cursor-pointer"
-                                                        >
-                                                            {t("nav.signOut")}
-                                                        </button>
-                                                    </DropdownMenu.Item>
-                                                </DropdownMenu.Content>
-                                            </DropdownMenu.Portal>
-                                        </DropdownMenu.Root>
-                                    ) : (
-                                        <Link
-                                            to="/login"
-                                            className="text-white bg-blue-700 hover:bg-blue-800
-                                                focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2"
                                         >
-                                            {t("nav.logIn")}
-                                        </Link>
-                                    )}
-                                </div>
-                            )}
+                                            <img
+                                                src={userLogo}
+                                                alt="user logo"
+                                                className="h-7"
+                                            />
+                                            <svg
+                                                className="w-2.5 h-2.5"
+                                                aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 10 6"
+                                            >
+                                                <path
+                                                    stroke="currentColor"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="m1 1 4 4 4-4"
+                                                />
+                                            </svg>
+                                        </DropdownMenu.Trigger>
+                                        <DropdownMenu.Portal>
+                                            <DropdownMenu.Content
+                                                className="z-50 min-w-[12rem] overflow-hidden rounded-lg bg-white shadow-md
+                                                        border-gray-300 border-[0.1px] me-1"
+                                                align="center"
+                                                sideOffset={12}
+                                            >
+                                                <DropdownMenu.Item
+                                                    className={itemClassName}
+                                                    disabled={true}
+                                                >
+                                                    <div className="flex items-center mx-auto">
+                                                        <img
+                                                            src={userLogo}
+                                                            alt="user logo"
+                                                            className="h-6"
+                                                        />
+                                                        <span className="text-sm font-bold px-4 py-2 w-full h-full cursor-">
+                                                            {currentUser.email}
+                                                        </span>
+                                                    </div>
+                                                </DropdownMenu.Item>
+                                                <DropdownMenuSeparator className="h-[1px] bg-gray-300" />
+                                                <DropdownMenu.Item className={itemClassName}>
+                                                    <Link
+                                                        to="/"
+                                                        from="/"
+                                                        className="px-4 py-2 w-full h-full"
+                                                    >
+                                                        {t("nav.manageAccount")}
+                                                    </Link>
+                                                </DropdownMenu.Item>
+                                                <DropdownMenu.Item className={itemClassName}>
+                                                    <Link
+                                                        to="/"
+                                                        from="/"
+                                                        className="px-4 py-2 w-full h-full"
+                                                    >
+                                                        {t("nav.feedback")}
+                                                    </Link>
+                                                </DropdownMenu.Item>
+                                                <DropdownMenu.Item className={itemClassName}>
+                                                    <button
+                                                        onClick={logOut}
+                                                        className="text-red-500 px-4 py-2 w-full h-full text-start cursor-pointer"
+                                                    >
+                                                        {t("nav.signOut")}
+                                                    </button>
+                                                </DropdownMenu.Item>
+                                            </DropdownMenu.Content>
+                                        </DropdownMenu.Portal>
+                                    </DropdownMenu.Root>
+                                ) : (
+                                    <Link
+                                        to="/loginPage"
+                                        from="/"
+                                        className="text-white bg-blue-700 hover:bg-blue-800
+                                                focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2"
+                                    >
+                                        {t("nav.logIn")}
+                                    </Link>
+                                )}
+                            </div>
                         </li>
                     </ul>
                     <div className="md:hidden">
@@ -191,7 +185,7 @@ export default function HeaderGeneral() {
                                     align="start"
                                     sideOffset={12}
                                 >
-                                    {currentUserData && (
+                                    {currentUser && (
                                         <div className="w-full">
                                             <DropdownMenu.Item
                                                 className={itemClassName}
@@ -204,17 +198,18 @@ export default function HeaderGeneral() {
                                                         className="h-6"
                                                     />
                                                     <span className="text-sm font-bold px-4 py-2 w-full h-full cursor-">
-                                                        {currentUserData.email}
+                                                        {currentUser.email}
                                                     </span>
                                                 </div>
                                             </DropdownMenu.Item>
                                             <DropdownMenuSeparator className="h-[1px] bg-gray-300" />
                                         </div>
                                     )}
-                                    {currentUserData && (
+                                    {currentUser && (
                                         <DropdownMenu.Item className={itemClassName}>
                                             <Link
-                                                to="#"
+                                                to="/"
+                                                from="/"
                                                 className="px-4 py-2 w-full h-full"
                                             >
                                                 {t("nav.manageAccount")}
@@ -223,7 +218,8 @@ export default function HeaderGeneral() {
                                     )}
                                     <DropdownMenu.Item className={itemClassName}>
                                         <Link
-                                            to="#"
+                                            to="/"
+                                            from="/"
                                             className="px-4 py-2 w-full h-full"
                                         >
                                             {t("nav.feedback")}
@@ -233,7 +229,7 @@ export default function HeaderGeneral() {
                                         className={itemClassName}
                                         asChild
                                     >
-                                        {currentUserData ? (
+                                        {currentUser ? (
                                             <button
                                                 onClick={logOut}
                                                 className="text-red-500 px-4 py-2 w-full h-full"
@@ -242,7 +238,7 @@ export default function HeaderGeneral() {
                                             </button>
                                         ) : (
                                             <Link
-                                                to="/login"
+                                                to="/loginPage"
                                                 className="w-full h-full px-4 py-2"
                                             >
                                                 {t("nav.logIn")}

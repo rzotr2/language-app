@@ -89,13 +89,11 @@ router.get('/me', async (req: Request, res: Response) => {
     }
     try {
         const payload = jwt.verify(token, process.env.JWT_SECRET!) as any;
-        console.log(payload)
         const user = await findUserById(payload.userId);
         if (!user) {
             res.status(404).json({ message: 'User not found' });
             return;
         }
-
         res.status(200).json(user);
         return;
     } catch {

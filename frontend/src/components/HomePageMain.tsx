@@ -2,26 +2,21 @@ import languages from "../assets/languages.webp";
 import { BiTask } from "react-icons/bi";
 import { LuBrainCircuit } from "react-icons/lu";
 import { FiMessageSquare } from "react-icons/fi";
-import { Link } from "react-router";
+import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useAuthState } from "../../store/users.ts";
+import { useAuthState } from "../../store/auth.ts";
 
 function HomePageMain() {
     const [currentUserLanguage, setCurrentUserLanguage] = useState<string | null>(null);
     const { t } = useTranslation();
-    const { currentUserData } = useAuthState();
 
     useEffect(() => {
-        (async () => {
-            const lang = await currentUserData?.nativeLanguage;
-            if (lang) {
-                setCurrentUserLanguage(lang);
-            } else {
-                setCurrentUserLanguage(null);
-            }
-        })();
-    }, [currentUserData?.nativeLanguage]);
+        const { currentUser } = useAuthState.getState();
+        if (currentUser) {
+            setCurrentUserLanguage(currentUser.nativeLanguage || null);
+        }
+    }, []);
 
     return (
         <>
@@ -37,30 +32,58 @@ function HomePageMain() {
                         {t("homepage.hero.subText")}
                     </p>
                     <div className="mt-5">
-                        <Link
-                            to={currentUserLanguage ? "/workpage" : "/main"}
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                        {currentUserLanguage ? (
+                            <Link
+                                to="/workPage"
+                                from="/"
+                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
                             focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
                             dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
                             dark:focus:ring-blue-800 cursor-pointer"
-                        >
-                            {t("homepage.hero.getStarted")}
-                        </Link>
+                            >
+                                {t("homepage.hero.getStarted")}
+                            </Link>
+                        ) : (
+                            <Link
+                                to="/mainPage"
+                                from="/"
+                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                            focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
+                            dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
+                            dark:focus:ring-blue-800 cursor-pointer"
+                            >
+                                {t("homepage.hero.getStarted")}
+                            </Link>
+                        )}
                     </div>
                 </div>
                 <div className="block md:hidden my-4 text-center px-3">
                     <h3 className="text-lg font-semibold py-1">{t("homepage.hero.mobileTitle")}</h3>
                     <span>{t("homepage.hero.mobileText")}</span>
                     <div className="mt-5">
-                        <Link
-                            to={currentUserLanguage ? "/workpage" : "/main"}
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                        {currentUserLanguage ? (
+                            <Link
+                                to="/workPage"
+                                from="/"
+                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
                             focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
                             dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
                             dark:focus:ring-blue-800 cursor-pointer"
-                        >
-                            {t("homepage.hero.getStarted")}
-                        </Link>
+                            >
+                                {t("homepage.hero.getStarted")}
+                            </Link>
+                        ) : (
+                            <Link
+                                to="/mainPage"
+                                from="/"
+                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                            focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
+                            dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
+                            dark:focus:ring-blue-800 cursor-pointer"
+                            >
+                                {t("homepage.hero.getStarted")}
+                            </Link>
+                        )}
                     </div>
                 </div>
                 <div className="w-full">
@@ -121,15 +144,28 @@ function HomePageMain() {
                 </div>
                 <h2 className="text-3xl font-bold pt-10 md:pt-15">{t("homepage.readyTitle")}</h2>
                 <div className="my-5">
-                    <Link
-                        to={currentUserLanguage ? "/workpage" : "/main"}
-                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                    {currentUserLanguage ? (
+                        <Link
+                            to="/workPage"
+                            from="/"
+                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
                             focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
                             dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
                             dark:focus:ring-blue-800 cursor-pointer"
-                    >
-                        {t("homepage.getStarted")}
-                    </Link>
+                        >
+                            {t("homepage.hero.getStarted")}
+                        </Link>
+                    ) : (
+                        <Link
+                            to="/mainPage"
+                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                            focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
+                            dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
+                            dark:focus:ring-blue-800 cursor-pointer"
+                        >
+                            {t("homepage.hero.getStarted")}
+                        </Link>
+                    )}
                 </div>
             </section>
         </>

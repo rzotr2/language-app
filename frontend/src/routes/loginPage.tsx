@@ -2,17 +2,23 @@ import { Callout } from "@radix-ui/themes";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { loginUser } from "../services/users.ts";
 import { BiInfoCircle } from "react-icons/bi";
-import { useAuthState } from "../../store/users.ts";
+import { useUserState } from "../../store/users.ts";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { createFileRoute } from "@tanstack/react-router";
+import { useAuthState } from "../../store/auth.ts";
 
 type Inputs = {
     email: string;
     password: string;
 };
+
+export const Route = createFileRoute("/loginPage")({
+    component: LoginPage,
+});
 
 function LoginPage() {
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}$/;
@@ -28,7 +34,8 @@ function LoginPage() {
         formState: { errors },
     } = useForm<Inputs>();
 
-    const { showPassword, error, authSuccess, setFieldAuth } = useAuthState();
+    const { showPassword, error, authSuccess, setFieldUser } = useUserState();
+    const { setFieldAuth } = useAuthState();
 
     const handleLoginSubmit = async () => {
         loginUser({
@@ -36,28 +43,29 @@ function LoginPage() {
             password: watch("password"),
         })
             .then((user) => {
-                setFieldAuth("currentUserData", user.data);
-                setFieldAuth("authSuccess", true);
-                setFieldAuth("error", null);
+                setFieldAuth("currentUser", user.data);
+                setFieldAuth("isAuthenticated", user.data);
+                setFieldUser("authSuccess", true);
+                setFieldUser("error", null);
                 setTimeout(() => {
                     if (user.data.goals) {
-                        navigate("/workpage");
+                        navigate({ to: "/workPage", from: "/" });
                     } else {
-                        navigate("/main");
+                        navigate({ to: "/mainPage", from: "/" });
                     }
-                    setFieldAuth("authSuccess", false);
-                    setFieldAuth("showPassword", false);
+                    setFieldUser("authSuccess", false);
+                    setFieldUser("showPassword", false);
                 }, 1500);
                 errors.email = undefined;
                 errors.password = undefined;
             })
             .catch((err) => {
                 if (err.response) {
-                    setFieldAuth("error", err.response.data);
+                    setFieldUser("error", err.response.data);
                 } else if (err.request) {
-                    setFieldAuth("error", `${t("login.noResponse")}`);
+                    setFieldUser("error", `${t("login.noResponse")}`);
                 } else {
-                    setFieldAuth("error", err.message);
+                    setFieldUser("error", err.message);
                 }
             });
     };
@@ -74,7 +82,8 @@ function LoginPage() {
                         </div>
                         <div className="p-1.5">
                             <Link
-                                to="/signup"
+                                to="/signUpPage"
+                                from="/"
                                 className="px-1 py-0.5 hover:bg-gray-100 rounded-sm"
                             >
                                 {t("login.signup")}
@@ -139,7 +148,7 @@ function LoginPage() {
                                 />
                                 <div
                                     className="p-2 cursor-pointer"
-                                    onClick={() => setFieldAuth("showPassword", !showPassword)}
+                                    onClick={() => setFieldUser("showPassword", !showPassword)}
                                 >
                                     {showPassword ? (
                                         <IoMdEye className="text-xl" />
@@ -184,6 +193,7 @@ function LoginPage() {
                         <div className="flex items-center justify-end gap-5 mt-5">
                             <Link
                                 to="/"
+                                from="/"
                                 className="group text-sm font-medium flex items-center"
                             >
                                 <IoChevronBackOutline className="transition-all group-hover:me-1 group-hover:text-blue-500" />
@@ -225,5 +235,3 @@ function LoginPage() {
         </>
     );
 }
-
-export default LoginPage;

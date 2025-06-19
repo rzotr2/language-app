@@ -1,8 +1,15 @@
-import HeaderGeneral from "../components/HeaderGeneral.tsx";
-import FooterGeneral from "../components/FooterGeneral.tsx";
 import MainPageMain from "../components/MainPageMain.tsx";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { createFileRoute } from "@tanstack/react-router";
+import { checkUserAuth } from "../auth/auth.ts";
+
+export const Route = createFileRoute("/mainPage")({
+    loader: async () => {
+        await checkUserAuth("/mainPage");
+    },
+    component: MainPage,
+});
 
 function MainPage() {
     const [loading, setLoading] = useState<boolean>(false);
@@ -26,13 +33,7 @@ function MainPage() {
                     </div>
                 </div>
             )}
-            <div className="flex flex-col justify-between min-h-[100vh]">
-                <HeaderGeneral />
-                <MainPageMain getIsLoading={getIsLoading} />
-                <FooterGeneral />
-            </div>
+            <MainPageMain getIsLoading={getIsLoading} />
         </>
     );
 }
-
-export default MainPage;

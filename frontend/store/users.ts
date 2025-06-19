@@ -1,7 +1,6 @@
 import { create } from "zustand";
-import type { User } from "../src/models/user.ts";
 
-type AuthState = {
+type UserState = {
     loginEmail: string;
     signupEmail: string;
     loginPassword: string;
@@ -16,9 +15,8 @@ type AuthState = {
     error: string | null;
     authSuccess: boolean;
     loading: boolean;
-    setFieldAuth: (key: string, value: string | null | boolean | User) => void;
+    setFieldUser: (key: string, value: string | null | boolean) => void;
     resetFields: () => void;
-    currentUserData: (User & { _id: string }) | null;
 };
 
 const initialState = {
@@ -36,11 +34,10 @@ const initialState = {
     error: null,
     authSuccess: false,
     loading: false,
-    currentUserData: null,
 };
 
-export const useAuthState = create<AuthState>((set) => ({
+export const useUserState = create<UserState>((set) => ({
     ...initialState,
-    setFieldAuth: (key, value) => set((state) => ({ ...state, [key]: value })),
+    setFieldUser: (key, value) => set((state) => ({ ...state, [key]: value })),
     resetFields: () => set({ ...initialState }),
 }));

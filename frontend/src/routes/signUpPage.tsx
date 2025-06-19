@@ -2,13 +2,15 @@ import { Callout } from "@radix-ui/themes";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { signUp, findUser } from "../services/users.ts";
 import axios from "axios";
 import { BiInfoCircle } from "react-icons/bi";
-import { useAuthState } from "../../store/users.ts";
+import { useUserState } from "../../store/users.ts";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { createFileRoute } from "@tanstack/react-router";
+import { useAuthState } from "../../store/auth.ts";
 
 type Inputs = {
     signUpEmail: string;
@@ -16,11 +18,16 @@ type Inputs = {
     confirmPassword: string;
 };
 
+export const Route = createFileRoute("/signUpPage")({
+    component: SignUpPage,
+});
+
 function SignUpPage() {
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}$/;
     const passwordRegex = /^.{8,}$/;
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const { setFieldAuth } = useAuthState();
 
     const {
         register,
@@ -35,40 +42,41 @@ function SignUpPage() {
         userAlreadyExists,
         error,
         authSuccess,
-        setFieldAuth,
-    } = useAuthState();
+        setFieldUser,
+    } = useUserState();
 
     const handleSignupSubmit = () => {
         findUser(watch("signUpEmail"))
             .then(() => {
-                setFieldAuth("userAlreadyExists", true);
+                setFieldUser("userAlreadyExists", true);
             })
             .catch((err) => {
                 if (axios.isAxiosError(err) && err.response) {
                     if (err.response.status === 404) {
-                        setFieldAuth("userAlreadyExists", false);
+                        setFieldUser("userAlreadyExists", false);
                         signUp({
                             email: watch("signUpEmail"),
                             password: watch("signUpPassword"),
                         }).then((user) => {
-                            setFieldAuth("currentUserData", user.data);
-                            setFieldAuth("authSuccess", true);
-                            setFieldAuth("error", null);
+                            setFieldAuth("currentUser", user.data);
+                            setFieldAuth("isAuthenticated", user.data);
+                            setFieldUser("authSuccess", true);
+                            setFieldUser("error", null);
                             setTimeout(() => {
-                                navigate("/main");
-                                setFieldAuth("authSuccess", false);
-                                setFieldAuth("showPassword", false);
-                                setFieldAuth("showConfirmPassword", false);
+                                navigate({ to: "/mainPage" });
+                                setFieldUser("authSuccess", false);
+                                setFieldUser("showPassword", false);
+                                setFieldUser("showConfirmPassword", false);
                             }, 1500);
                             errors.signUpEmail = undefined;
                             errors.signUpPassword = undefined;
                             errors.confirmPassword = undefined;
                         });
                     } else {
-                        setFieldAuth("error", err.response.data.message);
+                        setFieldUser("error", err.response.data.message);
                     }
                 } else {
-                    setFieldAuth("error", `${t("signup.error.noResponse")}`);
+                    setFieldUser("error", `${t("signup.error.noResponse")}`);
                 }
             });
     };
@@ -80,7 +88,8 @@ function SignUpPage() {
                     <div className="flex w-full border-gray-400 border-b-1 mb-4 text-sm items-center gap-2">
                         <div className="p-1.5">
                             <Link
-                                to="/login"
+                                to="/loginPage"
+                                from="/"
                                 className="px-1 py-0.5 hover:bg-gray-100 rounded-sm"
                             >
                                 {t("signup.login")}
@@ -151,7 +160,7 @@ function SignUpPage() {
                                 />
                                 <div
                                     className="p-2 cursor-pointer"
-                                    onClick={() => setFieldAuth("showPassword", !showPassword)}
+                                    onClick={() => setFieldUser("showPassword", !showPassword)}
                                 >
                                     {showPassword ? (
                                         <IoMdEye className="text-xl" />
@@ -196,7 +205,7 @@ function SignUpPage() {
                                 <div
                                     className="p-2 cursor-pointer"
                                     onClick={() =>
-                                        setFieldAuth("showConfirmPassword", !showConfirmPassword)
+                                        setFieldUser("showConfirmPassword", !showConfirmPassword)
                                     }
                                 >
                                     {showConfirmPassword ? (
@@ -258,6 +267,7 @@ function SignUpPage() {
                         <div className="space-x-5 flex items-center justify-end">
                             <Link
                                 to="/"
+                                from="/"
                                 className="group text-sm font-medium flex items-center"
                             >
                                 <IoChevronBackOutline className="transition-all group-hover:me-1 group-hover:text-blue-500" />

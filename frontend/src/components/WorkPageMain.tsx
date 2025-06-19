@@ -5,12 +5,10 @@ import { CustomTooltip } from "./small-components/CustomTooltip.tsx";
 import { DifficultyChoose } from "./small-components/DifficultyChoose.tsx";
 import { HintCard } from "./small-components/HintCard.tsx";
 import { FaMagic } from "react-icons/fa";
-import { findUserById } from "../services/users.ts";
 import { getRandomImage } from "../services/images.ts";
 import { useExerciseStore } from "../../store/exercises.ts";
 import { ExerciseArea } from "./small-components/ExerciseArea.tsx";
 import type { DefaultPropsForGeneration, ExerciseType, LanguageOption, PhotoType } from "../types";
-import { useAuthState } from "../../store/users.ts";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -20,6 +18,7 @@ import {
     generateQuizCards,
     generateEssayTopic,
 } from "../services/ai.ts";
+import { useAuthState } from "../../store/auth.ts";
 
 type WorkPageMainProps = {
     getIsLoading: (isLoading: boolean) => void;
@@ -38,16 +37,16 @@ const languageOptions: LanguageOption[] = [
 function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
     const anchorRef = useRef<HTMLDivElement>(null);
     const { t } = useTranslation();
-    const { currentUserData } = useAuthState();
+    const { currentUser } = useAuthState();
 
     const [selectedLanguageToLearn, setSelectedLanguageToLearn] = useState(
         languageOptions.find((lang) => {
-            return currentUserData?.languageToLearn === lang.value;
+            return currentUser?.languageToLearn === lang.value;
         }) ?? null,
     );
     const [selectedNativeLanguage, setSelectedNativeLanguage] = useState(
         languageOptions.find((lang) => {
-            return currentUserData?.nativeLanguage === lang.value;
+            return currentUser?.nativeLanguage === lang.value;
         }) ?? null,
     );
 
@@ -55,11 +54,11 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
         (async () => {
             const languageToLearn =
                 languageOptions.find((lang) => {
-                    return currentUserData?.languageToLearn === lang.value;
+                    return currentUser?.languageToLearn === lang.value;
                 }) ?? null;
             const nativeLanguage =
                 languageOptions.find((lang) => {
-                    return currentUserData?.nativeLanguage === lang.value;
+                    return currentUser?.nativeLanguage === lang.value;
                 }) ?? null;
 
             if (languageToLearn && nativeLanguage) {
@@ -70,7 +69,6 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
     }, []);
 
     const {
-        currentUser,
         generalPrompt,
         nativeLanguage,
         languageToLearn,
@@ -88,33 +86,6 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
         setField,
         setFields,
     } = useExerciseStore();
-
-    useEffect(() => {
-        (async () => {
-            try {
-                getIsLoading(true);
-                const userId = currentUserData?._id;
-                if (userId) {
-                    const user = await findUserById(userId);
-                    setField("currentUser", user);
-                    const foundNativeLanguage = languageOptions.find(
-                        (lang) => lang.value === user.nativeLanguage,
-                    );
-                    const foundLanguageToLearn = languageOptions.find(
-                        (lang) => lang.value === user.languageToLearn,
-                    );
-                    if (foundNativeLanguage && foundLanguageToLearn) {
-                        setField("selectedNativeLanguage", foundNativeLanguage);
-                        setField("selectedLanguageToLearn", foundLanguageToLearn);
-                    }
-                }
-            } catch (err) {
-                setField("currentUser", null);
-            } finally {
-                getIsLoading(false);
-            }
-        })();
-    }, [currentUserData]);
 
     const navigateToAnchor = () => {
         setTimeout(() => {

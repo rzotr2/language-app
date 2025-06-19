@@ -139,7 +139,7 @@ export const QuizExercise = ({ quizCards, generateMore, difficulty }: QuizExerci
                                     clipRule="evenodd"
                                 ></path>
                             </svg>
-                            {t("quiz.Reset")}
+                            {t("quiz.reset")}
                         </button>
                     </div>
                 </div>
