@@ -1,6 +1,7 @@
 import { Button } from "@radix-ui/themes";
 import { Popover } from "@radix-ui/themes";
 import { FaRegQuestionCircle } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 type CustomTooltipProps = {
     type: "information" | "hint";
@@ -8,6 +9,8 @@ type CustomTooltipProps = {
 };
 
 export const CustomTooltip = ({ type, text }: CustomTooltipProps) => {
+    const { t } = useTranslation();
+
     return (
         <>
             {type === "information" ? (
@@ -23,14 +26,13 @@ export const CustomTooltip = ({ type, text }: CustomTooltipProps) => {
                         className="space-y-2"
                     >
                         <p className="text-sm">
-                            To get the best experience, you`ll need to add language manually,
-                            <span className="font-bold">{`\n or \n`}</span>
-                            mention your native language and language you want to learn in this
-                            field.
+                            {t("tooltip.information.firstPart")}
+                            <span className="font-bold">{`\n ${t("tooltip.information.or")} \n`}</span>
+                            {t("tooltip.information.secondPart")}
                         </p>
                         <p className="text-sm">
-                            This prompt field has
-                            <span className="font-bold">{`\n the highest priority.`}</span>
+                            {t("tooltip.information.additionalField")}
+                            <span className="font-bold">{`\n ${t("tooltip.information.priority")}`}</span>
                         </p>
                     </Popover.Content>
                 </Popover.Root>

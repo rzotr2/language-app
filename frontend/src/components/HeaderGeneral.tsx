@@ -6,41 +6,26 @@ import { DropdownMenu } from "radix-ui";
 import { FiMenu } from "react-icons/fi";
 import userLogo from "../assets/svg/userLogo.svg";
 import { findUserById } from "../services/users.ts";
-import type { User } from "../models/user.ts";
 import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
+import { useTranslation } from "react-i18next";
+import { LanguageSelect } from "./small-components/LanguageSelect.tsx";
+import { useAuthState } from "../../store/users.ts";
 
 export default function HeaderGeneral() {
-    const [currentUser, setCurrentUser] = useState<User | null>();
     const [loading, setLoading] = useState<boolean>(false);
     const navigate = useNavigate();
     const itemClassName =
         "relative flex cursor-pointer select-none items-center rounded-sm text-sm outline-none transition-colors " +
         "focus:bg-slate-50 data-[disabled]:pointer-events-none data-[disabled]:bg-white hover:bg-gray-100";
 
-    useEffect(() => {
-        (async () => {
-            setLoading(true);
-            try {
-                const data = await axios.get("api/auth/me");
-                const user = await findUserById(data.data.id);
-                if (user) {
-                    localStorage.setItem("currentUserId", user._id);
-                    localStorage.setItem("currentUserLanguage", user.language);
-                    setCurrentUser(user);
-                }
-            } catch (err) {
-                setCurrentUser(null);
-            } finally {
-                setLoading(false);
-            }
-        })();
-    }, []);
+    const { currentUserData, setFieldAuth } = useAuthState();
+    const { t } = useTranslation();
 
     const logOut = async () => {
         try {
             await axios.get("api/auth/logout");
             navigate("/login");
-            setCurrentUser(null);
+            setFieldAuth("currentUserData", null);
         } catch (err) {
             console.log(err);
         }
@@ -68,7 +53,7 @@ export default function HeaderGeneral() {
                                 href="#"
                                 className="cursor-pointer hover:underline"
                             >
-                                About Me
+                                {t("nav.aboutMe")}
                             </a>
                         </li>
                         <li>
@@ -76,7 +61,7 @@ export default function HeaderGeneral() {
                                 href="#"
                                 className="cursor-pointer hover:underline"
                             >
-                                Projects
+                                {t("nav.projects")}
                             </a>
                         </li>
                         <li>
@@ -84,7 +69,7 @@ export default function HeaderGeneral() {
                                 href="#"
                                 className="cursor-pointer hover:underline"
                             >
-                                Resume
+                                {t("nav.resume")}
                             </a>
                         </li>
                         <li>
@@ -94,11 +79,12 @@ export default function HeaderGeneral() {
                                     className="min-w-[50px] flex justify-center"
                                 >
                                     <div className="Buttons"></div>
-                                    <span className="sr-only">Loading...</span>
+                                    <span className="sr-only">{t("nav.loading")}</span>
                                 </div>
                             ) : (
-                                <>
-                                    {currentUser ? (
+                                <div className="flex items-center gap-3">
+                                    <LanguageSelect />
+                                    {currentUserData ? (
                                         <DropdownMenu.Root>
                                             <DropdownMenu.Trigger
                                                 className="focus:outline-0 flex gap-2 px-2 items-center text-gray-900 rounded-full
@@ -143,7 +129,7 @@ export default function HeaderGeneral() {
                                                                 className="h-6"
                                                             />
                                                             <span className="text-sm font-bold px-4 py-2 w-full h-full cursor-">
-                                                                {currentUser.email}
+                                                                {currentUserData.email}
                                                             </span>
                                                         </div>
                                                     </DropdownMenu.Item>
@@ -153,7 +139,7 @@ export default function HeaderGeneral() {
                                                             to="#"
                                                             className="px-4 py-2 w-full h-full"
                                                         >
-                                                            Manage account
+                                                            {t("nav.manageAccount")}
                                                         </Link>
                                                     </DropdownMenu.Item>
                                                     <DropdownMenu.Item className={itemClassName}>
@@ -161,7 +147,7 @@ export default function HeaderGeneral() {
                                                             to="#"
                                                             className="px-4 py-2 w-full h-full"
                                                         >
-                                                            Feedback
+                                                            {t("nav.feedback")}
                                                         </Link>
                                                     </DropdownMenu.Item>
                                                     <DropdownMenu.Item className={itemClassName}>
@@ -169,7 +155,7 @@ export default function HeaderGeneral() {
                                                             onClick={logOut}
                                                             className="text-red-500 px-4 py-2 w-full h-full text-start cursor-pointer"
                                                         >
-                                                            Sign out
+                                                            {t("nav.signOut")}
                                                         </button>
                                                     </DropdownMenu.Item>
                                                 </DropdownMenu.Content>
@@ -181,10 +167,10 @@ export default function HeaderGeneral() {
                                             className="text-white bg-blue-700 hover:bg-blue-800
                                                 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2"
                                         >
-                                            Log in
+                                            {t("nav.logIn")}
                                         </Link>
                                     )}
-                                </>
+                                </div>
                             )}
                         </li>
                     </ul>
@@ -205,7 +191,7 @@ export default function HeaderGeneral() {
                                     align="start"
                                     sideOffset={12}
                                 >
-                                    {currentUser && (
+                                    {currentUserData && (
                                         <div className="w-full">
                                             <DropdownMenu.Item
                                                 className={itemClassName}
@@ -218,20 +204,20 @@ export default function HeaderGeneral() {
                                                         className="h-6"
                                                     />
                                                     <span className="text-sm font-bold px-4 py-2 w-full h-full cursor-">
-                                                        {currentUser.email}
+                                                        {currentUserData.email}
                                                     </span>
                                                 </div>
                                             </DropdownMenu.Item>
                                             <DropdownMenuSeparator className="h-[1px] bg-gray-300" />
                                         </div>
                                     )}
-                                    {currentUser && (
+                                    {currentUserData && (
                                         <DropdownMenu.Item className={itemClassName}>
                                             <Link
                                                 to="#"
                                                 className="px-4 py-2 w-full h-full"
                                             >
-                                                Manage account
+                                                {t("nav.manageAccount")}
                                             </Link>
                                         </DropdownMenu.Item>
                                     )}
@@ -240,26 +226,26 @@ export default function HeaderGeneral() {
                                             to="#"
                                             className="px-4 py-2 w-full h-full"
                                         >
-                                            Feedback
+                                            {t("nav.feedback")}
                                         </Link>
                                     </DropdownMenu.Item>
                                     <DropdownMenu.Item
                                         className={itemClassName}
                                         asChild
                                     >
-                                        {currentUser ? (
+                                        {currentUserData ? (
                                             <button
                                                 onClick={logOut}
                                                 className="text-red-500 px-4 py-2 w-full h-full"
                                             >
-                                                Sign out
+                                                {t("nav.signOut")}
                                             </button>
                                         ) : (
                                             <Link
                                                 to="/login"
                                                 className="w-full h-full px-4 py-2"
                                             >
-                                                Log in
+                                                {t("nav.logIn")}
                                             </Link>
                                         )}
                                     </DropdownMenu.Item>
@@ -280,7 +266,7 @@ export default function HeaderGeneral() {
                             className="text-gray-900 hover:underline"
                             aria-current="page"
                         >
-                            About me
+                            {t("nav.aboutMe")}
                         </a>
                     </li>
                     <li>
@@ -288,7 +274,7 @@ export default function HeaderGeneral() {
                             href="#"
                             className="text-gray-900 hover:underline"
                         >
-                            Projects
+                            {t("nav.projects")}
                         </a>
                     </li>
                     <li>
@@ -296,7 +282,7 @@ export default function HeaderGeneral() {
                             href="#"
                             className="text-gray-900 hover:underline"
                         >
-                            Resume
+                            {t("nav.resume")}
                         </a>
                     </li>
                 </ul>

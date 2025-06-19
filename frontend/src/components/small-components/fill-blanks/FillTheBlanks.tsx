@@ -4,6 +4,7 @@ import type { Blank } from "../../../types";
 import { CustomTooltip } from "../CustomTooltip.tsx";
 import { BlanksSelectAnswer } from "./BlanksSelectAnswer.tsx";
 import { PiShootingStarBold } from "react-icons/pi";
+import { useTranslation } from "react-i18next";
 
 type FillTheBlanksProps = {
     generateMore: () => void;
@@ -15,6 +16,7 @@ export const FillTheBlanks = ({ blanksArray, generateMore, difficulty }: FillThe
     const anchorRef = useRef<HTMLDivElement>(null);
     const [showExplanation, setShowExplanation] = useState<boolean>(false);
     const [reset, setReset] = useState<boolean>(false);
+    const { t } = useTranslation();
 
     const checkAnswers = () => {
         setShowExplanation(!showExplanation);
@@ -37,19 +39,17 @@ export const FillTheBlanks = ({ blanksArray, generateMore, difficulty }: FillThe
                 className="bg-gradient-to-r from-blue-600 to-indigo-700 py-2 px-3 sm:py-3 sm:px-6 rounded-t-xl"
                 ref={anchorRef}
             >
-                <h3 className="text-white text-lg sm:text-xl font-bold">Fill the blanks</h3>
-                <p className="text-blue-100 mt-1 text-sm sm:text-lg">
-                    Complete the sentence by selecting the correct words
-                </p>
+                <h3 className="text-white text-lg sm:text-xl font-bold">{t("blanks.title")}</h3>
+                <p className="text-blue-100 mt-1 text-sm sm:text-lg">{t("blanks.subtitle")}</p>
             </div>
             <div className="relative flex items-center mt-4 mb-5 mx-4 sm:mx-6 md:mx-8">
                 <div className="w-1 h-12 bg-gradient-to-b from-blue-500 to-indigo-500 rounded-full mr-4"></div>
                 <div>
                     <span className="text-blue-900 font-extrabold text-md sm:text-lg flex items-center gap-2">
-                        Focus on context and choose the best word for each blank.
+                        {t("blanks.mainInstruction")}
                     </span>
                     <div className="mt-1 text-blue-500 text-xs italic tracking-wide">
-                        Read the whole sentence before filling in the gaps.
+                        {t("blanks.hint")}
                     </div>
                 </div>
             </div>
@@ -103,7 +103,7 @@ export const FillTheBlanks = ({ blanksArray, generateMore, difficulty }: FillThe
                             hover:bg-blue-50 font-medium rounded-lg text-sm px-2 py-1 sm:px-4
                             sm:py-2 text-center cursor-pointer"
                     >
-                        Check answers
+                        {t("blanks.checkAnswers")}
                     </button>
                     <button
                         type="button"
@@ -112,7 +112,7 @@ export const FillTheBlanks = ({ blanksArray, generateMore, difficulty }: FillThe
                              font-medium rounded-lg text-sm px-2 py-1 sm:px-4 sm:py-2 sm:me-3
                             focus:outline-none cursor-pointer flex items-center gap-2"
                     >
-                        Generate more
+                        {t("blanks.generateMore")}
                         <PiShootingStarBold className="text-[14px]" />
                     </button>
                 </div>
@@ -120,7 +120,7 @@ export const FillTheBlanks = ({ blanksArray, generateMore, difficulty }: FillThe
             <div className="bg-gray-50 px-6 py-4 border-t border-gray-200">
                 <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500 font-medium">
-                        Difficulty:
+                        {t("blanks.difficulty")}
                         <span className="font-bold">{" " + `${difficulty}`}</span>
                     </span>
                     <div>
@@ -140,7 +140,7 @@ export const FillTheBlanks = ({ blanksArray, generateMore, difficulty }: FillThe
                                     clipRule="evenodd"
                                 ></path>
                             </svg>
-                            Reset
+                            {t("blanks.reset")}
                         </button>
                     </div>
                 </div>

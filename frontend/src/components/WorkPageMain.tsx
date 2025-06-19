@@ -1,11 +1,18 @@
 import Select from "react-select";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Box, Flex, RadioCards } from "@radix-ui/themes";
 import { CustomTooltip } from "./small-components/CustomTooltip.tsx";
 import { DifficultyChoose } from "./small-components/DifficultyChoose.tsx";
 import { HintCard } from "./small-components/HintCard.tsx";
 import { FaMagic } from "react-icons/fa";
 import { findUserById } from "../services/users.ts";
+import { getRandomImage } from "../services/images.ts";
+import { useExerciseStore } from "../../store/exercises.ts";
+import { ExerciseArea } from "./small-components/ExerciseArea.tsx";
+import type { DefaultPropsForGeneration, ExerciseType, LanguageOption, PhotoType } from "../types";
+import { useAuthState } from "../../store/users.ts";
+import { useTranslation } from "react-i18next";
+
 import {
     generateBlanks,
     generateCards,
@@ -13,11 +20,6 @@ import {
     generateQuizCards,
     generateEssayTopic,
 } from "../services/ai.ts";
-import { getRandomImage } from "../services/images.ts";
-import { useExerciseStore } from "../../store/exercises.ts";
-import { ExerciseArea } from "./small-components/ExerciseArea.tsx";
-
-import type { DefaultPropsForGeneration, ExerciseType, LanguageOption, PhotoType } from "../types";
 
 type WorkPageMainProps = {
     getIsLoading: (isLoading: boolean) => void;
@@ -35,14 +37,43 @@ const languageOptions: LanguageOption[] = [
 
 function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
     const anchorRef = useRef<HTMLDivElement>(null);
+    const { t } = useTranslation();
+    const { currentUserData } = useAuthState();
+
+    const [selectedLanguageToLearn, setSelectedLanguageToLearn] = useState(
+        languageOptions.find((lang) => {
+            return currentUserData?.languageToLearn === lang.value;
+        }) ?? null,
+    );
+    const [selectedNativeLanguage, setSelectedNativeLanguage] = useState(
+        languageOptions.find((lang) => {
+            return currentUserData?.nativeLanguage === lang.value;
+        }) ?? null,
+    );
+
+    useEffect(() => {
+        (async () => {
+            const languageToLearn =
+                languageOptions.find((lang) => {
+                    return currentUserData?.languageToLearn === lang.value;
+                }) ?? null;
+            const nativeLanguage =
+                languageOptions.find((lang) => {
+                    return currentUserData?.nativeLanguage === lang.value;
+                }) ?? null;
+
+            if (languageToLearn && nativeLanguage) {
+                setSelectedLanguageToLearn(languageToLearn);
+                setSelectedNativeLanguage(nativeLanguage);
+            }
+        })();
+    }, []);
 
     const {
         currentUser,
         generalPrompt,
         nativeLanguage,
-        selectedNativeLanguage,
         languageToLearn,
-        selectedLanguageToLearn,
         exerciseNumber,
         exercise,
         difficulty,
@@ -62,7 +93,7 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
         (async () => {
             try {
                 getIsLoading(true);
-                const userId = localStorage.getItem("currentUserId");
+                const userId = currentUserData?._id;
                 if (userId) {
                     const user = await findUserById(userId);
                     setField("currentUser", user);
@@ -83,7 +114,7 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                 getIsLoading(false);
             }
         })();
-    }, []);
+    }, [currentUserData]);
 
     const navigateToAnchor = () => {
         setTimeout(() => {
@@ -213,7 +244,7 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                 htmlFor="message"
                                 className="block mb-2 text-sm font-medium text-gray-900"
                             >
-                                What do you want to generate?
+                                {t("work.whatToGenerate")}
                             </label>
                             <CustomTooltip type="information" />
                         </div>
@@ -227,7 +258,7 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
                                   disabled:cursor-not-allowed border-gray-300 focus:ring-blue-500
                                   disabled:opacity-50 focus:border-blue-500"
-                            placeholder="For example: generate exercises on topic 'How i spent my summer'. It should be for A-2 speaking level"
+                            placeholder={`${t("work.promptPlaceholder")}`}
                         ></textarea>
                         <div className="flex items-center justify-around flex-wrap gap-5">
                             <div className="flex-col justify-center items-center w-full sm:w-auto">
@@ -235,7 +266,7 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                     htmlFor="message"
                                     className="block mb-2 text-sm font-medium text-gray-900"
                                 >
-                                    I speak:
+                                    {t("work.iSpeak")}
                                 </label>
                                 {selectedNativeLanguage && (
                                     <Select
@@ -264,7 +295,7 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                     htmlFor="message"
                                     className="block mb-2 text-sm font-medium text-gray-900"
                                 >
-                                    I want to learn:
+                                    {t("work.iWantToLearn")}
                                 </label>
                                 {selectedLanguageToLearn && (
                                     <Select
@@ -293,7 +324,7 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                     htmlFor="visitors"
                                     className="block mb-2 text-sm font-medium text-gray-900"
                                 >
-                                    Select number of exercises:
+                                    {t("work.selectNumber")}
                                 </label>
                                 <input
                                     type="number"
@@ -329,7 +360,7 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                         htmlFor="visitors"
                                         className="block mb-2 text-sm font-medium text-gray-900"
                                     >
-                                        Select type of exercises:
+                                        {t("work.selectType")}
                                     </label>
                                     <RadioCards.Root
                                         defaultValue="translation"
@@ -343,11 +374,10 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                                 direction="column"
                                                 width="100%"
                                             >
-                                                <p className="font-bold">Translate Text</p>
-                                                <p>
-                                                    Practice translating sentences between your
-                                                    native and target language.
+                                                <p className="font-bold">
+                                                    {t("work.types.translation.title")}
                                                 </p>
+                                                <p>{t("work.types.translation.desc")}</p>
                                             </Flex>
                                         </RadioCards.Item>
                                         <RadioCards.Item value="blanks">
@@ -355,11 +385,10 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                                 direction="column"
                                                 width="100%"
                                             >
-                                                <p className="font-bold">Fill in the Blanks</p>
-                                                <p>
-                                                    Complete sentences by filling in missing words
-                                                    to reinforce grammar and vocabulary.
+                                                <p className="font-bold">
+                                                    {t("work.types.blanks.title")}
                                                 </p>
+                                                <p>{t("work.types.blanks.desc")}</p>
                                             </Flex>
                                         </RadioCards.Item>
                                         <RadioCards.Item value="cards">
@@ -367,11 +396,10 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                                 direction="column"
                                                 width="100%"
                                             >
-                                                <p className="font-bold">Flip Cards</p>
-                                                <p>
-                                                    Practice vocabulary or phrases by flipping cards
-                                                    to reveal translations or answers.
+                                                <p className="font-bold">
+                                                    {t("work.types.cards.title")}
                                                 </p>
+                                                <p>{t("work.types.cards.desc")}</p>
                                             </Flex>
                                         </RadioCards.Item>
                                         <RadioCards.Item value="quiz">
@@ -379,11 +407,10 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                                 direction="column"
                                                 width="100%"
                                             >
-                                                <p className="font-bold">Quiz</p>
-                                                <p>
-                                                    Answer multiple-choice questions to test your
-                                                    language knowledge.
+                                                <p className="font-bold">
+                                                    {t("work.types.quiz.title")}
                                                 </p>
+                                                <p>{t("work.types.quiz.desc")}</p>
                                             </Flex>
                                         </RadioCards.Item>
                                         <RadioCards.Item value="imageDesc">
@@ -391,11 +418,10 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                                 direction="column"
                                                 width="100%"
                                             >
-                                                <p className="font-bold">Describe an image</p>
-                                                <p>
-                                                    Look at the picture and write a few sentences
-                                                    describing what you see.
+                                                <p className="font-bold">
+                                                    {t("work.types.imageDesc.title")}
                                                 </p>
+                                                <p>{t("work.types.imageDesc.desc")}</p>
                                             </Flex>
                                         </RadioCards.Item>
                                         <RadioCards.Item value="essay">
@@ -403,11 +429,10 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                                 direction="column"
                                                 width="100%"
                                             >
-                                                <p className="font-bold">Write an essay</p>
-                                                <p>
-                                                    Write a short essay on the given topic to
-                                                    practice your writing skills.
+                                                <p className="font-bold">
+                                                    {t("work.types.essay.title")}
                                                 </p>
+                                                <p>{t("work.types.essay.desc")}</p>
                                             </Flex>
                                         </RadioCards.Item>
                                     </RadioCards.Root>
@@ -420,7 +445,7 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                             className="button flex items-center gap-2"
                             onClick={handleGenerateClick}
                         >
-                            Generate <FaMagic />
+                            {t("work.generate")} <FaMagic />
                         </button>
                     </div>
                 </section>

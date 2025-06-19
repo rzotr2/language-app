@@ -8,6 +8,7 @@ import { checkImageDescription } from "../../../services/ai.ts";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import { useTranslation } from "react-i18next";
 
 type DescribeImageExerciseProps = {
     image: PhotoType;
@@ -38,6 +39,7 @@ export const DescribeImageExercise = ({
         string | null
     >(null);
     const [collapsibleOpened, setCollapsibleOpened] = useState<boolean>(false);
+    const { t } = useTranslation();
 
     const handleCheckDescriptionClick = () => {
         const propertiesObj: CheckDescriptionProps = {
@@ -70,19 +72,17 @@ export const DescribeImageExercise = ({
                 className="bg-gradient-to-r from-blue-600 to-indigo-700 py-2 px-3 sm:py-3 sm:px-6 rounded-t-xl"
                 ref={anchorRef}
             >
-                <h3 className="text-white text-lg sm:text-xl font-bold">Describe the Image</h3>
-                <p className="text-blue-100 mt-1 text-sm sm:text-lg">
-                    Look at the picture and write a detailed description of what you see.
-                </p>
+                <h3 className="text-white text-lg sm:text-xl font-bold">{t("imageDesc.title")}</h3>
+                <p className="text-blue-100 mt-1 text-sm sm:text-lg">{t("imageDesc.subtitle")}</p>
             </div>
             <div className="relative flex items-center mt-4 mb-5 mx-4 sm:mx-6 md:mx-8">
                 <div className="w-1 h-12 bg-gradient-to-b from-blue-500 to-indigo-500 rounded-full mr-4"></div>
                 <div>
                     <span className="text-blue-900 font-extrabold text-md sm:text-lg flex items-center gap-2">
-                        Focus on the setting, actions, and details.
+                        {t("imageDesc.mainInstruction")}
                     </span>
                     <div className="mt-1 text-blue-500 text-xs italic tracking-wide">
-                        Details bring your description to life.
+                        {t("imageDesc.hint")}
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@ export const DescribeImageExercise = ({
                     htmlFor="message"
                     className="font-bold text-gray-900"
                 >
-                    Enter what you see:
+                    {t("imageDesc.enterWhatYouSee")}
                 </label>
                 <textarea
                     id="message"
@@ -104,7 +104,7 @@ export const DescribeImageExercise = ({
                     onInput={(e) => setCurrentDescription(e.currentTarget.value)}
                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
                                   border-gray-300 focus:ring-blue-500 focus:border-blue-500 font-normal mt-1.5"
-                    placeholder="Describe what you see in the picture. Who is in the image? What are they doing? What is the setting, mood, and any interesting details?!"
+                    placeholder={`${t("imageDesc.textareaPlaceholder")}`}
                 ></textarea>
                 {checkDescriptionResultGrade && checkDescriptionResultAiVersion && (
                     <div
@@ -112,7 +112,7 @@ export const DescribeImageExercise = ({
                         className="my-6 space-y-5 text-sm sm:text-[16px] font-normal"
                     >
                         <div>
-                            <p className="font-bold pb-1.5">My version:</p>
+                            <p className="font-bold pb-1.5">{t("imageDesc.myVersion")}</p>
                             <Markdown
                                 remarkPlugins={[remarkGfm]}
                                 rehypePlugins={[rehypeRaw]}
@@ -122,7 +122,7 @@ export const DescribeImageExercise = ({
                         </div>
                         <Separator.Root className="my-[15px] bg-gray-700 data-[orientation=horizontal]:h-px" />
                         <div>
-                            <p className="font-bold pb-1.5">Review result</p>
+                            <p className="font-bold pb-1.5">{t("imageDesc.reviewResult")}</p>
                             <Markdown
                                 remarkPlugins={[remarkGfm]}
                                 rehypePlugins={[rehypeRaw]}
@@ -132,7 +132,7 @@ export const DescribeImageExercise = ({
                         </div>
                         <Separator.Root className="my-[15px] bg-gray-700 data-[orientation=horizontal]:h-px" />
                         <div>
-                            <p className="font-bold pb-1.5">How would AI describe this image:</p>
+                            <p className="font-bold pb-1.5">{t("imageDesc.aiVersion")}</p>
                             <Markdown
                                 remarkPlugins={[remarkGfm]}
                                 rehypePlugins={[rehypeRaw]}
@@ -148,7 +148,7 @@ export const DescribeImageExercise = ({
                         className="bg-blue-100 text-blue-900 px-3 py-1.5 cursor-pointer rounded-t-sm
                             flex items-center justify-between font-medium hover:bg-blue-200 transition-colors w-full"
                     >
-                        How to describe the image: step-by-step plan
+                        {t("imageDesc.collapsible.trigger")}
                         {collapsibleOpened ? (
                             <FaChevronUp className="text-base" />
                         ) : (
@@ -160,42 +160,47 @@ export const DescribeImageExercise = ({
                          text-blue-900 rounded-b-md p-4 space-y-3"
                     >
                         <div>
-                            <span className="font-semibold">1. General Impression:</span>
+                            <span className="font-semibold">
+                                {t("imageDesc.collapsible.generalImpression")}
+                            </span>
                             <div className="ml-4">
-                                What is the overall scene? (indoor/outdoor, type of place)
+                                {t("imageDesc.collapsible.generalImpressionHint")}
                             </div>
                         </div>
                         <div>
-                            <span className="font-semibold">2. People and Objects:</span>
+                            <span className="font-semibold">
+                                {t("imageDesc.collapsible.peopleObjects")}
+                            </span>
                             <div className="ml-4">
-                                Who or what is in the picture? (number of people, main objects)
+                                {t("imageDesc.collapsible.peopleObjectsHint")}
                             </div>
                         </div>
                         <div>
-                            <span className="font-semibold">3. Actions:</span>
+                            <span className="font-semibold">
+                                {t("imageDesc.collapsible.actions")}
+                            </span>
+                            <div className="ml-4">{t("imageDesc.collapsible.actionsHint")}</div>
+                        </div>
+                        <div>
+                            <span className="font-semibold">
+                                {t("imageDesc.collapsible.appearanceDetails")}
+                            </span>
                             <div className="ml-4">
-                                What are the people doing? (describe activities or interactions)
+                                {t("imageDesc.collapsible.appearanceDetailsHint")}
                             </div>
                         </div>
                         <div>
-                            <span className="font-semibold">4. Appearance and Details:</span>
-                            <div className="ml-4">
-                                What do the people look like? (clothes, age, mood, posture)
-                                <br />
-                                What details stand out? (colors, weather, time of day, background
-                                elements)
-                            </div>
+                            <span className="font-semibold">
+                                {t("imageDesc.collapsible.atmosphere")}
+                            </span>
+                            <div className="ml-4">{t("imageDesc.collapsible.atmosphereHint")}</div>
                         </div>
                         <div>
-                            <span className="font-semibold">5. Atmosphere:</span>
+                            <span className="font-semibold">
+                                {t("imageDesc.collapsible.personalOpinion")}
+                            </span>
                             <div className="ml-4">
-                                What is the mood or feeling of the image? (happy, busy, calm, etc.)
-                            </div>
-                        </div>
-                        <div>
-                            <span className="font-semibold">6. Personal Opinion (optional):</span>
-                            <div className="ml-4">
-                                What do you think about the image? (interesting, surprising, etc.)
+                                {t("imageDesc.collapsible.personalOpinionHint")}
                             </div>
                         </div>
                     </Collapsible.Content>
@@ -209,7 +214,7 @@ export const DescribeImageExercise = ({
                             hover:bg-blue-50 font-medium rounded-lg text-sm px-2 py-1.5 sm:px-4
                             sm:py-2.5 text-center cursor-pointer"
                         >
-                            Check answers
+                            {t("imageDesc.checkAnswer")}
                         </button>
                         <button
                             type="button"
@@ -218,7 +223,7 @@ export const DescribeImageExercise = ({
                              font-medium rounded-lg text-sm px-2 py-1.5 sm:px-4 sm:py-2.5
                             focus:outline-none cursor-pointer flex items-center gap-2"
                         >
-                            Regenerate image
+                            {t("imageDesc.regenerateImage")}
                             <PiShootingStarBold className="text-[14px]" />
                         </button>
                     </div>
@@ -228,7 +233,7 @@ export const DescribeImageExercise = ({
                 <div className="flex justify-between items-center">
                     <div>
                         <span className="text-sm text-gray-500 font-medium">
-                            Difficulty:
+                            {t("imageDesc.difficulty")}
                             <span className="font-bold">{" " + `${difficulty}`}</span>
                         </span>
                     </div>
@@ -255,7 +260,7 @@ export const DescribeImageExercise = ({
                                     clipRule="evenodd"
                                 ></path>
                             </svg>
-                            Reset
+                            {t("imageDesc.reset")}
                         </button>
                     </div>
                 </div>

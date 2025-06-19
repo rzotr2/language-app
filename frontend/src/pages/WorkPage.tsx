@@ -2,9 +2,11 @@ import HeaderGeneral from "../components/HeaderGeneral.tsx";
 import FooterGeneral from "../components/FooterGeneral.tsx";
 import WorkPageMain from "../components/WorkPageMain.tsx";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function WorkPage() {
     const [loading, setLoading] = useState<boolean>(false);
+    const { t } = useTranslation();
 
     const getIsLoading = (isLoading: boolean) => {
         setLoading(isLoading);
@@ -19,7 +21,7 @@ function WorkPage() {
                 >
                     <div className="Buttons mb-5"></div>
                     <div className="text-center font-extrabold text-xl">
-                        <p>Loading, please wait...</p>
+                        <p>{t("user.loading")}</p>
                     </div>
                 </div>
             )}

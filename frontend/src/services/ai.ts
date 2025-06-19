@@ -19,8 +19,8 @@ export const generateText = (props: DefaultPropsForGeneration) => {
             has the highest priority!!!:
             1. Preferences: ${props.generalPrompt}.
             2. If not mentioned in Preferences, my interests are: ${props.interests} and goals: ${props.goals}.
-            3. Native language: ${props.nativeLanguage} (if empty, then ${props.selectedNativeLanguage?.value}).
-            4. The text must be in: ${props.languageToLearn} (if empty, then ${props.selectedLanguageToLearn?.value}).
+            3. Native language: ${props.nativeLanguage} (if null, then ${props.selectedNativeLanguage?.value}).
+            4. The text must be in: ${props.languageToLearn} language (if null, then ${props.selectedLanguageToLearn?.value}).
             5. My current language level: ${props.level}, and the difficulty: ${props.difficulty}.
             Always use the highest priority information if there is a conflict (e.g., if "Ukrainian".
             is listed first as my native language, use Ukrainian, even if "German" is mentioned later).
@@ -86,7 +86,7 @@ export const generateBlanks = (props: DefaultPropsForGeneration) => {
                 has the highest priority!!!:
                 1. ${props.generalPrompt}
                 2. If not mentioned in Preferences, my interests are: ${props.interests} and goals: ${props.goals}.
-                3. The sentences must be in ${props.selectedLanguageToLearn?.value} (if empty, use ${props.languageToLearn}).
+                3. The sentences must be in  ${props.languageToLearn} language (if null, then ${props.selectedLanguageToLearn?.value})..
                 4. My current language level is ${props.level}.
                 5. The difficulty must be ${props.difficulty} according to my current level.
                 6. Each object must have:
@@ -94,7 +94,7 @@ export const generateBlanks = (props: DefaultPropsForGeneration) => {
                     "sentence": a sentence with a single blank (use ___ for the blank),
                     "options": an array of 4 possible answers (strings), only one is correct,
                     "answer": the correct answer (string),
-                    "explanation": a short explanation (1-2 sentences) why the answer is correct in ${props.selectedNativeLanguage?.value} (if empty, use ${props.nativeLanguage}).
+                    "explanation": a short explanation (1-2 sentences) why the answer is correct in ${props.nativeLanguage} language (if null, then ${props.nativeLanguage}).
                 
                 Output only the JSON array, nothing else. Without any "'''json etc.". Do not include any comments or explanations outside the array.`,
     );
@@ -102,20 +102,20 @@ export const generateBlanks = (props: DefaultPropsForGeneration) => {
 
 export const generateCards = (props: DefaultPropsForGeneration) => {
     return generate(
-        `Generate a JSON array of ${props.exerciseNumber} objects for a language learning exercise called "Fill the blanks".
+        `Generate a JSON array of ${props.exerciseNumber} objects for a language learning exercise called "Flash cards".
                 Follow these requirements in strict priority order (1 = highest priority):
                 
                 1. Preferences: ${props.generalPrompt}
                 2. If not specified above, use my interests: ${props.interests} and goals: ${props.goals}
-                3. Language: All sentences and examples must be in ${props.selectedLanguageToLearn?.label || props.languageToLearn}
+                3. Language: Fields "word" and "example" must be in ${props.languageToLearn} language (if null, then in ${props.selectedLanguageToLearn?.value} language).
                 4. My current language level: ${props.level}
                 5. Difficulty: The content must match the difficulty ${props.difficulty} for my level.
                 6. Each object in the array must have:
                 [
                     {
                         "word": a word or phrase (in the target language);
-                        "translation": translation of the word/phrase into my native language (${props.selectedNativeLanguage?.label || props.nativeLanguage}) (FROM CAPITAL LETTER);
-                        "meaning": explanation/meaning of the word/phrase in my native language (${props.selectedNativeLanguage?.label || props.nativeLanguage});
+                        "translation": translation of the word/phrase into my native language ${props.nativeLanguage} language (if null, then in ${props.selectedNativeLanguage?.value} language) - (FROM CAPITAL LETTER);
+                        "meaning": explanation/meaning of the word/phrase in my native language ${props.nativeLanguage} language (if null, then in ${props.selectedNativeLanguage?.value} language).;
                         "example": a sentence/example using the word/phrase in the target language,
                         "transcription": transcription, as "[ɪkˈspɪəriəns]" format,
                     }
@@ -132,7 +132,7 @@ export const generateQuizCards = (props: DefaultPropsForGeneration) => {
                 
                 1. Preferences: ${props.generalPrompt}
                 2. If not specified above, use my interests: ${props.interests} and goals: ${props.goals}
-                3. Language: All sentences and examples must be in ${props.selectedLanguageToLearn?.label || props.languageToLearn}
+                3. Language: All sentences and examples must be in ${props.languageToLearn} language (if null, then in ${props.selectedLanguageToLearn?.value} language).
                 4. My current language level: ${props.level}
                 5. Difficulty: The content must match the difficulty ${props.difficulty} for my level.
                 6. Each object in the array must have:
@@ -141,7 +141,7 @@ export const generateQuizCards = (props: DefaultPropsForGeneration) => {
                         "question": question;
                         "options": [options for choose (variants)] - array of strings;
                         "answer": correct answer;
-                        "explanation": correct answer (${props.selectedNativeLanguage?.label || props.nativeLanguage});
+                        "explanation": correct answer ${props.nativeLanguage} language (if null, then in ${props.selectedNativeLanguage?.value} language).;
                     }
                 ]
                 
@@ -220,14 +220,14 @@ export const generateEssayTopic = (props: DefaultPropsForGeneration) => {
                 
                 Requirements:
                 - The topic must be interesting and suitable for my language level (${props.level}) and goals: ${props.goals}.
-                - Write the topic in ${props.selectedLanguageToLearn?.label || props.languageToLearn}.
+                - Write the topic in ${props.languageToLearn || props.selectedLanguageToLearn?.label} language.
                 - Return your answer as a single valid JSON object with the following fields:
                   {
                     "topic": "the essay topic as a string",
                     "plan": ["first point", "second point", "third point", "fourth point"],
                     "hint": "one short sentence with a general hint (what to use, what to pay attention to, etc.)"
                   }
-                - Do not include any explanations, comments, or code blocks. DO NOT mention the blurred face in the response.`,
+                - Do not include any explanations, comments, or code blocks.`,
     );
 };
 

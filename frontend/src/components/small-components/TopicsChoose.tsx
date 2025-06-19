@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Box, Flex, RadioCards } from "@radix-ui/themes";
 import { IoChevronBackOutline } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
 
 type TopicsChooseProps = {
     getSelectedTopic: (selectedLevel?: string, back?: boolean) => void;
@@ -9,13 +10,14 @@ type TopicsChooseProps = {
 
 export default function TopicsChoose(props: TopicsChooseProps) {
     const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+    const { t } = useTranslation();
 
     return (
         <div
             className={`${props.show ? "sm:h-[500px] flex flex-col justify-between" : "w-0 h-0 overflow-hidden"}`}
         >
             <h3 className="text-sm mb-4 md:mb-7 md:text-xl font-semibold">
-                What are you interested in?
+                {t("interests.title")}
             </h3>
             <div className="mb-6 md:w-2/3 mx-auto">
                 <Box maxWidth="">
@@ -29,8 +31,10 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                                 direction="column"
                                 width="100%"
                             >
-                                <p className="font-bold">💻 Technology & Innovation</p>
-                                <p>Discuss the latest gadgets, software, and tech trends.</p>
+                                <p className="font-bold">
+                                    {t("interests.topics.technology.label")}
+                                </p>
+                                <p>{t("interests.topics.technology.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
                         <RadioCards.Item value="Food and Cooking">
@@ -38,8 +42,8 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                                 direction="column"
                                 width="100%"
                             >
-                                <p className="font-bold">🍳 Food & Cooking</p>
-                                <p>Explore recipes, culinary terms, and restaurant reviews.</p>
+                                <p className="font-bold">{t("interests.topics.food.label")}</p>
+                                <p>{t("interests.topics.food.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
                         <RadioCards.Item value="Culture and History">
@@ -47,8 +51,8 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                                 direction="column"
                                 width="100%"
                             >
-                                <p className="font-bold">🏰 Culture & History</p>
-                                <p>Delve into traditions, historic events, and famous landmarks.</p>
+                                <p className="font-bold">{t("interests.topics.culture.label")}</p>
+                                <p>{t("interests.topics.culture.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
                         <RadioCards.Item value="Sports and Fitness">
@@ -56,8 +60,8 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                                 direction="column"
                                 width="100%"
                             >
-                                <p className="font-bold">🏃‍♂️ Sports & Fitness</p>
-                                <p>Talk about workouts, games, and healthy lifestyles.</p>
+                                <p className="font-bold">{t("interests.topics.sports.label")}</p>
+                                <p>{t("interests.topics.sports.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
                         <RadioCards.Item value="Environment and Nature">
@@ -65,10 +69,10 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                                 direction="column"
                                 width="100%"
                             >
-                                <p className="font-bold">🌿 Environment & Nature</p>
-                                <p>
-                                    Learn vocabulary on wildlife, conservation, and sustainability.
+                                <p className="font-bold">
+                                    {t("interests.topics.environment.label")}
                                 </p>
+                                <p>{t("interests.topics.environment.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
                         <RadioCards.Item value="Art and Literature">
@@ -76,8 +80,8 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                                 direction="column"
                                 width="100%"
                             >
-                                <p className="font-bold">🎭 Art & Literature</p>
-                                <p>Analyze books, movies, theater, and creative expression.</p>
+                                <p className="font-bold">{t("interests.topics.art.label")}</p>
+                                <p>{t("interests.topics.art.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
                     </RadioCards.Root>
@@ -93,7 +97,7 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                      group-hover:text-blue-500 text-lg"
                     />
                     <span className="transition-colors group-hover:text-blue-500 text-lg">
-                        Back
+                        {t("interests.back")}
                     </span>
                 </button>
                 <button
@@ -111,7 +115,7 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                             : "bg-blue-400 cursor-not-allowed"
                     }`}
                 >
-                    Continue
+                    {t("interests.continue")}
                 </button>
             </div>
         </div>

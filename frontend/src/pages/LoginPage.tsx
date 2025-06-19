@@ -7,6 +7,7 @@ import { loginUser } from "../services/users.ts";
 import { BiInfoCircle } from "react-icons/bi";
 import { useAuthState } from "../../store/users.ts";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 type Inputs = {
     email: string;
@@ -18,6 +19,7 @@ function LoginPage() {
     const passwordRegex = /^.{8,}$/;
 
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const {
         register,
@@ -26,7 +28,7 @@ function LoginPage() {
         formState: { errors },
     } = useForm<Inputs>();
 
-    const { showPassword, error, authSuccess, setField, resetFields } = useAuthState();
+    const { showPassword, error, authSuccess, setFieldAuth } = useAuthState();
 
     const handleLoginSubmit = async () => {
         loginUser({
@@ -34,24 +36,28 @@ function LoginPage() {
             password: watch("password"),
         })
             .then((user) => {
-                setField("authSuccess", true);
-                setField("error", null);
+                setFieldAuth("currentUserData", user.data);
+                setFieldAuth("authSuccess", true);
+                setFieldAuth("error", null);
                 setTimeout(() => {
                     if (user.data.goals) {
                         navigate("/workpage");
                     } else {
                         navigate("/main");
                     }
-                    resetFields();
+                    setFieldAuth("authSuccess", false);
+                    setFieldAuth("showPassword", false);
                 }, 1500);
+                errors.email = undefined;
+                errors.password = undefined;
             })
             .catch((err) => {
                 if (err.response) {
-                    setField("error", err.response.data);
+                    setFieldAuth("error", err.response.data);
                 } else if (err.request) {
-                    setField("error", "No response from server");
+                    setFieldAuth("error", `${t("login.noResponse")}`);
                 } else {
-                    setField("error", err.message);
+                    setFieldAuth("error", err.message);
                 }
             });
     };
@@ -63,7 +69,7 @@ function LoginPage() {
                     <div className="flex w-full border-gray-400 border-b-1 mb-4 text-sm items-center gap-2">
                         <div className="p-1.5 border-b-1 border-blue-600">
                             <button className="px-1 py-0.5 hover:bg-gray-100 rounded-sm font-semibold">
-                                Login
+                                {t("login.login")}
                             </button>
                         </div>
                         <div className="p-1.5">
@@ -71,7 +77,7 @@ function LoginPage() {
                                 to="/signup"
                                 className="px-1 py-0.5 hover:bg-gray-100 rounded-sm"
                             >
-                                Sign up
+                                {t("login.signup")}
                             </Link>
                         </div>
                     </div>
@@ -81,12 +87,15 @@ function LoginPage() {
                                 htmlFor="email"
                                 className="block mb-1 text-sm font-medium text-gray-900"
                             >
-                                Your email
+                                {t("login.yourEmail")}
                             </label>
                             <input
                                 {...register("email", {
                                     required: "This field is required",
-                                    pattern: { value: emailRegex, message: "Wrong email format" },
+                                    pattern: {
+                                        value: emailRegex,
+                                        message: `${t("login.error.emailFormat")}`,
+                                    },
                                 })}
                                 id="email"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
@@ -112,25 +121,25 @@ function LoginPage() {
                                 htmlFor="password"
                                 className="block mb-2 text-sm font-medium text-gray-900"
                             >
-                                Your password
+                                {t("login.yourPassword")}
                             </label>
                             <div className="bg-gray-50 border border-gray-300 items-center rounded-lg w-full flex justify-between">
                                 <input
                                     {...register("password", {
                                         pattern: {
                                             value: passwordRegex,
-                                            message: "Password must be at least 8 characters long",
+                                            message: `${t("login.error.passwordFormat")}`,
                                         },
                                     })}
                                     type={showPassword ? "text" : "password"}
                                     id="password"
                                     className="text-gray-900 text-sm rounded-lg focus:outline-0 block w-full p-2.5"
                                     required
-                                    placeholder="Password"
+                                    placeholder={`${t("login.passwordPlaceholder")}`}
                                 />
                                 <div
                                     className="p-2 cursor-pointer"
-                                    onClick={() => setField("showPassword", !showPassword)}
+                                    onClick={() => setFieldAuth("showPassword", !showPassword)}
                                 >
                                     {showPassword ? (
                                         <IoMdEye className="text-xl" />
@@ -169,7 +178,7 @@ function LoginPage() {
                                 <Callout.Icon>
                                     <BiInfoCircle />
                                 </Callout.Icon>
-                                <Callout.Text>Successfully logged in. Redirecting...</Callout.Text>
+                                <Callout.Text>{t("login.success")}</Callout.Text>
                             </Callout.Root>
                         )}
                         <div className="flex items-center justify-end gap-5 mt-5">
@@ -179,7 +188,7 @@ function LoginPage() {
                             >
                                 <IoChevronBackOutline className="transition-all group-hover:me-1 group-hover:text-blue-500" />
                                 <span className="transition-colors group-hover:text-blue-500">
-                                    Back
+                                    {t("login.back")}
                                 </span>
                             </Link>
                             <button
@@ -207,7 +216,7 @@ function LoginPage() {
                                         />
                                     </svg>
                                 )}
-                                Log in
+                                {t("login.logIn")}
                             </button>
                         </div>
                     </form>

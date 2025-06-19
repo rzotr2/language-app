@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Box, Flex, RadioCards } from "@radix-ui/themes";
 import { IoChevronBackOutline } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
 
 type LanguageChooseProps = {
     getSelectedLevel: (selectedLevel?: string, back?: boolean) => void;
@@ -9,13 +10,14 @@ type LanguageChooseProps = {
 
 export default function LevelChoose(props: LanguageChooseProps) {
     const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
+    const { t } = useTranslation();
 
     return (
         <div
             className={`${props.show ? "sm:h-[500px] flex flex-col justify-between" : "w-0 h-0 overflow-hidden"}`}
         >
             <h3 className="text-sm mb-4 md:mb-7 md:text-xl font-semibold">
-                Choose your current language level:
+                {t("languageSelect.levelChoose.levelChooseTitle")}
             </h3>
             <div className="mb-6 md:w-2/3 mx-auto">
                 <Box maxWidth="">
@@ -23,76 +25,70 @@ export default function LevelChoose(props: LanguageChooseProps) {
                         columns={{ initial: "1", sm: "2" }}
                         onValueChange={(value) => setSelectedLevel(value)}
                     >
-                        <RadioCards.Item value="A-1">
+                        <RadioCards.Item value="A1">
                             <Flex
                                 direction="column"
                                 width="100%"
                             >
-                                <p className="font-bold">A1 – Beginner</p>
-                                <p>
-                                    Can understand and use very basic phrases and introductions; can
-                                    ask and answer simple questions.
+                                <p className="font-bold">
+                                    {t("languageSelect.levelChoose.a1Title")}
                                 </p>
+                                <p>{t("languageSelect.levelChoose.a1Desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="A-2">
+                        <RadioCards.Item value="A2">
                             <Flex
                                 direction="column"
                                 width="100%"
                             >
-                                <p className="font-bold">A2 – Elementary</p>
-                                <p>
-                                    Handles everyday tasks and routine exchanges; can describe in
-                                    simple terms family, shopping, local geography.
+                                <p className="font-bold">
+                                    {t("languageSelect.levelChoose.a2Title")}
                                 </p>
+                                <p>{t("languageSelect.levelChoose.a2Desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="B-1">
+                        <RadioCards.Item value="B1">
                             <Flex
                                 direction="column"
                                 width="100%"
                             >
-                                <p className="font-bold">B1 – Intermediate</p>
-                                <p>
-                                    Communicates on familiar topics, produces simple connected text;
-                                    can narrate experiences and ambitions.
+                                <p className="font-bold">
+                                    {t("languageSelect.levelChoose.b1Title")}
                                 </p>
+                                <p>{t("languageSelect.levelChoose.b1Desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="B-2">
+                        <RadioCards.Item value="B2">
                             <Flex
                                 direction="column"
                                 width="100%"
                             >
-                                <p className="font-bold">B2 – Upper-Intermediate</p>
-                                <p>
-                                    Understands main ideas of complex text; interacts with fluency
-                                    and spontaneity in most situations.
+                                <p className="font-bold">
+                                    {t("languageSelect.levelChoose.b2Title")}
                                 </p>
+                                <p>{t("languageSelect.levelChoose.b2Desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="C-1">
+                        <RadioCards.Item value="C1">
                             <Flex
                                 direction="column"
                                 width="100%"
                             >
-                                <p className="font-bold">C1 – Advanced</p>
-                                <p>
-                                    Uses language flexibly for social, academic and professional
-                                    purposes; expresses ideas coherently and precisely.
+                                <p className="font-bold">
+                                    {t("languageSelect.levelChoose.c1Title")}
                                 </p>
+                                <p>{t("languageSelect.levelChoose.c1Desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="C-2">
+                        <RadioCards.Item value="C2">
                             <Flex
                                 direction="column"
                                 width="100%"
                             >
-                                <p className="font-bold">C2 – Proficient</p>
-                                <p>
-                                    Near-native mastery; understands virtually everything heard or
-                                    read, and expresses nuances effortlessly.
+                                <p className="font-bold">
+                                    {t("languageSelect.levelChoose.c2Title")}
                                 </p>
+                                <p>{t("languageSelect.levelChoose.c2Desc")}</p>
                             </Flex>
                         </RadioCards.Item>
                     </RadioCards.Root>
@@ -108,7 +104,7 @@ export default function LevelChoose(props: LanguageChooseProps) {
                      group-hover:text-blue-500 text-lg"
                     />
                     <span className="transition-colors group-hover:text-blue-500 text-lg">
-                        Back
+                        {t("languageSelect.back")}
                     </span>
                 </button>
                 <button
@@ -126,7 +122,7 @@ export default function LevelChoose(props: LanguageChooseProps) {
                             : "bg-blue-400 cursor-not-allowed"
                     }`}
                 >
-                    Continue
+                    {t("languageSelect.continue")}
                 </button>
             </div>
         </div>

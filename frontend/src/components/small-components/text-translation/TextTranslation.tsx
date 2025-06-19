@@ -7,6 +7,7 @@ import rehypeRaw from "rehype-raw";
 import { Separator } from "radix-ui";
 import type { CheckTranslationProps } from "../../../types";
 import { PiShootingStarBold } from "react-icons/pi";
+import { useTranslation } from "react-i18next";
 
 type ExerciseSectionProps = {
     text: string;
@@ -31,6 +32,7 @@ export const TextTranslation = ({
     const [checkTextResultGrade, setCheckTextResultGrade] = useState<string | null>(null);
     const [checkTextResultAiVersion, setCheckTextResultAiVersion] = useState<string | null>(null);
     const anchorRef = useRef<HTMLDivElement>(null);
+    const { t } = useTranslation();
 
     const handleCheckTranslationClick = () => {
         const propertiesObj: CheckTranslationProps = {
@@ -63,19 +65,19 @@ export const TextTranslation = ({
                 className="bg-gradient-to-r from-blue-600 to-indigo-700 py-2 px-3 sm:py-3 sm:px-6 rounded-t-xl"
                 ref={anchorRef}
             >
-                <h3 className="text-white text-lg sm:text-xl font-bold">Text translation</h3>
-                <p className="text-blue-100 mt-1 text-sm sm:text-lg">
-                    Translate text into your native language
-                </p>
+                <h3 className="text-white text-lg sm:text-xl font-bold">
+                    {t("translation.title")}
+                </h3>
+                <p className="text-blue-100 mt-1 text-sm sm:text-lg">{t("translation.subtitle")}</p>
             </div>
             <div className="relative flex items-center mt-4 mb-5 mx-4 sm:mx-6 md:mx-8">
                 <div className="w-1 h-12 bg-gradient-to-b from-blue-500 to-indigo-500 rounded-full mr-4"></div>
                 <div>
                     <span className="text-blue-900 font-extrabold text-md sm:text-lg flex items-center gap-2">
-                        Focus on meaning, clarity, and natural language.
+                        {t("translation.mainInstruction")}
                     </span>
                     <div className="mt-1 text-blue-500 text-xs italic tracking-wide">
-                        Translate the message, not just the words.
+                        {t("translation.hint")}
                     </div>
                 </div>
             </div>
@@ -89,7 +91,7 @@ export const TextTranslation = ({
                             <IoMdInformationCircleOutline />
                         </div>
                         <p className="flex-1 font-normal text-blue-700 text-sm">
-                            It is better to use device with a big screen for this exercise.
+                            {t("translation.deviceHint")}
                         </p>
                         <button
                             onClick={() => setClosed(true)}
@@ -105,7 +107,7 @@ export const TextTranslation = ({
                     htmlFor="message"
                     className="font-bold text-gray-900"
                 >
-                    Enter your translation:
+                    {t("translation.enterYourTranslation")}
                 </label>
                 <textarea
                     id="message"
@@ -114,7 +116,7 @@ export const TextTranslation = ({
                     onInput={(e) => setTranslationText(e.currentTarget.value)}
                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
                                   border-gray-300 focus:ring-blue-500 focus:border-blue-500 font-normal mt-1.5"
-                    placeholder="Write your translation here. Focus on conveying the meaning clearly and naturally, not just translating word for word"
+                    placeholder={`${t("translation.textareaPlaceholder")}`}
                 ></textarea>
                 {checkTextResultGrade && checkTextResultAiVersion && (
                     <div
@@ -122,7 +124,7 @@ export const TextTranslation = ({
                         className="my-6 space-y-5 text-sm sm:text-[16px] font-normal"
                     >
                         <div>
-                            <p className="font-bold pb-1.5">My version:</p>
+                            <p className="font-bold pb-1.5">{t("translation.myVersion")}</p>
                             <Markdown
                                 remarkPlugins={[remarkGfm]}
                                 rehypePlugins={[rehypeRaw]}
@@ -132,7 +134,7 @@ export const TextTranslation = ({
                         </div>
                         <Separator.Root className="my-[15px] bg-gray-700 data-[orientation=horizontal]:h-px" />
                         <div>
-                            <p className="font-bold pb-1.5">Review result</p>
+                            <p className="font-bold pb-1.5">{t("translation.reviewResult")}</p>
                             <Markdown
                                 remarkPlugins={[remarkGfm]}
                                 rehypePlugins={[rehypeRaw]}
@@ -142,7 +144,7 @@ export const TextTranslation = ({
                         </div>
                         <Separator.Root className="my-[15px] bg-gray-700 data-[orientation=horizontal]:h-px" />
                         <div>
-                            <p className="font-bold pb-1.5">How would AI translate this text:</p>
+                            <p className="font-bold pb-1.5">{t("translation.aiVersion")}</p>
                             <Markdown
                                 remarkPlugins={[remarkGfm]}
                                 rehypePlugins={[rehypeRaw]}
@@ -169,7 +171,7 @@ export const TextTranslation = ({
                             hover:bg-blue-50 font-medium rounded-lg text-sm px-2 py-1.5 sm:px-4
                             sm:py-2.5 text-center cursor-pointer"
                         >
-                            Check answers
+                            {t("translation.checkAnswer")}
                         </button>
                         <button
                             type="button"
@@ -178,7 +180,7 @@ export const TextTranslation = ({
                              font-medium rounded-lg text-sm px-2 py-1.5 sm:px-4 sm:py-2.5
                             focus:outline-none cursor-pointer flex items-center gap-2 sm:me-3"
                         >
-                            Generate more
+                            {t("translation.generateMore")}
                             <PiShootingStarBold className="text-[14px]" />
                         </button>
                     </div>
@@ -188,7 +190,7 @@ export const TextTranslation = ({
                 <div className="flex justify-between items-center">
                     <div>
                         <span className="text-sm text-gray-500 font-medium">
-                            Difficulty:
+                            {t("translation.difficulty")}
                             <span className="font-bold">{" " + `${difficulty}`}</span>
                         </span>
                     </div>
@@ -215,7 +217,7 @@ export const TextTranslation = ({
                                     clipRule="evenodd"
                                 ></path>
                             </svg>
-                            Reset
+                            {t("translation.reset")}
                         </button>
                     </div>
                 </div>

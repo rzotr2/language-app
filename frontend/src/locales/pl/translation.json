@@ -1,0 +1,312 @@
+{
+  "nav": {
+    "aboutMe": "O mnie",
+    "projects": "Projekty",
+    "resume": "CV",
+    "manageAccount": "Zarządzaj kontem",
+    "feedback": "Opinia",
+    "signOut": "Wyloguj się",
+    "logIn": "Zaloguj się"
+  },
+  "user": {
+    "loading": "Ładowanie...",
+    "email": "E-mail"
+  },
+  "buttons": {
+    "save": "Zapisz",
+    "cancel": "Anuluj"
+  },
+  "homepage": {
+    "hero": {
+      "mainText": "Rozpocznij swoją językową podróż dzięki interaktywnym ćwiczeniom i praktyce w prawdziwych sytuacjach. Rozwijaj swoje umiejętności krok po kroku w wspierającym, angażującym środowisku dla uczących się na każdym poziomie.",
+      "subText": "Opanuj nowy język krok po kroku",
+      "getStarted": "Zacznij",
+      "mobileTitle": "Ucz się języka online",
+      "mobileText": "Ćwicz różne zadania z AI. To lepsze niż inne strony. Po prostu spróbuj i zobaczysz!"
+    },
+    "aiSection": {
+      "title": "Ucz się języka z AI",
+      "description": "Ćwicz dzięki spersonalizowanym ćwiczeniom generowanym przez sztuczną inteligencję."
+    },
+    "features": {
+      "improveSkillsTitle": "Popraw swoje umiejętności",
+      "improveSkillsText": "Popraw czytanie i słuchanie dzięki interaktywnym zadaniom",
+      "sharpenKnowledgeTitle": "Pogłębiaj wiedzę",
+      "sharpenKnowledgeText": "Pogłębiaj gramatykę i słownictwo dzięki wyzwaniom AI",
+      "practiceConversationTitle": "Ćwicz konwersację",
+      "practiceConversationText": "Prowadź realistyczne dialogi, aby poprawić płynność mówienia"
+    },
+    "readyTitle": "Gotowy, aby rozpocząć swoją podróż?",
+    "getStarted": "Zacznij"
+  },
+  "login": {
+    "login": "Zaloguj się",
+    "signup": "Zarejestruj się",
+    "yourEmail": "Twój e-mail",
+    "yourPassword": "Twoje hasło",
+    "emailPlaceholder": "email@przyklad.com",
+    "passwordPlaceholder": "Hasło",
+    "back": "Wstecz",
+    "logIn": "Zaloguj się",
+    "success": "Pomyślnie zalogowano. Przekierowanie...",
+    "error": {
+      "required": "To pole jest wymagane",
+      "emailFormat": "Nieprawidłowy format e-mail",
+      "passwordFormat": "Hasło musi mieć co najmniej 8 znaków",
+      "noResponse": "Brak odpowiedzi z serwera"
+    }
+  },
+  "signup": {
+    "login": "Zaloguj się",
+    "signup": "Zarejestruj się",
+    "yourEmail": "Twój e-mail",
+    "yourPassword": "Twoje hasło",
+    "confirmPassword": "Potwierdź hasło",
+    "emailPlaceholder": "email@przyklad.com",
+    "passwordPlaceholder": "Hasło",
+    "confirmPasswordPlaceholder": "Potwierdź hasło",
+    "back": "Wstecz",
+    "signUp": "Zarejestruj się",
+    "success": "Pomyślnie zarejestrowano. Przekierowanie...",
+    "error": {
+      "required": "To pole jest wymagane",
+      "emailFormat": "Nieprawidłowy format e-mail",
+      "passwordFormat": "Hasło musi mieć co najmniej 8 znaków",
+      "passwordRequired": "Hasło jest wymagane",
+      "passwordsMatch": "Hasła muszą być identyczne",
+      "emailTaken": "E-mail jest już zajęty",
+      "noResponse": "Brak odpowiedzi z serwera"
+    }
+  },
+  "loader": {
+    "submitting": "Wysyłanie odpowiedzi,",
+    "wait": "proszę czekać..."
+  },
+  "languageSelect": {
+    "desiredLanguageChooseTitle": "Jakiego języka chcesz się uczyć?",
+    "nativeLanguageChooseTitle": "Jakim językiem mówisz?",
+    "levelChoose": {
+      "levelChooseTitle": "Wybierz swój obecny poziom językowy:",
+      "a1Title": "A1 – Początkujący",
+      "a1Desc": "Rozumie i używa bardzo prostych zwrotów; potrafi zadawać i odpowiadać na proste pytania.",
+      "a2Title": "A2 – Podstawowy",
+      "a2Desc": "Radzi sobie z codziennymi zadaniami i rutynowymi wymianami; potrafi opisać rodzinę, zakupy, lokalizację.",
+      "b1Title": "B1 – Średniozaawansowany",
+      "b1Desc": "Komunikuje się na znane tematy, tworzy proste powiązane teksty; potrafi opowiadać o doświadczeniach i planach.",
+      "b2Title": "B2 – Wyższy średniozaawansowany",
+      "b2Desc": "Rozumie główne treści złożonych tekstów; potrafi swobodnie i spontanicznie się porozumiewać.",
+      "c1Title": "C1 – Zaawansowany",
+      "c1Desc": "Używa języka elastycznie w celach społecznych, akademickich i zawodowych; wyraża pomysły jasno i precyzyjnie.",
+      "c2Title": "C2 – Biegły",
+      "c2Desc": "Prawie jak native speaker; rozumie praktycznie wszystko, co usłyszy lub przeczyta, i łatwo wyraża niuanse."
+    },
+    "back": "Wstecz",
+    "continue": "Dalej"
+  },
+  "interests": {
+    "title": "Czym się interesujesz?",
+    "back": "Wstecz",
+    "continue": "Dalej",
+    "topics": {
+      "technology": {
+        "label": "💻 Technologia i innowacje",
+        "desc": "Dyskutuj o najnowszych gadżetach, oprogramowaniu i trendach technologicznych."
+      },
+      "food": {
+        "label": "🍳 Jedzenie i gotowanie",
+        "desc": "Odkrywaj przepisy, terminy kulinarne i recenzje restauracji."
+      },
+      "culture": {
+        "label": "🏰 Kultura i historia",
+        "desc": "Zanurz się w tradycjach, wydarzeniach historycznych i słynnych zabytkach."
+      },
+      "sports": {
+        "label": "🏃‍♂️ Sport i fitness",
+        "desc": "Rozmawiaj o treningach, grach i zdrowym stylu życia."
+      },
+      "environment": {
+        "label": "🌿 Środowisko i natura",
+        "desc": "Poznawaj słownictwo dotyczące przyrody, ochrony środowiska i zrównoważonego rozwoju."
+      },
+      "art": {
+        "label": "🎭 Sztuka i literatura",
+        "desc": "Analizuj książki, filmy, teatr i twórczość artystyczną."
+      }
+    }
+  },
+  "goals": {
+    "title": "Dlaczego chcesz się uczyć języka?",
+    "back": "Wstecz",
+    "submit": "Zatwierdź",
+    "options": {
+      "travel": {
+        "label": "🧳 Podróże i codzienna rozmowa",
+        "desc": "Radź sobie w prawdziwych sytuacjach, takich jak rezerwacja hotelu czy zamawianie jedzenia."
+      },
+      "business": {
+        "label": "💼 Biznes i komunikacja zawodowa",
+        "desc": "Udoskonal pisanie e-maili, prezentacje i dialogi w pracy."
+      },
+      "exam": {
+        "label": "📝 Przygotowanie do egzaminów",
+        "desc": "Ćwicz strategie i przykładowe testy, aby osiągnąć swój cel."
+      },
+      "academic": {
+        "label": "📚 Umiejętności akademickie",
+        "desc": "Popraw czytanie, pisanie esejów i rozumienie wykładów."
+      },
+      "personal": {
+        "label": "🎨 Rozwój osobisty i hobby",
+        "desc": "Ucz się przez swoje ulubione zajęcia, takie jak muzyka, sztuka czy podróże."
+      },
+      "listening": {
+        "label": "🎧 Słuchanie i wymowa",
+        "desc": "Popraw rozumienie mowy i wymowę."
+      }
+    }
+  },
+  "work": {
+    "whatToGenerate": "Co chcesz wygenerować?",
+    "promptPlaceholder": "Na przykład: wygeneruj ćwiczenia na temat 'Jak spędziłem lato'. To powinno być na poziomie A2.",
+    "iSpeak": "Mówię:",
+    "iWantToLearn": "Chcę się uczyć:",
+    "selectNumber": "Wybierz liczbę ćwiczeń:",
+    "selectType": "Wybierz typ ćwiczeń:",
+    "generate": "Generuj",
+    "difficulty": "Poziom trudności",
+    "types": {
+      "translation": {
+        "title": "Tłumaczenie tekstu",
+        "desc": "Ćwicz tłumaczenie zdań między językiem ojczystym a docelowym."
+      },
+      "blanks": {
+        "title": "Uzupełnij luki",
+        "desc": "Uzupełnij zdania, wstawiając brakujące słowa, aby utrwalić gramatykę i słownictwo."
+      },
+      "cards": {
+        "title": "Fiszki",
+        "desc": "Ucz się słówek lub zwrotów, odwracając fiszki, aby zobaczyć tłumaczenie lub odpowiedź."
+      },
+      "quiz": {
+        "title": "Quiz",
+        "desc": "Odpowiadaj na pytania wielokrotnego wyboru, aby sprawdzić swoją znajomość języka."
+      },
+      "imageDesc": {
+        "title": "Opisz obrazek",
+        "desc": "Spójrz na obrazek i napisz kilka zdań, co widzisz."
+      },
+      "essay": {
+        "title": "Napisz esej",
+        "desc": "Napisz krótki esej na podany temat, aby poćwiczyć pisanie."
+      }
+    }
+  },
+  "essay": {
+    "title": "Napisz esej",
+    "subtitle": "Napisz esej, wyrażając swoje myśli i argumenty.",
+    "mainInstruction": "Wyrażaj swoje myśli i argumenty w dobrze zorganizowanym eseju.",
+    "hint": "Jasno organizuj swoje pomysły i popieraj je przykładami.",
+    "topic": "Temat",
+    "plan": "Plan",
+    "textareaPlaceholder": "Napisz tutaj swój esej. Zacznij od wstępu, rozwijaj główne pomysły w osobnych akapitach i zakończ podsumowaniem. Używaj spójników i zwracaj uwagę na strukturę, jasność i gramatykę.",
+    "myVersion": "Moja wersja:",
+    "reviewResult": "Ocena",
+    "aiVersion": "Jak AI napisałby esej na ten temat:",
+    "checkAnswer": "Sprawdź esej",
+    "generateMore": "Wygeneruj ponownie",
+    "reset": "Zresetuj",
+    "difficulty": "Poziom trudności:"
+  },
+  "imageDesc": {
+    "title": "Opisz obrazek",
+    "subtitle": "Spójrz na obrazek i napisz szczegółowy opis tego, co widzisz.",
+    "mainInstruction": "Zwróć uwagę na miejsce, działania i szczegóły.",
+    "hint": "Szczegóły ożywiają twój opis.",
+    "enterWhatYouSee": "Opisz, co widzisz:",
+    "textareaPlaceholder": "Opisz, co widzisz na obrazku. Kto jest na obrazku? Co robią? Jakie jest miejsce, nastrój, czy są jakieś ciekawe szczegóły?",
+    "myVersion": "Moja wersja:",
+    "reviewResult": "Ocena",
+    "aiVersion": "Jak AI opisałby ten obrazek:",
+    "checkAnswer": "Sprawdź odpowiedź",
+    "regenerateImage": "Wygeneruj obrazek ponownie",
+    "reset": "Zresetuj",
+    "difficulty": "Poziom trudności:",
+    "collapsible": {
+      "trigger": "Jak opisać obrazek: plan krok po kroku",
+      "generalImpression": "1. Ogólne wrażenie:",
+      "generalImpressionHint": "Jaka jest ogólna scena? (wewnątrz/na zewnątrz, rodzaj miejsca)",
+      "peopleObjects": "2. Ludzie i obiekty:",
+      "peopleObjectsHint": "Kto lub co jest na obrazku? (liczba osób, główne obiekty)",
+      "actions": "3. Działania:",
+      "actionsHint": "Co robią ludzie? (opisz czynności lub interakcje)",
+      "appearanceDetails": "4. Wygląd i szczegóły:",
+      "appearanceDetailsHint": "Jak wyglądają ludzie? (ubranie, wiek, nastrój, postawa)\nJakie szczegóły się wyróżniają? (kolory, pogoda, pora dnia, tło)",
+      "atmosphere": "5. Atmosfera:",
+      "atmosphereHint": "Jaki jest nastrój obrazka? (wesoły, zajęty, spokojny itp.)",
+      "personalOpinion": "6. Opinia osobista (opcjonalnie):",
+      "personalOpinionHint": "Co sądzisz o obrazku? (ciekawe, zaskakujące itp.)"
+    }
+  },
+  "blanks": {
+    "title": "Uzupełnij luki",
+    "subtitle": "Uzupełnij zdanie, wybierając właściwe słowa",
+    "mainInstruction": "Zwróć uwagę na kontekst i wybierz najlepsze słowo do każdej luki.",
+    "hint": "Przeczytaj całe zdanie przed uzupełnieniem luk.",
+    "checkAnswers": "Sprawdź odpowiedzi",
+    "generateMore": "Wygeneruj ponownie",
+    "reset": "Zresetuj",
+    "difficulty": "Poziom trudności:"
+  },
+  "flipCards": {
+    "title": "Fiszki",
+    "subtitle": "Przetłumacz tekst na swój język ojczysty",
+    "mainInstruction": "Sprawdź swoją pamięć i ucz się nowych słów za pomocą fiszek.",
+    "hint": "Spróbuj przypomnieć sobie odpowiedź przed odwróceniem każdej karty.",
+    "generateMore": "Wygeneruj ponownie",
+    "reset": "Zresetuj",
+    "difficulty": "Poziom trudności:",
+    "flipCardExample": "Przykład:"
+  },
+  "quiz": {
+    "title": "Quiz",
+    "subtitle": "Wybierz poprawną odpowiedź spośród proponowanych opcji",
+    "previous": "Poprzednie",
+    "next": "Następne",
+    "question": "Pytanie",
+    "of": "z",
+    "generateMore": "Wygeneruj ponownie",
+    "reset": "Zresetuj",
+    "difficulty": "Poziom trudności:"
+  },
+  "translation": {
+    "title": "Tłumaczenie tekstu",
+    "subtitle": "Przetłumacz tekst na swój język ojczysty",
+    "mainInstruction": "Zwróć uwagę na znaczenie, jasność i naturalność języka.",
+    "hint": "Tłumacz przekaz, a nie tylko słowa.",
+    "deviceHint": "Do tego ćwiczenia lepiej użyć urządzenia z dużym ekranem.",
+    "enterYourTranslation": "Wpisz swoje tłumaczenie:",
+    "textareaPlaceholder": "Napisz tutaj swoje tłumaczenie. Skup się na jasnym i naturalnym przekazaniu znaczenia, a nie tylko na tłumaczeniu słowo w słowo.",
+    "myVersion": "Moja wersja:",
+    "reviewResult": "Ocena",
+    "aiVersion": "Jak AI przetłumaczyłby ten tekst:",
+    "checkAnswer": "Sprawdź odpowiedź",
+    "generateMore": "Wygeneruj ponownie",
+    "reset": "Zresetuj",
+    "difficulty": "Poziom trudności:"
+  },
+  "tooltip": {
+    "information": {
+      "firstPart": "Aby uzyskać najlepsze doświadczenie, musisz dodać język ręcznie,",
+      "or": "lub",
+      "secondPart": "wpisz swój język ojczysty i język, którego chcesz się uczyć, w tym polu.",
+      "additionalField": "To pole podpowiedzi ma",
+      "priority": "najwyższy priorytet."
+    }
+  },
+  "hintCard": {
+    "title": "Wskazówka:",
+    "easyDesc": "Proste zdania i podstawowe słownictwo.",
+    "mediumDesc": "Bardziej złożone struktury i nowe słowa.",
+    "hardDesc": "Zaawansowane tematy, złożona gramatyka i wyrażenia."
+  }
+}

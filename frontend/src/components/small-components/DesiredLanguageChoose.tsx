@@ -6,6 +6,7 @@ import france from "../../assets/svg/flags/france.svg";
 import us from "../../assets/svg/flags/us.svg";
 import poland from "../../assets/svg/flags/polland.svg";
 import { IoChevronBackOutline } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
 
 type LanguageChooseProps = {
     getSelectedLanguageToLearn: (selectedLanguage: string) => void;
@@ -29,13 +30,14 @@ const languages: Lang[] = [
 
 export default function DesiredLanguageChoose(props: LanguageChooseProps) {
     const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
+    const { t } = useTranslation();
 
     return (
         <div
             className={`${props.show ? "sm:h-[500px] flex flex-col justify-between" : "w-0 h-0 overflow-hidden"}`}
         >
             <h3 className="text-sm mb-4 md:mb-7 md:text-xl font-semibold">
-                What language do you want to learn?
+                {t("languageSelect.desiredLanguageChooseTitle")}
             </h3>
 
             <div className="container mx-auto flex items-center md:flex-row justify-center flex-wrap pb-5">
@@ -73,7 +75,7 @@ export default function DesiredLanguageChoose(props: LanguageChooseProps) {
                     className="group text-sm font-medium flex items-center text-gray-400"
                 >
                     <IoChevronBackOutline className="transition-all text-lg" />
-                    <span className="cursor-not-allowed text-lg">Back</span>
+                    <span className="cursor-not-allowed text-lg">{t("languageSelect.back")}</span>
                 </button>
                 <button
                     type="button"
@@ -90,7 +92,7 @@ export default function DesiredLanguageChoose(props: LanguageChooseProps) {
                                     : "bg-blue-400 cursor-not-allowed"
                             }`}
                 >
-                    Continue
+                    {t("languageSelect.continue")}
                 </button>
             </div>
         </div>

@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import type { CheckEssayProps, EssayType } from "../../../types";
 import { checkEssay } from "../../../services/ai.ts";
+import { useTranslation } from "react-i18next";
 
 type EssayExerciseProps = {
     difficulty: string;
@@ -29,6 +30,7 @@ export const EssayExercise = ({
     const [checkEssayResultMyText, setCheckEssayResultMyText] = useState<string | null>(null);
     const [checkEssayResultGrade, setCheckEssayResultGrade] = useState<string | null>(null);
     const [checkEssayResultAiVersion, setCheckEssayResultAiVersion] = useState<string | null>(null);
+    const { t } = useTranslation();
 
     const handleCheckEssayClick = () => {
         const propertiesObj: CheckEssayProps = {
@@ -61,19 +63,17 @@ export const EssayExercise = ({
                 className="bg-gradient-to-r from-blue-600 to-indigo-700 py-2 px-3 sm:py-3 sm:px-6 rounded-t-xl"
                 ref={anchorRef}
             >
-                <h3 className="text-white text-lg sm:text-xl font-bold">Essay Writing</h3>
-                <p className="text-blue-100 mt-1 text-sm sm:text-lg">
-                    Write an essay expressing your thoughts and arguments.
-                </p>
+                <h3 className="text-white text-lg sm:text-xl font-bold">{t("essay.title")}</h3>
+                <p className="text-blue-100 mt-1 text-sm sm:text-lg">{t("essay.subtitle")}</p>
             </div>
             <div className="relative flex items-center mt-4 mb-5 mx-4 sm:mx-6 md:mx-8">
                 <div className="w-1 h-12 bg-gradient-to-b from-blue-500 to-indigo-500 rounded-full mr-4"></div>
                 <div>
                     <span className="text-blue-900 font-extrabold text-md sm:text-lg flex items-center gap-2">
-                        Express your thoughts and arguments in a well-structured essay.
+                        {t("essay.mainInstruction")}
                     </span>
                     <div className="mt-1 text-blue-500 text-xs italic tracking-wide">
-                        Organize your ideas clearly and support them with examples.
+                        {t("essay.hint")}
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@ export const EssayExercise = ({
                     onInput={(e) => setCurrentEssay(e.currentTarget.value)}
                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
                                   border-gray-300 focus:ring-blue-500 focus:border-blue-500 font-normal mt-1.5"
-                    placeholder="Write your essay here. Start with an introduction, develop your main ideas in separate paragraphs, and finish with a conclusion. Use linking words and pay attention to structure, clarity, and grammar."
+                    placeholder={`${t("essay.textAreaPlaceholder")}`}
                 ></textarea>
                 {checkEssayResultGrade && checkEssayResultAiVersion && (
                     <div
@@ -99,7 +99,7 @@ export const EssayExercise = ({
                         className="my-6 space-y-5 text-sm sm:text-[16px] font-normal"
                     >
                         <div>
-                            <p className="font-bold pb-1.5">My version:</p>
+                            <p className="font-bold pb-1.5">{t("essay.myVersion")}</p>
                             <Markdown
                                 remarkPlugins={[remarkGfm]}
                                 rehypePlugins={[rehypeRaw]}
@@ -109,7 +109,7 @@ export const EssayExercise = ({
                         </div>
                         <Separator.Root className="my-[15px] bg-gray-700 data-[orientation=horizontal]:h-px" />
                         <div>
-                            <p className="font-bold pb-1.5">Review result</p>
+                            <p className="font-bold pb-1.5">{t("essay.reviewResult")}</p>
                             <Markdown
                                 remarkPlugins={[remarkGfm]}
                                 rehypePlugins={[rehypeRaw]}
@@ -119,9 +119,7 @@ export const EssayExercise = ({
                         </div>
                         <Separator.Root className="my-[15px] bg-gray-700 data-[orientation=horizontal]:h-px" />
                         <div>
-                            <p className="font-bold pb-1.5">
-                                How would AI write essay on this topic:
-                            </p>
+                            <p className="font-bold pb-1.5">{t("essay.aiVersion")}</p>
                             <Markdown
                                 remarkPlugins={[remarkGfm]}
                                 rehypePlugins={[rehypeRaw]}
@@ -131,52 +129,6 @@ export const EssayExercise = ({
                         </div>
                     </div>
                 )}
-                <Collapsible.Root>
-                    <Collapsible.Content
-                        className="CollapsibleContent text-sm bg-blue-50
-                         text-blue-900 rounded-b-md p-4 space-y-3"
-                    >
-                        <div>
-                            <span className="font-semibold">1. General Impression:</span>
-                            <div className="ml-4">
-                                What is the overall scene? (indoor/outdoor, type of place)
-                            </div>
-                        </div>
-                        <div>
-                            <span className="font-semibold">2. People and Objects:</span>
-                            <div className="ml-4">
-                                Who or what is in the picture? (number of people, main objects)
-                            </div>
-                        </div>
-                        <div>
-                            <span className="font-semibold">3. Actions:</span>
-                            <div className="ml-4">
-                                What are the people doing? (describe activities or interactions)
-                            </div>
-                        </div>
-                        <div>
-                            <span className="font-semibold">4. Appearance and Details:</span>
-                            <div className="ml-4">
-                                What do the people look like? (clothes, age, mood, posture)
-                                <br />
-                                What details stand out? (colors, weather, time of day, background
-                                elements)
-                            </div>
-                        </div>
-                        <div>
-                            <span className="font-semibold">5. Atmosphere:</span>
-                            <div className="ml-4">
-                                What is the mood or feeling of the image? (happy, busy, calm, etc.)
-                            </div>
-                        </div>
-                        <div>
-                            <span className="font-semibold">6. Personal Opinion (optional):</span>
-                            <div className="ml-4">
-                                What do you think about the image? (interesting, surprising, etc.)
-                            </div>
-                        </div>
-                    </Collapsible.Content>
-                </Collapsible.Root>
                 <div className="flex w-full justify-center sm:justify-end py-3">
                     <div className="flex gap-3 p-0">
                         <button
@@ -186,7 +138,7 @@ export const EssayExercise = ({
                             hover:bg-blue-50 font-medium rounded-lg text-sm px-2 py-1.5 sm:px-4
                             sm:py-2.5 text-center cursor-pointer"
                         >
-                            Check answers
+                            {t("essay.checkAnswer")}
                         </button>
                         <button
                             type="button"
@@ -195,7 +147,7 @@ export const EssayExercise = ({
                              font-medium rounded-lg text-sm px-2 py-1.5 sm:px-4 sm:py-2.5
                             focus:outline-none cursor-pointer flex items-center gap-2"
                         >
-                            Generate more
+                            {t("essay.generateMore")}
                             <PiShootingStarBold className="text-[14px]" />
                         </button>
                     </div>
@@ -205,7 +157,7 @@ export const EssayExercise = ({
                 <div className="flex justify-between items-center">
                     <div>
                         <span className="text-sm text-gray-500 font-medium">
-                            Difficulty:
+                            {t("essay.difficulty")}
                             <span className="font-bold">{" " + `${difficulty}`}</span>
                         </span>
                     </div>
@@ -232,7 +184,7 @@ export const EssayExercise = ({
                                     clipRule="evenodd"
                                 ></path>
                             </svg>
-                            Reset
+                            {t("essay.reset")}
                         </button>
                     </div>
                 </div>

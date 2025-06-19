@@ -8,6 +8,7 @@ import axios from "axios";
 import { BiInfoCircle } from "react-icons/bi";
 import { useAuthState } from "../../store/users.ts";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 type Inputs = {
     signUpEmail: string;
@@ -18,7 +19,7 @@ type Inputs = {
 function SignUpPage() {
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}$/;
     const passwordRegex = /^.{8,}$/;
-
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const {
@@ -34,36 +35,40 @@ function SignUpPage() {
         userAlreadyExists,
         error,
         authSuccess,
-        setField,
-        resetFields,
+        setFieldAuth,
     } = useAuthState();
 
     const handleSignupSubmit = () => {
         findUser(watch("signUpEmail"))
             .then(() => {
-                setField("userAlreadyExists", true);
+                setFieldAuth("userAlreadyExists", true);
             })
             .catch((err) => {
                 if (axios.isAxiosError(err) && err.response) {
                     if (err.response.status === 404) {
-                        setField("userAlreadyExists", false);
-                        console.log(watch("signUpEmail"));
+                        setFieldAuth("userAlreadyExists", false);
                         signUp({
                             email: watch("signUpEmail"),
                             password: watch("signUpPassword"),
-                        }).then(() => {
-                            setField("authSuccess", true);
-                            setField("error", null);
+                        }).then((user) => {
+                            setFieldAuth("currentUserData", user.data);
+                            setFieldAuth("authSuccess", true);
+                            setFieldAuth("error", null);
                             setTimeout(() => {
                                 navigate("/main");
-                                resetFields();
+                                setFieldAuth("authSuccess", false);
+                                setFieldAuth("showPassword", false);
+                                setFieldAuth("showConfirmPassword", false);
                             }, 1500);
+                            errors.signUpEmail = undefined;
+                            errors.signUpPassword = undefined;
+                            errors.confirmPassword = undefined;
                         });
                     } else {
-                        setField("error", err.response.data.message);
+                        setFieldAuth("error", err.response.data.message);
                     }
                 } else {
-                    setField("error", "No response from server");
+                    setFieldAuth("error", `${t("signup.error.noResponse")}`);
                 }
             });
     };
@@ -78,12 +83,12 @@ function SignUpPage() {
                                 to="/login"
                                 className="px-1 py-0.5 hover:bg-gray-100 rounded-sm"
                             >
-                                Login
+                                {t("signup.login")}
                             </Link>
                         </div>
                         <div className="p-1.5 border-b-1 border-blue-600">
                             <button className="px-1 py-0.5 hover:bg-gray-100 rounded-sm font-semibold">
-                                Sign up
+                                {t("signup.signup")}
                             </button>
                         </div>
                     </div>
@@ -93,12 +98,15 @@ function SignUpPage() {
                                 htmlFor="email"
                                 className="block mb-2 text-sm font-medium text-gray-900"
                             >
-                                Your email
+                                {t("signup.yourEmail")}
                             </label>
                             <input
                                 {...register("signUpEmail", {
-                                    required: "This field is required",
-                                    pattern: { value: emailRegex, message: "Wrong email format" },
+                                    required: `${t("signup.error.required")}`,
+                                    pattern: {
+                                        value: emailRegex,
+                                        message: `${t("signup.error.emailFormat")}`,
+                                    },
                                 })}
                                 id="email"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
@@ -124,26 +132,26 @@ function SignUpPage() {
                                 htmlFor="password"
                                 className="block mb-2 text-sm font-medium text-gray-900"
                             >
-                                Your password
+                                {t("signup.yourPassword")}
                             </label>
                             <div className="bg-gray-50 border border-gray-300 items-center rounded-lg w-full flex justify-between">
                                 <input
                                     {...register("signUpPassword", {
                                         pattern: {
                                             value: passwordRegex,
-                                            message: "Password must be at least 8 characters long",
+                                            message: `${t("signup.error.passwordFormat")}`,
                                         },
-                                        required: "Password is required",
+                                        required: `${t("signup.error.required")}`,
                                     })}
                                     type={showPassword ? "text" : "password"}
                                     id="password"
                                     className="text-gray-900 text-sm rounded-lg focus:outline-0 block w-full p-2.5"
                                     required
-                                    placeholder="Password"
+                                    placeholder={`${t("signup.passwordPlaceholder")}`}
                                 />
                                 <div
                                     className="p-2 cursor-pointer"
-                                    onClick={() => setField("showPassword", !showPassword)}
+                                    onClick={() => setFieldAuth("showPassword", !showPassword)}
                                 >
                                     {showPassword ? (
                                         <IoMdEye className="text-xl" />
@@ -170,25 +178,25 @@ function SignUpPage() {
                                 htmlFor="confirmPassword"
                                 className="block mb-2 text-sm font-medium text-gray-900"
                             >
-                                Confirm your password
+                                {t("signup.confirmPassword")}
                             </label>
                             <div className="bg-gray-50 border border-gray-300 items-center rounded-lg w-full flex justify-between mb-1">
                                 <input
                                     {...register("confirmPassword", {
                                         validate: (value: string) =>
                                             value === watch("signUpPassword") ||
-                                            "Passwords should match",
+                                            `${t("signup.error.passwordsMatch")}`,
                                     })}
                                     type={showConfirmPassword ? "text" : "password"}
                                     id="confirmPassword"
                                     className="text-gray-900 text-sm rounded-lg focus:outline-0 block w-full p-2.5"
                                     required
-                                    placeholder="Confirm password"
+                                    placeholder={`${t("signup.confirmPasswordPlaceholder")}`}
                                 />
                                 <div
                                     className="p-2 cursor-pointer"
                                     onClick={() =>
-                                        setField("showConfirmPassword", !showConfirmPassword)
+                                        setFieldAuth("showConfirmPassword", !showConfirmPassword)
                                     }
                                 >
                                     {showConfirmPassword ? (
@@ -222,7 +230,7 @@ function SignUpPage() {
                                         <Callout.Icon>
                                             <BiInfoCircle />
                                         </Callout.Icon>
-                                        <Callout.Text>Email is already taken.</Callout.Text>
+                                        <Callout.Text>{t("signup.error.emailTaken")}</Callout.Text>
                                     </Callout.Root>
                                 )}
                                 {error && (
@@ -242,9 +250,7 @@ function SignUpPage() {
                                         <Callout.Icon>
                                             <BiInfoCircle />
                                         </Callout.Icon>
-                                        <Callout.Text>
-                                            Successfully signed up. Redirecting...
-                                        </Callout.Text>
+                                        <Callout.Text>{t("signup.success")}</Callout.Text>
                                     </Callout.Root>
                                 )}
                             </div>
@@ -256,7 +262,7 @@ function SignUpPage() {
                             >
                                 <IoChevronBackOutline className="transition-all group-hover:me-1 group-hover:text-blue-500" />
                                 <span className="transition-colors group-hover:text-blue-500">
-                                    Back
+                                    {t("signup.back")}
                                 </span>
                             </Link>
                             <button
@@ -284,7 +290,7 @@ function SignUpPage() {
                                         />
                                     </svg>
                                 )}
-                                Sign up
+                                {t("signup.signUp")}
                             </button>
                         </div>
                     </form>

@@ -1,6 +1,7 @@
 import { type ReactElement, useEffect, useState } from "react";
 import { Navigate } from "react-router";
-import axios from "axios";
+import { useTranslation } from "react-i18next";
+import { useAuthState } from "../../store/users.ts";
 
 interface Props {
     children: ReactElement;
@@ -9,12 +10,15 @@ interface Props {
 export default function RequireAuth({ children }: Props) {
     const [loading, setLoading] = useState(true);
     const [ok, setOk] = useState(false);
+    const { t } = useTranslation();
+    const { currentUserData } = useAuthState();
 
     useEffect(() => {
         (async () => {
             try {
-                await axios.get("/api/auth/me");
-                setOk(true);
+                if (currentUserData) {
+                    setOk(true);
+                }
             } catch (err) {
                 setOk(false);
             } finally {
@@ -31,7 +35,7 @@ export default function RequireAuth({ children }: Props) {
             >
                 <div className="Buttons mb-5"></div>
                 <div className="text-center font-extrabold text-xl">
-                    <p>Loading, please wait...</p>
+                    <p>{t("user.loading")}</p>
                 </div>
             </div>
         );

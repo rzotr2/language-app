@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { FlipCardType } from "../../../types";
+import { useTranslation } from "react-i18next";
 
 type FlipCardProps = FlipCardType & { reset: boolean };
 
@@ -12,6 +13,7 @@ export default function FlipCard({
     reset,
 }: FlipCardProps) {
     const [flipped, setFlipped] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         setFlipped(reset);
@@ -35,7 +37,8 @@ export default function FlipCard({
                     <h3 className="text-lg font-bold text-indigo-700">{translation}</h3>
                     <p className="text-sm">{meaning}</p>
                     <p className="text-gray-600 text-sm">
-                        <span className="font-medium">Example:</span> {example}
+                        <span className="font-medium">{t("flipCards.flipCardExample")}</span>{" "}
+                        {example}
                     </p>
                 </div>
             </div>

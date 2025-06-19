@@ -3,6 +3,7 @@ import type { QuizCard } from "../../../types";
 import { PiShootingStarBold } from "react-icons/pi";
 import { QuizCardSlider } from "./QuizCardSlider.tsx";
 import { QuizCardSlide } from "./QuizCardSlide.tsx";
+import { useTranslation } from "react-i18next";
 
 type QuizExerciseProps = {
     quizCards: QuizCard[];
@@ -13,6 +14,7 @@ type QuizExerciseProps = {
 export const QuizExercise = ({ quizCards, generateMore, difficulty }: QuizExerciseProps) => {
     const anchorRef = useRef<HTMLDivElement>(null);
     const [slideNumber, setSlideNumber] = useState<number>(0);
+    const { t } = useTranslation();
 
     const handlePerv = () => {
         setSlideNumber(slideNumber === 0 ? slideNumber : slideNumber - 1);
@@ -31,10 +33,8 @@ export const QuizExercise = ({ quizCards, generateMore, difficulty }: QuizExerci
                 className="bg-gradient-to-r from-blue-600 to-indigo-700 py-2 px-3 sm:py-3 sm:px-6 rounded-t-xl"
                 ref={anchorRef}
             >
-                <h3 className="text-white text-lg sm:text-xl font-bold">Quiz</h3>
-                <p className="text-blue-100 mt-1 text-sm sm:text-lg">
-                    Choose the correct answer from suggested options
-                </p>
+                <h3 className="text-white text-lg sm:text-xl font-bold">{t("quiz.title")}</h3>
+                <p className="text-blue-100 mt-1 text-sm sm:text-lg">{t("quiz.subtitle")}</p>
             </div>
             <div className="bg-gradient-to-r from-blue-800 to-indigo-800 p-2 sm:p-4">
                 <div
@@ -62,7 +62,7 @@ export const QuizExercise = ({ quizCards, generateMore, difficulty }: QuizExerci
                             className="text-gray-900 bg-gray-300 border border-gray-300 focus:outline-none
                                     cursor-not-allowed font-medium rounded-lg text-sm py-1 w-[70px] sm:w-[100px] sm:py-2"
                         >
-                            Previous
+                            {t("quiz.previous")}
                         </button>
                     ) : (
                         <button
@@ -71,12 +71,12 @@ export const QuizExercise = ({ quizCards, generateMore, difficulty }: QuizExerci
                             className="text-gray-900 bg-white border border-gray-300 focus:outline-none cursor-pointer
                             hover:bg-gray-100 font-medium rounded-lg text-sm py-1 w-[70px] sm:w-[100px] sm:py-2"
                         >
-                            Previous
+                            {t("quiz.previous")}
                         </button>
                     )}
                     <div className="text-sm sm:text-md cursor-default">
-                        <span>{"Question" + " "}</span>
-                        <span>{`${slideNumber + 1} of ${quizCards.length}`}</span>
+                        <span>{t("quiz.question") + " "}</span>
+                        <span>{`${slideNumber + 1} ${t("quiz.of")} ${quizCards.length}`}</span>
                     </div>
                     {slideNumber === quizCards.length - 1 ? (
                         <button
@@ -86,7 +86,7 @@ export const QuizExercise = ({ quizCards, generateMore, difficulty }: QuizExerci
                             className="text-gray-900 bg-gray-300 border border-gray-300 focus:outline-none
                                     cursor-not-allowed font-medium rounded-lg text-sm py-1 w-[70px] sm:w-[100px] sm:py-2"
                         >
-                            Next
+                            {t("quiz.next")}
                         </button>
                     ) : (
                         <button
@@ -95,7 +95,7 @@ export const QuizExercise = ({ quizCards, generateMore, difficulty }: QuizExerci
                             className="text-gray-900 bg-white border border-gray-300 focus:outline-none cursor-pointer
                             hover:bg-gray-100 font-medium rounded-lg text-sm py-1 w-[70px] sm:w-[100px] sm:py-2"
                         >
-                            Next
+                            {t("quiz.next")}
                         </button>
                     )}
                 </div>
@@ -108,7 +108,7 @@ export const QuizExercise = ({ quizCards, generateMore, difficulty }: QuizExerci
                              font-medium rounded-lg text-sm px-2 py-1.5 sm:px-4 sm:py-2.5
                             focus:outline-none cursor-pointer flex items-center gap-2 sm:me-3"
                         >
-                            Generate more
+                            {t("quiz.generateMore")}
                             <PiShootingStarBold className="text-[14px]" />
                         </button>
                     </div>
@@ -118,7 +118,7 @@ export const QuizExercise = ({ quizCards, generateMore, difficulty }: QuizExerci
                 <div className="flex justify-between items-center">
                     <div>
                         <span className="text-sm text-gray-500 font-medium">
-                            Difficulty:
+                            {t("quiz.difficulty")}
                             <span className="font-bold">{" " + `${difficulty}`}</span>
                         </span>
                     </div>
@@ -139,7 +139,7 @@ export const QuizExercise = ({ quizCards, generateMore, difficulty }: QuizExerci
                                     clipRule="evenodd"
                                 ></path>
                             </svg>
-                            Reset
+                            {t("quiz.Reset")}
                         </button>
                     </div>
                 </div>

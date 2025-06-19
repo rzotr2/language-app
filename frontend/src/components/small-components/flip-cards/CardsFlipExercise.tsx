@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import type { FlipCardType } from "../../../types";
 import FlipCard from "./FlipCard.tsx";
 import { PiShootingStarBold } from "react-icons/pi";
+import { useTranslation } from "react-i18next";
 
 type CardsFlipProps = {
     generateMore: () => void;
@@ -12,6 +13,7 @@ type CardsFlipProps = {
 export const CardsFlipExercise = ({ flipCards, generateMore, difficulty }: CardsFlipProps) => {
     const anchorRef = useRef<HTMLDivElement>(null);
     const [reset, setReset] = useState<boolean>(false);
+    const { t } = useTranslation();
 
     const handleReset = () => {
         setReset(true);
@@ -27,19 +29,17 @@ export const CardsFlipExercise = ({ flipCards, generateMore, difficulty }: Cards
                 className="bg-gradient-to-r from-blue-600 to-indigo-700 py-2 px-3 sm:py-3 sm:px-6 rounded-t-xl"
                 ref={anchorRef}
             >
-                <h3 className="text-white text-lg sm:text-xl font-bold">Flip cards</h3>
-                <p className="text-blue-100 mt-1 text-sm sm:text-lg">
-                    Translate text into your native language
-                </p>
+                <h3 className="text-white text-lg sm:text-xl font-bold">{t("flipCards.title")}</h3>
+                <p className="text-blue-100 mt-1 text-sm sm:text-lg">{t("flipCards.subtitle")}</p>
             </div>
             <div className="relative flex items-center mt-4 mb-5 mx-4 sm:mx-6 md:mx-8">
                 <div className="w-1 h-12 bg-gradient-to-b from-blue-500 to-indigo-500 rounded-full mr-4"></div>
                 <div>
                     <span className="text-blue-900 font-extrabold text-md sm:text-lg flex items-center gap-2">
-                        Test your memory and learn new words with flashcards.
+                        {t("flipCards.mainInstruction")}
                     </span>
                     <div className="mt-1 text-blue-500 text-xs italic tracking-wide">
-                        Try to recall the answer before flipping each card
+                        {t("flipCards.hint")}
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@ export const CardsFlipExercise = ({ flipCards, generateMore, difficulty }: Cards
                              font-medium rounded-lg text-sm px-2 py-1.5 sm:px-4 sm:py-2.5
                             focus:outline-none cursor-pointer flex items-center gap-2 sm:me-3"
                     >
-                        Generate more
+                        {t("flipCards.generateMore")}
                         <PiShootingStarBold className="text-[14px]" />
                     </button>
                 </div>
@@ -79,7 +79,7 @@ export const CardsFlipExercise = ({ flipCards, generateMore, difficulty }: Cards
                 <div className="flex justify-between items-center">
                     <div>
                         <span className="text-sm text-gray-500 font-medium">
-                            Difficulty:
+                            {t("flipCards.difficulty")}
                             <span className="font-bold">{" " + `${difficulty}`}</span>
                         </span>
                     </div>
@@ -100,7 +100,7 @@ export const CardsFlipExercise = ({ flipCards, generateMore, difficulty }: Cards
                                     clipRule="evenodd"
                                 ></path>
                             </svg>
-                            Reset
+                            {t("flipCards.reset")}
                         </button>
                     </div>
                 </div>

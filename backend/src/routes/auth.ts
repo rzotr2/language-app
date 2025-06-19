@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from "../models/user";
-import { sendUser } from "../services/users";
+import {findUserById, sendUser} from "../services/users";
 
 const router = Router();
 
@@ -33,7 +33,7 @@ router.post("/signup", async (req: Request, res: Response) => {
             maxAge: 1000 * 60 * 60,
         });
 
-        res.status(200).json({id: createdUser._id, email: createdUser.email});
+        res.status(200).json(createdUser);
 
     } catch (error) {
         console.log(error);
@@ -81,7 +81,7 @@ router.post(
     }
 );
 
-router.get('/me', (req: Request, res: Response) => {
+router.get('/me', async (req: Request, res: Response) => {
     const token = req.cookies.token;
     if (!token) {
         res.status(401).json("Token is missing");
@@ -89,11 +89,19 @@ router.get('/me', (req: Request, res: Response) => {
     }
     try {
         const payload = jwt.verify(token, process.env.JWT_SECRET!) as any;
-        res.json({ id: payload.userId, email: payload.email});
+        console.log(payload)
+        const user = await findUserById(payload.userId);
+        if (!user) {
+            res.status(404).json({ message: 'User not found' });
+            return;
+        }
+
+        res.status(200).json(user);
+        return;
     } catch {
         res.status(401).json("Unauthorized. Access denied");
     }
-})
+});
 
 router.get('/logout', (_req: Request, res: Response) => {
     res
