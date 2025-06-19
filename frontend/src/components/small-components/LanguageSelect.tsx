@@ -15,7 +15,6 @@ const languageOptions = [
 
 export const LanguageSelect = () => {
     const [value, setValue] = useState<string | null>(null);
-    const selected = languageOptions.find((lang) => lang.value === value);
 
     const { i18n } = useTranslation();
 
@@ -23,7 +22,7 @@ export const LanguageSelect = () => {
 
     return (
         <Select.Root
-            value={value ?? null}
+            value={value as string | undefined}
             onValueChange={(value) => {
                 setValue(value);
                 i18n.changeLanguage(value);
@@ -31,25 +30,21 @@ export const LanguageSelect = () => {
             }}
         >
             <Select.Trigger>
-                {selected ? (
-                    <span className="flex items-center gap-2">
-                        <span>{selected.emoji}</span>
-                    </span>
+                {value ? (
+                    <span>{languageOptions.find((l) => l.value === value)?.emoji}</span>
                 ) : (
                     <IoLanguageOutline />
                 )}
             </Select.Trigger>
             <Select.Content>
-                {languageOptions.map((lang, index) => {
-                    return (
-                        <Select.Item
-                            key={index}
-                            value={lang.value}
-                        >
-                            {lang.label}
-                        </Select.Item>
-                    );
-                })}
+                {languageOptions.map((lang, index) => (
+                    <Select.Item
+                        key={index}
+                        value={lang.value}
+                    >
+                        {lang.label}
+                    </Select.Item>
+                ))}
             </Select.Content>
         </Select.Root>
     );

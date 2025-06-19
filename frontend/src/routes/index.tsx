@@ -1,13 +1,14 @@
-import HeaderGeneral from "../components/HeaderGeneral.tsx";
+import { createFileRoute } from "@tanstack/react-router";
 import HomePageMain from "../components/HomePageMain.tsx";
-import FooterGeneral from "../components/FooterGeneral.tsx";
+
+export const Route = createFileRoute("/")({
+    component: HomePage,
+});
 
 function HomePage() {
     return (
         <>
-            <HeaderGeneral />
             <HomePageMain />
-            <FooterGeneral />
         </>
     );
 }
