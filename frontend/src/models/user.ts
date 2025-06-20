@@ -8,4 +8,6 @@ export type User = {
     level?: string;
     interests?: string;
     goals?: string;
+    firstName?: string;
+    lastName?: string;
 };

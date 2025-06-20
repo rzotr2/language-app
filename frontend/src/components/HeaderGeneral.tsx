@@ -51,28 +51,31 @@ export default function HeaderGeneral() {
                             <LanguageSelect />
                         </li>
                         <li>
-                            <a
-                                href="#"
+                            <Link
+                                to="/profile"
+                                search={{ page: "about" }}
                                 className="cursor-pointer hover:underline"
                             >
                                 {t("nav.aboutMe")}
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="#"
+                            <Link
+                                to="/profile"
+                                search={{ page: "projects" }}
                                 className="cursor-pointer hover:underline"
                             >
                                 {t("nav.projects")}
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="#"
+                            <Link
+                                to="/profile"
+                                search={{ page: "resume" }}
                                 className="cursor-pointer hover:underline"
                             >
                                 {t("nav.resume")}
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <div className="flex items-center gap-3">
@@ -128,7 +131,7 @@ export default function HeaderGeneral() {
                                                 <DropdownMenuSeparator className="h-[1px] bg-gray-300" />
                                                 <DropdownMenu.Item className={itemClassName}>
                                                     <Link
-                                                        to="/"
+                                                        to="/manage"
                                                         from="/"
                                                         className="px-4 py-2 w-full h-full"
                                                     >
@@ -208,7 +211,7 @@ export default function HeaderGeneral() {
                                     {currentUser && (
                                         <DropdownMenu.Item className={itemClassName}>
                                             <Link
-                                                to="/"
+                                                to="/manage"
                                                 from="/"
                                                 className="px-4 py-2 w-full h-full"
                                             >
@@ -257,29 +260,32 @@ export default function HeaderGeneral() {
                     py-1 text-center w-full rounded-md items-center justify-center"
                 >
                     <li>
-                        <a
-                            href="#"
+                        <Link
+                            to="/profile"
+                            search={{ page: "about" }}
                             className="text-gray-900 hover:underline"
                             aria-current="page"
                         >
                             {t("nav.aboutMe")}
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
-                            href="#"
+                        <Link
+                            to="/profile"
+                            search={{ page: "projects" }}
                             className="text-gray-900 hover:underline"
                         >
                             {t("nav.projects")}
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
-                            href="#"
+                        <Link
+                            to="/profile"
+                            search={{ page: "resume" }}
                             className="text-gray-900 hover:underline"
                         >
                             {t("nav.resume")}
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>

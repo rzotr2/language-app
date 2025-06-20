@@ -86,3 +86,7 @@ export type PexelsResponsePhoto = {
 export type PexelsResponse = {
     photos: PexelsResponsePhoto[];
 };
+
+export type ProfileSearchParams = {
+    page: "about" | "resume" | "projects";
+};

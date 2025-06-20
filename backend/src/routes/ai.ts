@@ -1,12 +1,13 @@
 import {Request, Response, Router} from "express";
 import OpenAI from "openai";
+import { authMiddleware} from "../middlewares/auth";
 
 const router = Router();
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_APIKEY,
 });
 
-router.get('/generate', async (req: Request, res: Response) => {
+router.get('/generate', authMiddleware, async (req: Request, res: Response) => {
     const request = req.query.text;
 
     try {

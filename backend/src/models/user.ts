@@ -35,7 +35,15 @@ const userSchema = new Schema({
     goals: {
         type: String,
         required: false
-    }
+    },
+    firstName: {
+        type: String,
+        required: false
+    },
+    lastName: {
+        type: String,
+        required: false
+    },
 });
 
 const User = model('User', userSchema);

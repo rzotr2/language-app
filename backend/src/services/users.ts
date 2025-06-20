@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import User from "../models/user";
 import bcrypt from "bcrypt";
 import { UserType } from "../types/user";
+import {ObjectId} from "mongodb";
 
 dotenv.config();
 
@@ -29,13 +30,20 @@ export async function findUserById(id: string){
 }
 
 export async function updateUser(user: {
-    id: any;
-    languageToLearn: any;
-    nativeLanguage: any;
-    level: any;
-    interests: any;
-    goals: any
+    id?: string;
+    languageToLearn?: string | null;
+    nativeLanguage?: string | null;
+    level?: string | null;
+    interests?: string | null;
+    goals?: string | null
 }){
     const { id, languageToLearn, nativeLanguage, level, interests, goals } = user;
     return User.findByIdAndUpdate(id, { languageToLearn, nativeLanguage, level, interests, goals }, {new: true});
+}
+
+export async function updatePassword(id: ObjectId, newPassword: string) {
+    const salt = await bcrypt.genSalt(Number(process.env.SALT));
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    return User.findByIdAndUpdate( id, {password: hashedPassword }, {new: true});
 }

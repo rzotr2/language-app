@@ -23,6 +23,10 @@ export const updateUser = async (user: User) => {
     return await axios.post("api/users/update", user).then((res) => res.data);
 };
 
+export const changePassword = (email: string, newPassword: string, oldPassword: string) => {
+    return axios.post("api/auth/changePassword", { email, newPassword, oldPassword });
+};
+
 export const authMe = () => {
     return axios.get("api/auth/me");
 };

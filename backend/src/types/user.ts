@@ -1,3 +1,5 @@
+import { JwtPayload } from "jsonwebtoken";
+
 export type UserType = {
     email: string,
     password: string,
@@ -7,4 +9,14 @@ export type UserType = {
     level?: string,
     interests?: string,
     goals?: string,
+    firstName?: string,
+    lastName?: string,
+}
+
+declare global {
+    namespace Express {
+        interface Request {
+            user?: JwtPayload;
+        }
+    }
 }

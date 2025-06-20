@@ -43,6 +43,7 @@ function SignUpPage() {
         error,
         authSuccess,
         setFieldUser,
+        resetFields,
     } = useUserState();
 
     const handleSignupSubmit = () => {
@@ -65,8 +66,7 @@ function SignUpPage() {
                             setTimeout(() => {
                                 navigate({ to: "/mainPage" });
                                 setFieldUser("authSuccess", false);
-                                setFieldUser("showPassword", false);
-                                setFieldUser("showConfirmPassword", false);
+                                resetFields();
                             }, 1500);
                             errors.signUpEmail = undefined;
                             errors.signUpPassword = undefined;

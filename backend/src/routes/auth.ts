@@ -2,7 +2,8 @@ import { Router, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from "../models/user";
-import {findUserById, sendUser} from "../services/users";
+import {findUserById, sendUser, updatePassword} from "../services/users";
+import {authMiddleware} from "../middlewares/auth";
 
 const router = Router();
 
@@ -100,6 +101,36 @@ router.get('/me', async (req: Request, res: Response) => {
         res.status(401).json("Unauthorized. Access denied");
     }
 });
+
+router.post(
+    '/changePassword', authMiddleware,
+    async (req: Request, res: Response): Promise<void> => {
+        const { email, newPassword, oldPassword } = req.body;
+
+        try {
+            const user = await User.findOne({ email }).exec();
+            if (!user) {
+                res.status(401).send('Wrong data. Please, re-login or sign up');
+                return;
+            }
+
+            const isMatch = await bcrypt.compare(oldPassword, user.password);
+            if (!isMatch) {
+                res.status(401).send('The old password you entered is wrong');
+                return;
+            }
+
+            const updatedUser = await updatePassword(user._id, newPassword);
+
+            console.log(updatedUser)
+
+            res.status(200).json(updatedUser);
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+);
 
 router.get('/logout', (_req: Request, res: Response) => {
     res

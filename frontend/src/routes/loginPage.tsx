@@ -34,7 +34,7 @@ function LoginPage() {
         formState: { errors },
     } = useForm<Inputs>();
 
-    const { showPassword, error, authSuccess, setFieldUser } = useUserState();
+    const { showPassword, error, authSuccess, setFieldUser, resetFields } = useUserState();
     const { setFieldAuth } = useAuthState();
 
     const handleLoginSubmit = async () => {
@@ -53,8 +53,7 @@ function LoginPage() {
                     } else {
                         navigate({ to: "/mainPage", from: "/" });
                     }
-                    setFieldUser("authSuccess", false);
-                    setFieldUser("showPassword", false);
+                    resetFields();
                 }, 1500);
                 errors.email = undefined;
                 errors.password = undefined;

@@ -308,5 +308,125 @@
     "easyDesc": "Simple sentences and basic vocabulary.",
     "mediumDesc": "More complex structures and new words.",
     "hardDesc": "Advanced topics, complex grammar, and expressions."
+  },
+  "about": {
+    "banner": {
+      "name": "Pavlo Lukin",
+      "position": "Junior Front-End Developer"
+    },
+    "greetingTitle": "Welcome to my page!",
+    "tooltip": "I really appreciate that you visited here.",
+    "aboutText": [
+      "I am Pavlo, a Junior Front-End Developer actively growing in the field of modern web technologies. After obtaining a law degree, I decided to change direction and dove into the world of IT.",
+      "My journey began with learning HTML, CSS, and JavaScript. Later, I started building my own projects using React, TypeScript, TailwindCSS, and worked with REST APIs, MongoDB, Node.js, and other modern tools. I value clarity, structure, and minimalism in development, and always strive for high-quality results.",
+      "Although I am only at the beginning of my professional path, I am ready to approach learning new technologies responsibly, actively collaborate in an IT team, participate in real projects, and constantly improve my skills.",
+      "My goal is to grow in Front-End, work in a modern team, create useful products, and never stop progressing."
+    ],
+    "contactButton": "Contact me",
+    "downloadResumeDE": "Download resume in German",
+    "downloadResumeEN": "Download resume in English"
+  },
+  "projects": {
+    "title": "My Projects",
+    "subtitle": "From idea to implementation: my most interesting works in Front-End.",
+    "taskManager": {
+      "title": "Task Manager",
+      "description": "Task Manager — an app for managing tasks with drag & drop, localStorage saving, API integration, and an adaptive minimalist interface built with React, TypeScript, and TailwindCSS."
+    },
+    "weatherApp": {
+      "title": "Weather App",
+      "description": "Weather App — a modern weather application with multilingual support, OpenWeatherMap API integration, custom icons, and a responsive design built with React, TypeScript, and TailwindCSS."
+    },
+    "languageApp": {
+      "title": "Language App",
+      "description": "Language App — a modern SPA for language learning with OpenAI API integration, personalized exercise generation, authentication, data storage in MongoDB, and dynamic navigation built with React, Node.js (Express), and TypeScript."
+    }
+  },
+  "resume": {
+    "profile": {
+      "name": "Pavlo Lukin",
+      "position": "Front-End Developer",
+      "intern": "Intern",
+      "age": "Age:",
+      "ageNumber": "24 years old"
+    },
+    "education": {
+      "title": "EDUCATION",
+      "bachelor": {
+        "degree": "Bachelor of Law",
+        "institution": "Lviv State University of Internal Affairs",
+        "location": "Lviv, Ukraine"
+      },
+      "master": {
+        "degree": "Master of Law",
+        "institution": "Lviv State University of Internal Affairs",
+        "location": "Lviv, Ukraine"
+      }
+    },
+    "skills": {
+      "title": "SKILLS",
+      "list": [
+        "Node.js (basic level)",
+        "API integration"
+      ]
+    },
+    "careerObjective": {
+      "title": "CAREER OBJECTIVE",
+      "text": "I changed my professional field after obtaining a law degree and am highly motivated to develop in IT. After intensive self-directed training in frontend development (React, TypeScript, TailwindCSS) and the implementation of several practical projects, I am seeking a position as an intern or Junior Front-End Developer."
+    },
+    "projects": {
+      "title": "PROJECTS",
+      "taskManager": {
+        "title": "Task Manager",
+        "subtitle": "Development of a modern task management app using React, TypeScript, and TailwindCSS.",
+        "points": [
+          "Drag & drop, localStorage saving, API integration, responsive design",
+          "Deployed on GitHub Pages",
+          "Link to"
+        ]
+      },
+      "weatherApp": {
+        "title": "Weather App",
+        "subtitle": "Development of a modern weather app using React, TypeScript, and TailwindCSS.",
+        "points": [
+          "Weather application built with React, TypeScript, TailwindCSS, and OpenWeatherMap API",
+          "Multilingual support with language switcher",
+          "Deployed on Netlify",
+          "Link to"
+        ]
+      },
+      "languageApp": {
+        "title": "Language App",
+        "subtitle": "Modern language learning application (SPA) built with React, Node.js (Express), and MongoDB.",
+        "points": [
+          "Multilingual support with language switcher",
+          "Integration of the OpenAI API to generate personalized exercises",
+          "User authentication and secure data storage with MongoDB",
+          "TanStack React Router for dynamic navigation and REST API for backend communication",
+          "Link to"
+        ]
+      }
+    },
+    "languages": {
+      "title": "LANGUAGES",
+      "list": [
+        "German: B1 (in progress)",
+        "English: B2",
+        "Ukrainian: native",
+        "Russian: fluent"
+      ]
+    },
+    "strengths": {
+      "title": "PERSONAL STRENGTHS",
+      "list": [
+        "Analytical and logical thinking skills",
+        "High self-motivation and willingness to learn",
+        "Openness to new technologies and modern working methods",
+        "Strong sense of responsibility and self-discipline"
+      ]
+    },
+    "downloadResumeDE": "Download resume in German",
+    "downloadResumeEN": "Download resume in English",
+    "contactButton": "Contact me"
   }
 }

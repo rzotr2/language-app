@@ -13,12 +13,16 @@ export const checkUserAuth = async (pathname?: string) => {
                 auth.setFieldAuth("isAuthenticated", true);
                 return;
             } else {
-                if (pathname === "/workPage" || pathname === "/mainPage") {
+                if (
+                    pathname === "/workPage" ||
+                    pathname === "/mainPage" ||
+                    pathname === "/manage"
+                ) {
                     throw redirect({ to: "/loginPage" });
                 }
             }
         } catch (err) {
-            if (pathname === "/workPage" || pathname === "/mainPage") {
+            if (pathname === "/workPage" || pathname === "/mainPage" || pathname === "/manage") {
                 throw redirect({ to: "/loginPage" });
             }
         }

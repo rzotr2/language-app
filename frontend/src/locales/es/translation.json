@@ -308,5 +308,125 @@
     "easyDesc": "Frases simples y vocabulario básico.",
     "mediumDesc": "Estructuras más complejas y palabras nuevas.",
     "hardDesc": "Temas avanzados, gramática compleja y expresiones."
+  },
+  "about": {
+    "banner": {
+      "name": "Pavlo Lukin",
+      "position": "Junior Front-End Developer"
+    },
+    "greetingTitle": "¡Bienvenido a mi página!",
+    "tooltip": "Aprecio mucho que hayas visitado aquí.",
+    "aboutText": [
+      "Soy Pavlo, Junior Front-End Developer que se desarrolla activamente en el campo de las tecnologías web actuales. Después de obtener un título en derecho, decidí cambiar de rumbo y sumergirme en el mundo de la informática.",
+      "Mi camino comenzó con el aprendizaje de HTML, CSS y JavaScript. Más tarde, empecé a crear mis propios proyectos utilizando React, TypeScript, TailwindCSS, y trabajé con REST API, MongoDB, Node.js y otras herramientas modernas. Valoro la claridad, la estructura y el minimalismo en el desarrollo, y siempre busco un resultado de alta calidad.",
+      "Aunque solo estoy al principio de mi carrera profesional, estoy listo para aprender nuevas tecnologías de manera responsable, colaborar activamente en un equipo de TI, participar en proyectos reales y mejorar constantemente mis habilidades.",
+      "Mi objetivo es desarrollarme en Front-End, trabajar en un equipo moderno, crear productos útiles y no detenerme en lo logrado."
+    ],
+    "contactButton": "Contactar conmigo",
+    "downloadResumeDE": "Descargar CV en alemán",
+    "downloadResumeEN": "Descargar CV en inglés"
+  },
+  "projects": {
+    "title": "Mis proyectos",
+    "subtitle": "De la idea a la realización: mis trabajos más interesantes en Front-End.",
+    "taskManager": {
+      "title": "Task Manager",
+      "description": "Task Manager — una aplicación para la gestión de tareas con drag & drop, almacenamiento en localStorage, integración de API y una interfaz minimalista y adaptable en React, TypeScript y TailwindCSS."
+    },
+    "weatherApp": {
+      "title": "Weather App",
+      "description": "Weather App — una aplicación del tiempo con soporte multilingüe, integración de OpenWeatherMap API, iconos personalizados y diseño adaptable en React, TypeScript y TailwindCSS."
+    },
+    "languageApp": {
+      "title": "Language App",
+      "description": "Language App — SPA para el aprendizaje de idiomas con integración de OpenAI API, generación de ejercicios personalizados, autenticación, almacenamiento de datos en MongoDB y navegación dinámica en React, Node.js (Express) y TypeScript."
+    }
+  },
+  "resume": {
+    "profile": {
+      "name": "Pavlo Lukin",
+      "position": "Front-End Developer",
+      "intern": "Practicante",
+      "age": "Edad:",
+      "ageNumber": "24 años"
+    },
+    "education": {
+      "title": "EDUCACIÓN",
+      "bachelor": {
+        "degree": "Licenciatura en Derecho",
+        "institution": "Universidad Estatal de Asuntos Internos de Leópolis",
+        "location": "Leópolis, Ucrania"
+      },
+      "master": {
+        "degree": "Máster en Derecho",
+        "institution": "Universidad Estatal de Asuntos Internos de Leópolis",
+        "location": "Leópolis, Ucrania"
+      }
+    },
+    "skills": {
+      "title": "HABILIDADES",
+      "list": [
+        "Node.js (nivel básico)",
+        "Integración de API"
+      ]
+    },
+    "careerObjective": {
+      "title": "OBJETIVO PROFESIONAL",
+      "text": "Cambié de campo profesional después de obtener un título en derecho y tengo una gran motivación para desarrollarme en IT. Tras una formación autodidacta intensiva en frontend (React, TypeScript, TailwindCSS) y la realización de varios proyectos prácticos, busco un puesto de practicante o Junior Front-End Developer."
+    },
+    "projects": {
+      "title": "PROYECTOS",
+      "taskManager": {
+        "title": "Task Manager",
+        "subtitle": "Desarrollo de una aplicación para la gestión de tareas en React, TypeScript y TailwindCSS.",
+        "points": [
+          "Drag & drop, almacenamiento en localStorage, integración de API, diseño adaptable",
+          "Desplegado en GitHub Pages",
+          "Enlace a"
+        ]
+      },
+      "weatherApp": {
+        "title": "Weather App",
+        "subtitle": "Desarrollo de una aplicación del tiempo en React, TypeScript y TailwindCSS.",
+        "points": [
+          "Aplicación del tiempo con React, TypeScript, TailwindCSS y OpenWeatherMap API",
+          "Soporte multilingüe con selector de idioma",
+          "Desplegado en Netlify",
+          "Enlace a"
+        ]
+      },
+      "languageApp": {
+        "title": "Language App",
+        "subtitle": "Aplicación para el aprendizaje de idiomas (SPA) en React, Node.js (Express) y MongoDB.",
+        "points": [
+          "Soporte multilingüe con selector de idioma",
+          "Integración de OpenAI API para generar ejercicios personalizados",
+          "Autenticación de usuario y almacenamiento seguro de datos en MongoDB",
+          "Tanstack React Router para navegación dinámica y REST API para el backend",
+          "Enlace a"
+        ]
+      }
+    },
+    "languages": {
+      "title": "IDIOMAS",
+      "list": [
+        "Alemán: B1 (en progreso)",
+        "Inglés: B2",
+        "Ucraniano: nativo",
+        "Ruso: fluido"
+      ]
+    },
+    "strengths": {
+      "title": "FORTALEZAS PERSONALES",
+      "list": [
+        "Pensamiento analítico y lógico",
+        "Alta automotivación y deseo de aprender",
+        "Apertura a nuevas tecnologías y métodos de trabajo modernos",
+        "Alto sentido de responsabilidad y autodisciplina"
+      ]
+    },
+    "downloadResumeDE": "Descargar CV en alemán",
+    "downloadResumeEN": "Descargar CV en inglés",
+    "contactButton": "Contactar conmigo"
   }
 }

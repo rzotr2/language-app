@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkPageRouteImport } from './routes/workPage'
 import { Route as SignUpPageRouteImport } from './routes/signUpPage'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ManageRouteImport } from './routes/manage'
 import { Route as MainPageRouteImport } from './routes/mainPage'
 import { Route as LoginPageRouteImport } from './routes/loginPage'
 import { Route as IndexRouteImport } from './routes/index'
@@ -23,6 +25,16 @@ const WorkPageRoute = WorkPageRouteImport.update({
 const SignUpPageRoute = SignUpPageRouteImport.update({
   id: '/signUpPage',
   path: '/signUpPage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManageRoute = ManageRouteImport.update({
+  id: '/manage',
+  path: '/manage',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MainPageRoute = MainPageRouteImport.update({
@@ -45,6 +57,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/loginPage': typeof LoginPageRoute
   '/mainPage': typeof MainPageRoute
+  '/manage': typeof ManageRoute
+  '/profile': typeof ProfileRoute
   '/signUpPage': typeof SignUpPageRoute
   '/workPage': typeof WorkPageRoute
 }
@@ -52,6 +66,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/loginPage': typeof LoginPageRoute
   '/mainPage': typeof MainPageRoute
+  '/manage': typeof ManageRoute
+  '/profile': typeof ProfileRoute
   '/signUpPage': typeof SignUpPageRoute
   '/workPage': typeof WorkPageRoute
 }
@@ -60,19 +76,37 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/loginPage': typeof LoginPageRoute
   '/mainPage': typeof MainPageRoute
+  '/manage': typeof ManageRoute
+  '/profile': typeof ProfileRoute
   '/signUpPage': typeof SignUpPageRoute
   '/workPage': typeof WorkPageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/loginPage' | '/mainPage' | '/signUpPage' | '/workPage'
+  fullPaths:
+    | '/'
+    | '/loginPage'
+    | '/mainPage'
+    | '/manage'
+    | '/profile'
+    | '/signUpPage'
+    | '/workPage'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/loginPage' | '/mainPage' | '/signUpPage' | '/workPage'
+  to:
+    | '/'
+    | '/loginPage'
+    | '/mainPage'
+    | '/manage'
+    | '/profile'
+    | '/signUpPage'
+    | '/workPage'
   id:
     | '__root__'
     | '/'
     | '/loginPage'
     | '/mainPage'
+    | '/manage'
+    | '/profile'
     | '/signUpPage'
     | '/workPage'
   fileRoutesById: FileRoutesById
@@ -81,6 +115,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginPageRoute: typeof LoginPageRoute
   MainPageRoute: typeof MainPageRoute
+  ManageRoute: typeof ManageRoute
+  ProfileRoute: typeof ProfileRoute
   SignUpPageRoute: typeof SignUpPageRoute
   WorkPageRoute: typeof WorkPageRoute
 }
@@ -99,6 +135,20 @@ declare module '@tanstack/react-router' {
       path: '/signUpPage'
       fullPath: '/signUpPage'
       preLoaderRoute: typeof SignUpPageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manage': {
+      id: '/manage'
+      path: '/manage'
+      fullPath: '/manage'
+      preLoaderRoute: typeof ManageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mainPage': {
@@ -129,6 +179,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginPageRoute: LoginPageRoute,
   MainPageRoute: MainPageRoute,
+  ManageRoute: ManageRoute,
+  ProfileRoute: ProfileRoute,
   SignUpPageRoute: SignUpPageRoute,
   WorkPageRoute: WorkPageRoute,
 }

@@ -25,15 +25,21 @@ export const CustomTooltip = ({ type, text }: CustomTooltipProps) => {
                         maxWidth="300px"
                         className="space-y-2"
                     >
-                        <p className="text-sm">
-                            {t("tooltip.information.firstPart")}
-                            <span className="font-bold">{`\n ${t("tooltip.information.or")} \n`}</span>
-                            {t("tooltip.information.secondPart")}
-                        </p>
-                        <p className="text-sm">
-                            {t("tooltip.information.additionalField")}
-                            <span className="font-bold">{`\n ${t("tooltip.information.priority")}`}</span>
-                        </p>
+                        {!text ? (
+                            <div>
+                                <p className="text-sm">
+                                    {t("tooltip.information.firstPart")}
+                                    <span className="font-bold">{`\n ${t("tooltip.information.or")} \n`}</span>
+                                    {t("tooltip.information.secondPart")}
+                                </p>
+                                <p className="text-sm">
+                                    {t("tooltip.information.additionalField")}
+                                    <span className="font-bold">{`\n ${t("tooltip.information.priority")}`}</span>
+                                </p>
+                            </div>
+                        ) : (
+                            <p>{text}</p>
+                        )}
                     </Popover.Content>
                 </Popover.Root>
             ) : (
