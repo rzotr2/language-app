@@ -29,12 +29,12 @@
       "description": "Übe mit personalisierten Übungen, die von künstlicher Intelligenz generiert werden."
     },
     "features": {
-      "improveSkillsTitle": "Verbessere deine Fähigkeiten",
-      "improveSkillsText": "Verbessere dein Lese- und Hörverständnis mit interaktiven Aufgaben",
-      "sharpenKnowledgeTitle": "Schärfe dein Wissen",
-      "sharpenKnowledgeText": "Vertiefe Grammatik und Wortschatz mit KI-Herausforderungen",
-      "practiceConversationTitle": "Konversation üben",
-      "practiceConversationText": "Führe realistische Dialoge, um deine Sprechfertigkeit zu verbessern"
+      "improveSkillsTitle": "📖 Verbessere deine Fähigkeiten",
+      "improveSkillsText": "Verbessere dein Lese- und Hörverständnis mit interaktiven Aufgaben.",
+      "sharpenKnowledgeTitle": "🧠 Schärfe dein Wissen",
+      "sharpenKnowledgeText": "Vertiefe Grammatik und Wortschatz mit KI-Herausforderungen.",
+      "extendVocabularyTitle": "💬 Erweitere deinen Wortschatz",
+      "extendVocabularyText": "Lerne neue Wörter und Ausdrücke im Kontext, um sicher über verschiedene Themen zu kommunizieren."
     },
     "readyTitle": "Bereit, deine Reise zu beginnen?",
     "getStarted": "Loslegen"
@@ -427,5 +427,64 @@
     "downloadResumeDE": "Lebenslauf auf Deutsch herunterladen",
     "downloadResumeEN": "Lebenslauf auf Englisch herunterladen",
     "contactButton": "Kontakt aufnehmen"
+  },
+  "account": {
+    "changesApplied": "Änderungen wurden erfolgreich übernommen",
+    "password": {
+      "minLength": "Ihr Passwort muss mindestens 8 Zeichen lang sein",
+      "success": "Passwort erfolgreich geändert",
+      "enterBoth": "Bitte geben Sie sowohl Ihr altes als auch Ihr neues Passwort ein",
+      "unknownError": "Unbekannter Fehler"
+    }
+  },
+  "accountManage": {
+    "title": "Kontoverwaltung",
+    "subtitle": "Richten Sie Ihr Profil für das Sprachenlernen ein",
+    "form": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "yourCurrentEmail": "Ihre aktuelle E-Mail",
+      "newEmail": "Neue E-Mail",
+      "changePassword": "Passwort ändern",
+      "oldPassword": "Altes Passwort",
+      "newPassword": "Neues Passwort",
+      "submit": "Änderungen speichern",
+      "success": "Änderungen wurden erfolgreich übernommen",
+      "interests": "Ihre Interessen:",
+      "interestsPlaceholder": "Reisen, Musik, Filme, Technologie",
+      "interestsHint": "Geben Sie Ihre Interessen an, damit wir passende Lernmaterialien für Sie auswählen können",
+      "goals": "Lernziele:",
+      "goalsPlaceholder": "Ich möchte auf Reisen fließend sprechen und technische Literatur im Original lesen",
+      "goalsHint": "Beschreiben Sie, warum Sie die Sprache lernen und was Sie erreichen möchten"
+    },
+    "level": {
+      "title": "Niveau der Sprache, die Sie lernen:",
+      "A1": {
+        "label": "A1",
+        "desc": "Anfänger"
+      },
+      "A2": {
+        "label": "A2",
+        "desc": "Elementar"
+      },
+      "B1": {
+        "label": "B1",
+        "desc": "Mittelstufe"
+      },
+      "B2": {
+        "label": "B2",
+        "desc": "Obere Mittelstufe"
+      },
+      "C1": {
+        "label": "C1",
+        "desc": "Fortgeschritten"
+      },
+      "C2": {
+        "label": "C2",
+        "desc": "Kompetent"
+      }
+    },
+    "iSpeak": "Ich spreche:",
+    "iWantToLearn": "Ich möchte lernen:"
   }
 }

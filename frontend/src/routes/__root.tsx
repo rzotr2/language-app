@@ -24,7 +24,10 @@ export function Root() {
         location.pathname === "/loginPage" || location.pathname === "/signUpPage";
 
     useEffect(() => {
-        if (currentUser?.nativeLanguage) {
+        const currentLanguage = localStorage?.getItem("currentLanguage");
+        if (currentLanguage) {
+            i18n.changeLanguage(currentLanguage);
+        } else if (currentUser) {
             i18n.changeLanguage(currentUser.nativeLanguage);
         }
     }, [currentUser, i18n]);

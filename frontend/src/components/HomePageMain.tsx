@@ -1,11 +1,11 @@
 import languages from "../assets/languages.webp";
 import { BiTask } from "react-icons/bi";
 import { LuBrainCircuit } from "react-icons/lu";
-import { FiMessageSquare } from "react-icons/fi";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAuthState } from "../../store/auth.ts";
+import { LuNotebookPen } from "react-icons/lu";
 
 function HomePageMain() {
     const [currentUserLanguage, setCurrentUserLanguage] = useState<string | null>(null);
@@ -108,7 +108,7 @@ function HomePageMain() {
             <section className="mt-2 py-4 md:py-10 px-5 text-center">
                 <div
                     className="container mx-auto flex flex-col items-center md:flex-row justify-center
-                        flex-wrap md:flex-nowrap"
+                        flex-wrap md:flex-nowrap gap-5 md:gap-1"
                 >
                     <div className="w-2/3 md:w-2/6 flex items-center flex-col">
                         <BiTask className="text-7xl mb-1 md:mb-3" />
@@ -131,13 +131,13 @@ function HomePageMain() {
                         </div>
                     </div>
                     <div className="w-2/3 md:w-2/6 flex items-center flex-col">
-                        <FiMessageSquare className="text-7xl mb-1 md:mb-3" />
+                        <LuNotebookPen className="text-7xl mb-1 md:mb-3" />
                         <div className="flex flex-col items-center">
                             <p className="font-semibold">
-                                {t("homepage.features.practiceConversationTitle")}
+                                {t("homepage.features.extendVocabularyTitle")}
                             </p>
                             <p className="md:w-4/5">
-                                {t("homepage.features.practiceConversationText")}
+                                {t("homepage.features.extendVocabularyText")}
                             </p>
                         </div>
                     </div>

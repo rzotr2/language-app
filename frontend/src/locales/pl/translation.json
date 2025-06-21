@@ -29,12 +29,12 @@
       "description": "Ćwicz dzięki spersonalizowanym ćwiczeniom generowanym przez sztuczną inteligencję."
     },
     "features": {
-      "improveSkillsTitle": "Popraw swoje umiejętności",
-      "improveSkillsText": "Popraw czytanie i słuchanie dzięki interaktywnym zadaniom",
-      "sharpenKnowledgeTitle": "Pogłębiaj wiedzę",
-      "sharpenKnowledgeText": "Pogłębiaj gramatykę i słownictwo dzięki wyzwaniom AI",
-      "practiceConversationTitle": "Ćwicz konwersację",
-      "practiceConversationText": "Prowadź realistyczne dialogi, aby poprawić płynność mówienia"
+      "improveSkillsTitle": "📖 Popraw swoje umiejętności",
+      "improveSkillsText": "Popraw czytanie i słuchanie dzięki interaktywnym zadaniom.",
+      "sharpenKnowledgeTitle": "🧠 Pogłębiaj wiedzę",
+      "sharpenKnowledgeText": "Pogłębiaj gramatykę i słownictwo dzięki wyzwaniom AI.",
+      "extendVocabularyTitle": "💬 Poszerzaj słownictwo",
+      "extendVocabularyText": "Ucz się nowych słów i zwrotów w kontekście, aby pewnie rozmawiać na różne tematy."
     },
     "readyTitle": "Gotowy, aby rozpocząć swoją podróż?",
     "getStarted": "Zacznij"
@@ -428,5 +428,64 @@
     "downloadResumeDE": "Pobierz CV po niemiecku",
     "downloadResumeEN": "Pobierz CV po angielsku",
     "contactButton": "Napisz do mnie"
+  },
+  "account": {
+    "changesApplied": "Zmiany zostały pomyślnie zastosowane",
+    "password": {
+      "minLength": "Twoje hasło musi mieć co najmniej 8 znaków",
+      "success": "Hasło zostało pomyślnie zmienione",
+      "enterBoth": "Wprowadź stare i nowe hasło",
+      "unknownError": "Nieznany błąd"
+    }
+  },
+  "accountManage": {
+    "title": "Zarządzanie kontem",
+    "subtitle": "Skonfiguruj swój profil do nauki języka",
+    "form": {
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "yourCurrentEmail": "Twój aktualny e-mail",
+      "newEmail": "Nowy e-mail",
+      "changePassword": "Zmień hasło",
+      "oldPassword": "Stare hasło",
+      "newPassword": "Nowe hasło",
+      "submit": "Zapisz zmiany",
+      "success": "Zmiany zostały pomyślnie zastosowane",
+      "interests": "Twoje zainteresowania:",
+      "interestsPlaceholder": "Podróże, muzyka, kino, technologia",
+      "interestsHint": "Podaj swoje zainteresowania, abyśmy mogli dobrać odpowiednie materiały do nauki",
+      "goals": "Cele nauki:",
+      "goalsPlaceholder": "Chcę swobodnie rozmawiać podczas podróży i czytać literaturę techniczną w oryginale",
+      "goalsHint": "Opisz, dlaczego uczysz się języka i co chcesz osiągnąć"
+    },
+    "level": {
+      "title": "Poziom języka, którego się uczysz:",
+      "A1": {
+        "label": "A1",
+        "desc": "Początkujący"
+      },
+      "A2": {
+        "label": "A2",
+        "desc": "Podstawowy"
+      },
+      "B1": {
+        "label": "B1",
+        "desc": "Średni"
+      },
+      "B2": {
+        "label": "B2",
+        "desc": "Wyższy średni"
+      },
+      "C1": {
+        "label": "C1",
+        "desc": "Zaawansowany"
+      },
+      "C2": {
+        "label": "C2",
+        "desc": "Biegły"
+      }
+    },
+    "iSpeak": "Mówię:",
+    "iWantToLearn": "Chcę się uczyć:"
   }
 }

@@ -80,7 +80,7 @@ export default function HeaderGeneral() {
                         <li>
                             <div className="flex items-center gap-3">
                                 {currentUser ? (
-                                    <DropdownMenu.Root>
+                                    <DropdownMenu.Root modal={false}>
                                         <DropdownMenu.Trigger
                                             className="focus:outline-0 flex gap-2 px-2 items-center text-gray-900 rounded-full
                                                                     hover:text-blue-600 md:me-0 ring-4 ring-gray-100 cursor-pointer"
@@ -108,8 +108,10 @@ export default function HeaderGeneral() {
                                         </DropdownMenu.Trigger>
                                         <DropdownMenu.Portal>
                                             <DropdownMenu.Content
+                                                collisionPadding={10}
+                                                hideWhenDetached={true}
                                                 className="z-50 min-w-[12rem] overflow-hidden rounded-lg bg-white shadow-md
-                                                        border-gray-300 border-[0.1px] me-1"
+                                                        border-gray-300 border-[0.1px]"
                                                 align="center"
                                                 sideOffset={12}
                                             >
@@ -117,13 +119,13 @@ export default function HeaderGeneral() {
                                                     className={itemClassName}
                                                     disabled={true}
                                                 >
-                                                    <div className="flex items-center mx-auto">
+                                                    <div className="flex items-center mx-auto px-4 py-2 gap-3">
                                                         <img
                                                             src={userLogo}
                                                             alt="user logo"
                                                             className="h-6"
                                                         />
-                                                        <span className="text-sm font-bold px-4 py-2 w-full h-full cursor-">
+                                                        <span className="text-sm font-bold w-full h-full">
                                                             {currentUser.email}
                                                         </span>
                                                     </div>
@@ -136,15 +138,6 @@ export default function HeaderGeneral() {
                                                         className="px-4 py-2 w-full h-full"
                                                     >
                                                         {t("nav.manageAccount")}
-                                                    </Link>
-                                                </DropdownMenu.Item>
-                                                <DropdownMenu.Item className={itemClassName}>
-                                                    <Link
-                                                        to="/"
-                                                        from="/"
-                                                        className="px-4 py-2 w-full h-full"
-                                                    >
-                                                        {t("nav.feedback")}
                                                     </Link>
                                                 </DropdownMenu.Item>
                                                 <DropdownMenu.Item className={itemClassName}>
@@ -172,7 +165,7 @@ export default function HeaderGeneral() {
                         </li>
                     </ul>
                     <div className="md:hidden">
-                        <DropdownMenu.Root>
+                        <DropdownMenu.Root modal={false}>
                             <DropdownMenu.Trigger
                                 className="focus:outline-0 flex gap-2 items-center text-gray-900 rounded-full
                                 hover:text-blue-600 md:me-0"
@@ -183,8 +176,9 @@ export default function HeaderGeneral() {
                             </DropdownMenu.Trigger>
                             <DropdownMenu.Portal>
                                 <DropdownMenu.Content
+                                    collisionPadding={10}
                                     className="z-50 min-w-[12rem] overflow-hidden rounded-lg bg-white shadow-md
-                                        border-gray-300 border-[0.1px] me-1"
+                                        border-gray-300 border-[0.1px]"
                                     align="start"
                                     sideOffset={12}
                                 >
@@ -194,13 +188,13 @@ export default function HeaderGeneral() {
                                                 className={itemClassName}
                                                 disabled={true}
                                             >
-                                                <div className="flex items-center mx-auto">
+                                                <div className="flex items-center mx-auto px-4 py-2 gap-3">
                                                     <img
                                                         src={userLogo}
                                                         alt="user logo"
                                                         className="h-6"
                                                     />
-                                                    <span className="text-sm font-bold px-4 py-2 w-full h-full cursor-">
+                                                    <span className="text-sm font-bold w-full h-full">
                                                         {currentUser.email}
                                                     </span>
                                                 </div>
@@ -219,15 +213,6 @@ export default function HeaderGeneral() {
                                             </Link>
                                         </DropdownMenu.Item>
                                     )}
-                                    <DropdownMenu.Item className={itemClassName}>
-                                        <Link
-                                            to="/"
-                                            from="/"
-                                            className="px-4 py-2 w-full h-full"
-                                        >
-                                            {t("nav.feedback")}
-                                        </Link>
-                                    </DropdownMenu.Item>
                                     <DropdownMenu.Item
                                         className={itemClassName}
                                         asChild

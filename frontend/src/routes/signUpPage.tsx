@@ -278,7 +278,7 @@ function SignUpPage() {
                             <button
                                 type="submit"
                                 className="text-white bg-blue-700 hover:bg-blue-800
-                                                        focus:outline-none font-medium rounded-lg text-sm w-[130px]
+                                                        focus:outline-none font-medium rounded-lg text-sm
                                                         px-5 py-2.5 text-center flex gap-3 justify-center items-center"
                             >
                                 {authSuccess && (

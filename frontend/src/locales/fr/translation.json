@@ -29,12 +29,12 @@
       "description": "Entraînez-vous avec des exercices personnalisés générés par l'intelligence artificielle."
     },
     "features": {
-      "improveSkillsTitle": "Améliorez vos compétences",
-      "improveSkillsText": "Améliorez votre compréhension orale et écrite avec des exercices interactifs",
-      "sharpenKnowledgeTitle": "Affinez vos connaissances",
-      "sharpenKnowledgeText": "Approfondissez la grammaire et le vocabulaire avec des défis IA",
-      "practiceConversationTitle": "Pratiquez la conversation",
-      "practiceConversationText": "Participez à des dialogues réalistes pour améliorer votre aisance à l'oral"
+      "improveSkillsTitle": "📖 Améliorez vos compétences",
+      "improveSkillsText": "Améliorez votre compréhension écrite et orale avec des exercices interactifs.",
+      "sharpenKnowledgeTitle": "🧠 Approfondissez vos connaissances",
+      "sharpenKnowledgeText": "Approfondissez la grammaire et le vocabulaire avec des défis IA.",
+      "extendVocabularyTitle": "💬 Enrichissez votre vocabulaire",
+      "extendVocabularyText": "Apprenez de nouveaux mots et expressions en contexte pour communiquer avec confiance sur divers sujets."
     },
     "readyTitle": "Prêt à commencer votre aventure ?",
     "getStarted": "Commencer"
@@ -428,5 +428,64 @@
     "downloadResumeDE": "Télécharger le CV en allemand",
     "downloadResumeEN": "Télécharger le CV en anglais",
     "contactButton": "Me contacter"
+  },
+  "account": {
+    "changesApplied": "Les modifications ont été appliquées avec succès",
+    "password": {
+      "minLength": "Votre mot de passe doit comporter au moins 8 caractères",
+      "success": "Mot de passe changé avec succès",
+      "enterBoth": "Veuillez saisir l'ancien et le nouveau mot de passe",
+      "unknownError": "Erreur inconnue"
+    }
+  },
+  "accountManage": {
+    "title": "Gestion du compte",
+    "subtitle": "Configurez votre profil pour l'apprentissage des langues",
+    "form": {
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "yourCurrentEmail": "Votre e-mail actuel",
+      "newEmail": "Nouvel e-mail",
+      "changePassword": "Changer le mot de passe",
+      "oldPassword": "Ancien mot de passe",
+      "newPassword": "Nouveau mot de passe",
+      "submit": "Enregistrer les modifications",
+      "success": "Les modifications ont été appliquées avec succès",
+      "interests": "Vos centres d'intérêt :",
+      "interestsPlaceholder": "Voyages, musique, cinéma, technologie",
+      "interestsHint": "Indiquez vos centres d'intérêt afin que nous puissions sélectionner des supports d'apprentissage adaptés",
+      "goals": "Objectifs d'apprentissage :",
+      "goalsPlaceholder": "Je veux parler couramment lors de mes voyages et lire de la littérature technique en version originale",
+      "goalsHint": "Décrivez pourquoi vous apprenez la langue et ce que vous souhaitez accomplir"
+    },
+    "level": {
+      "title": "Niveau de la langue que vous apprenez :",
+      "A1": {
+        "label": "A1",
+        "desc": "Débutant"
+      },
+      "A2": {
+        "label": "A2",
+        "desc": "Élémentaire"
+      },
+      "B1": {
+        "label": "B1",
+        "desc": "Intermédiaire"
+      },
+      "B2": {
+        "label": "B2",
+        "desc": "Intermédiaire supérieur"
+      },
+      "C1": {
+        "label": "C1",
+        "desc": "Avancé"
+      },
+      "C2": {
+        "label": "C2",
+        "desc": "Maîtrise"
+      }
+    },
+    "iSpeak": "Je parle :",
+    "iWantToLearn": "Je veux apprendre :"
   }
 }

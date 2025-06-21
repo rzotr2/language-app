@@ -57,9 +57,11 @@ export const AboutPage = () => {
                         </div>
                         <ul className="space-y-5">
                             <li className="flex items-center gap-5 justify-between">
-                                <p className="font-semibold">{t("about.downloadResumeDE")}</p>
+                                <p className="font-semibold">
+                                    {t("about.downloadResumeDE") + " " + "(.pdf)"}
+                                </p>
                                 <a
-                                    href="../../assets/Lebenslauf%20Pavlo%20Lukin.pdf"
+                                    href="../../../public/Lebenslauf%20Pavlo%20Lukin.pdf"
                                     download
                                     className="border-2 border-indigo-600 text-indigo-600 px-3 py-1 md:px-6 md:py-2
                                     rounded-lg font-semibold hover:bg-indigo-50 transition"
@@ -68,9 +70,11 @@ export const AboutPage = () => {
                                 </a>
                             </li>
                             <li className="flex items-center gap-5 justify-between">
-                                <p className="font-semibold">{t("about.downloadResumeEN")}</p>
+                                <p className="font-semibold">
+                                    {t("about.downloadResumeEN") + " " + "(.pdf)"}
+                                </p>
                                 <a
-                                    href="../../assets/Lebenslauf%20Pavlo%20Lukin%20EN.pdf"
+                                    href="../../../public/Lebenslauf%20Pavlo%20Lukin%20EN.pdf"
                                     download
                                     className="border-2 border-indigo-600 text-indigo-600 px-3 py-1 md:px-6 md:py-2
                                     rounded-lg font-semibold hover:bg-indigo-50 transition"

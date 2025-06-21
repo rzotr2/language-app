@@ -50,6 +50,7 @@ function Manage() {
     const [oldPasswordToUpdate, setOldPasswordToUpdate] = useState<string | null>(null);
     const [changePasswordError, setChangePasswordError] = useState<string | null>(null);
     const [changePasswordSuccess, setChangePasswordSuccess] = useState<string | null>(null);
+    const [formSubmitSuccess, setFormSubmitSuccess] = useState<string | null>(null);
     const [collapsibleOpened, setCollapsibleOpened] = useState(false);
     const [updatedNativeLanguage, setUpdatedNativeLanguage] = useState(
         currentUserData?.nativeLanguage,
@@ -86,6 +87,7 @@ function Manage() {
                 };
                 const responseUpdatedUser = await updateUser(updatedUser);
                 setFieldAuth("currentUser", responseUpdatedUser);
+                setFormSubmitSuccess(t("account.changesApplied"));
                 setCurrentUserData(responseUpdatedUser);
             }
         }
@@ -105,25 +107,25 @@ function Manage() {
                     if (newPasswordToUpdate && oldPasswordToUpdate) {
                         if (newPasswordToUpdate.length < 8) {
                             console.log(newPasswordToUpdate.length);
-                            setChangePasswordError("Your password must have at least 8 characters");
+                            setChangePasswordError(t("account.password.minLength"));
                         } else {
                             await changePassword(
                                 existingUser.email,
                                 newPasswordToUpdate,
                                 oldPasswordToUpdate,
                             );
-                            setChangePasswordSuccess("Successfully changed password");
+                            setChangePasswordSuccess(t("account.password.success"));
                             setNewPasswordToUpdate(null);
                             setOldPasswordToUpdate(null);
                         }
                     } else {
-                        setChangePasswordError("You should enter your old and new passwords");
+                        setChangePasswordError(t("account.password.enterBoth"));
                     }
                 } catch (err) {
                     if (axios.isAxiosError(err) && err.response) {
                         setChangePasswordError(err.response.data);
                     } else {
-                        setChangePasswordError("Unknown error");
+                        setChangePasswordError(t("account.password.unknownError"));
                     }
                 }
             }
@@ -137,10 +139,10 @@ function Manage() {
                 to-indigo-600 shadow-lg px-5 md:px-7 py-3 md:py-5 text-white flex flex-col items-start"
             >
                 <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-1">
-                    Керування обліковим записом
+                    {t("accountManage.title")}
                 </h2>
                 <p className="text-md sm:text-lg md:text-2xl font-normal opacity-90">
-                    Налаштуйте свій профіль для вивчення мови
+                    {t("accountManage.subtitle")}
                 </p>
             </div>
             <form onSubmit={handleUpdateSubmit}>
@@ -150,7 +152,7 @@ function Manage() {
                             htmlFor="first_name"
                             className="block mb-2 text-sm font-medium text-gray-900 "
                         >
-                            First name
+                            {t("accountManage.form.firstName")}
                         </label>
                         <input
                             type="text"
@@ -165,7 +167,7 @@ function Manage() {
                             htmlFor="first_name"
                             className="block mb-2 text-sm font-medium text-gray-900"
                         >
-                            Last name
+                            {t("accountManage.form.lastName")}
                         </label>
                         <input
                             onInput={(event) => setUpdatedLastName(event.currentTarget.value)}
@@ -182,7 +184,7 @@ function Manage() {
                             htmlFor="first_name"
                             className="block mb-2 text-sm font-medium text-gray-900 "
                         >
-                            Your current email
+                            {t("accountManage.form.yourCurrentEmail")}
                         </label>
                         <input
                             type="email"
@@ -199,14 +201,14 @@ function Manage() {
                             htmlFor="first_name"
                             className="block mb-2 text-sm font-medium text-gray-900 "
                         >
-                            New email
+                            {t("accountManage.form.newEmail")}
                         </label>
                         <input
                             type="email"
                             id="first_name"
                             onInput={(event) => setEmailToUpdate(event.currentTarget.value)}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                            placeholder={currentUserData?.email || "email"}
+                            placeholder={"Email"}
                         />
                     </div>
                 </div>
@@ -217,7 +219,7 @@ function Manage() {
                             className="bg-red-500 text-white px-3 py-1.5 cursor-pointer rounded-t-md gap-3
                             flex items-center justify-end font-medium hover:bg-red-400 transition-colors"
                         >
-                            Змінити пароль
+                            {t("accountManage.form.changePassword")}
                             {collapsibleOpened ? (
                                 <FaChevronUp className="text-base" />
                             ) : (
@@ -236,7 +238,7 @@ function Manage() {
                                         htmlFor="first_name"
                                         className="block mb-2 text-sm font-medium text-gray-900"
                                     >
-                                        Old password
+                                        {t("accountManage.form.oldPassword")}
                                     </label>
                                     <div className="bg-gray-50 border border-gray-300 items-center rounded-lg w-full flex justify-between">
                                         <input
@@ -268,7 +270,7 @@ function Manage() {
                                         htmlFor="first_name"
                                         className="block mb-2 text-sm font-medium text-gray-900"
                                     >
-                                        New Password
+                                        {t("accountManage.form.newPassword")}
                                     </label>
                                     <div className="bg-gray-50 border border-gray-300 items-center rounded-lg w-full flex justify-between">
                                         <input
@@ -303,7 +305,7 @@ function Manage() {
                                     dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
                                     dark:focus:ring-blue-800 cursor-pointer"
                                 >
-                                    Change password
+                                    {t("accountManage.form.changePassword")}
                                 </button>
                             </div>
                         </div>
@@ -340,7 +342,7 @@ function Manage() {
                                 htmlFor="message"
                                 className="block mb-2 text-sm font-medium text-gray-900"
                             >
-                                {t("work.iSpeak")}
+                                {t("accountManage.iSpeak")}
                             </label>
                             {currentUserData?.nativeLanguage && (
                                 <Select
@@ -373,7 +375,7 @@ function Manage() {
                                 htmlFor="message"
                                 className="block mb-2 text-sm font-medium text-gray-900"
                             >
-                                {t("work.iWantToLearn")}
+                                {t("accountManage.iWantToLearn")}
                             </label>
                             {currentUserData?.languageToLearn && (
                                 <Select
@@ -403,7 +405,7 @@ function Manage() {
                         </div>
                     </div>
                     <Box className="w-[95%] mx-auto py-4">
-                        <p>Рівень володіння мовою, яку вивчаєте:</p>
+                        <p>{t("accountManage.level.title")}</p>
                         <RadioCards.Root
                             defaultValue={currentUserData?.level}
                             columns={{ initial: "1", sm: "3" }}
@@ -415,8 +417,8 @@ function Manage() {
                                     direction="column"
                                     width="100%"
                                 >
-                                    <p className="font-bold">А1</p>
-                                    <p>Початковий</p>
+                                    <p className="font-bold">{t("accountManage.level.A1.label")}</p>
+                                    <p>{t("accountManage.level.A1.desc")}</p>
                                 </Flex>
                             </RadioCards.Item>
                             <RadioCards.Item value="A2">
@@ -424,8 +426,8 @@ function Manage() {
                                     direction="column"
                                     width="100%"
                                 >
-                                    <p className="font-bold">А2</p>
-                                    <p>Елементарний</p>
+                                    <p className="font-bold">{t("accountManage.level.A2.label")}</p>
+                                    <p>{t("accountManage.level.A2.desc")}</p>
                                 </Flex>
                             </RadioCards.Item>
                             <RadioCards.Item value="B1">
@@ -433,8 +435,8 @@ function Manage() {
                                     direction="column"
                                     width="100%"
                                 >
-                                    <p className="font-bold">B2</p>
-                                    <p>Середній</p>
+                                    <p className="font-bold">{t("accountManage.level.B1.label")}</p>
+                                    <p>{t("accountManage.level.B1.desc")}</p>
                                 </Flex>
                             </RadioCards.Item>
                             <RadioCards.Item value="B2">
@@ -442,8 +444,8 @@ function Manage() {
                                     direction="column"
                                     width="100%"
                                 >
-                                    <p className="font-bold">B2</p>
-                                    <p>Вище середнього</p>
+                                    <p className="font-bold">{t("accountManage.level.B2.label")}</p>
+                                    <p>{t("accountManage.level.B2.desc")}</p>
                                 </Flex>
                             </RadioCards.Item>
                             <RadioCards.Item value="C1">
@@ -451,8 +453,8 @@ function Manage() {
                                     direction="column"
                                     width="100%"
                                 >
-                                    <p className="font-bold">C1</p>
-                                    <p>Просунутий</p>
+                                    <p className="font-bold">{t("accountManage.level.C1.label")}</p>
+                                    <p>{t("accountManage.level.C1.desc")}</p>
                                 </Flex>
                             </RadioCards.Item>
                             <RadioCards.Item value="C2">
@@ -460,15 +462,15 @@ function Manage() {
                                     direction="column"
                                     width="100%"
                                 >
-                                    <p className="font-bold">С2</p>
-                                    <p>Вільне володіння</p>
+                                    <p className="font-bold">{t("accountManage.level.C2.label")}</p>
+                                    <p>{t("accountManage.level.C2.desc")}</p>
                                 </Flex>
                             </RadioCards.Item>
                         </RadioCards.Root>
                     </Box>
                 </div>
                 <div className="w-[95%] mx-auto">
-                    <p>Ваші інтереси:</p>
+                    <p>{t("accountManage.form.interests")}</p>
                     <textarea
                         onInput={(event) => {
                             setUpdatedInterests(event.currentTarget.value);
@@ -479,16 +481,16 @@ function Manage() {
                                   disabled:cursor-not-allowed border-gray-300 focus:ring-blue-500
                                   disabled:opacity-50 focus:border-blue-500"
                         placeholder={
-                            currentUserData?.interests || "Подорожі, музика, кіно, технології"
+                            currentUserData?.interests ||
+                            t("accountManage.form.interests.placeholder")
                         }
                     ></textarea>
                     <p className="text-sm opacity-70 py-1">
-                        Вкажіть свої інтереси, щоб ми могли підібрати відповідні матеріали для
-                        навчання
+                        {t("accountManage.form.interestsHint")}
                     </p>
                 </div>
                 <div className="w-[95%] mx-auto py-5">
-                    <p>Цілі вивчення:</p>
+                    <p>{t("accountManage.form.goals")}</p>
                     <textarea
                         onInput={(event) => {
                             setUpdatedGoals(event.currentTarget.value);
@@ -499,13 +501,10 @@ function Manage() {
                                   disabled:cursor-not-allowed border-gray-300 focus:ring-blue-500
                                   disabled:opacity-50 focus:border-blue-500"
                         placeholder={
-                            currentUserData?.goals ||
-                            "Хочу вільно спілкуватися під час подорожей та читати технічну літературу в оригіналі"
+                            currentUserData?.goals || t("accountManage.form.goals.placeholder")
                         }
                     ></textarea>
-                    <p className="text-sm opacity-70 py-1">
-                        Опишіть, для чого ви вивчаєте мову і чого хочете досягти
-                    </p>
+                    <p className="text-sm opacity-70 py-1">{t("accountManage.form.goalsHint")}</p>
                     <div className="flex justify-end pt-5">
                         <button
                             type="submit"
@@ -517,6 +516,18 @@ function Manage() {
                             Submit
                         </button>
                     </div>
+                    {formSubmitSuccess && (
+                        <Callout.Root
+                            color="green"
+                            size="1"
+                            className="mt-2 mb-4"
+                        >
+                            <Callout.Icon>
+                                <BiInfoCircle />
+                            </Callout.Icon>
+                            <Callout.Text>{formSubmitSuccess}</Callout.Text>
+                        </Callout.Root>
+                    )}
                 </div>
             </form>
         </div>

@@ -26,6 +26,7 @@ export const LanguageSelect = () => {
             onValueChange={(value) => {
                 setValue(value);
                 i18n.changeLanguage(value);
+                localStorage.setItem("currentLanguage", value);
                 setLanguage(value);
             }}
         >
