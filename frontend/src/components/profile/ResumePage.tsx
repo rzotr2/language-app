@@ -27,7 +27,7 @@ export const ResumePage = () => {
                         </div>
                         <div className="flex items-center gap-2">
                             <span className="material-icons text-base">Phone:</span>
-                            <span className="text-sm">+49 31213 3213213 321</span>
+                            <span className="text-sm">+49 160 926 814 58</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <span className="material-icons text-base">GitHub:</span>
@@ -125,9 +125,7 @@ export const ResumePage = () => {
                                 <div className="font-bold">
                                     {t("resume.projects.weatherApp.title")}
                                 </div>
-                                <div className="text-sm italic mb-1">
-                                    {t("resume.projects.weatherApp.subtitle")}
-                                </div>
+                                <div className="text-sm italic mb-1"></div>
                                 <ul className="list-disc list-inside text-sm mb-1">
                                     <li>{t("resume.projects.weatherApp.points.0")}</li>
                                     <li>{t("resume.projects.weatherApp.points.1")}</li>

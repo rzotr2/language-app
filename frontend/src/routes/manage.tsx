@@ -513,7 +513,7 @@ function Manage() {
                             dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
                             dark:focus:ring-blue-800 cursor-pointer"
                         >
-                            Submit
+                            {t("accountManage.form.submit")}
                         </button>
                     </div>
                     {formSubmitSuccess && (

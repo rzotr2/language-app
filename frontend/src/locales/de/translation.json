@@ -486,5 +486,11 @@
     },
     "iSpeak": "Ich spreche:",
     "iWantToLearn": "Ich möchte lernen:"
-  }
+  },
+  "difficulty": [
+    "Einfach",
+    "Mittel",
+    "Schwierig"
+  ],
+  "return": "Zurück zum Anfang"
 }

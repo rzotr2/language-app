@@ -3,6 +3,7 @@ import { IoLanguageOutline } from "react-icons/io5";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLanguageStore } from "../../../store/language.ts";
+import { useAuthState } from "../../../store/auth.ts";
 
 const languageOptions = [
     { value: "en", label: "English 🇬🇧", emoji: " 🇬🇧" },
@@ -14,7 +15,10 @@ const languageOptions = [
 ];
 
 export const LanguageSelect = () => {
-    const [value, setValue] = useState<string | null>(null);
+    const { currentUser } = useAuthState();
+    const [value, setValue] = useState<string | null>(
+        localStorage.getItem("currentLanguage") || currentUser?.nativeLanguage || null,
+    );
 
     const { i18n } = useTranslation();
 

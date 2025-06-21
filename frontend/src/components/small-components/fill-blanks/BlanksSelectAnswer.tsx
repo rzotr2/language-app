@@ -14,6 +14,15 @@ export const BlanksSelectAnswer = ({ showExplanation, task }: BlanksSelectAnswer
         return;
     }
 
+    const shuffleArray = (array: string[]) => {
+        return array
+            .map((value) => ({ value, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ value }) => value);
+    };
+
+    const shuffledOptions = shuffleArray(task.options);
+
     return (
         <Select.Root disabled={showExplanation}>
             {showExplanation ? (
@@ -35,7 +44,7 @@ export const BlanksSelectAnswer = ({ showExplanation, task }: BlanksSelectAnswer
             <Select.Portal>
                 <Select.Content className="text-sm sm:text-lg shadow-xl bg-gray-300 rounded-md">
                     <Select.Viewport>
-                        {task.options.map((option, idx) => (
+                        {shuffledOptions.map((option, idx) => (
                             <Select.Item
                                 key={idx}
                                 value={option}

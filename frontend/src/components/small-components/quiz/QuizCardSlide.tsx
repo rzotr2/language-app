@@ -1,4 +1,4 @@
-import { type PropsWithChildren, useState } from "react";
+import { type PropsWithChildren, useMemo, useState } from "react";
 import type { QuizCard } from "../../../types";
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
@@ -17,6 +17,15 @@ export const QuizCardSlide = (props: QuizCardSlideProps) => {
         setCurrentIndex(index);
     };
 
+    const shuffleArray = (array: string[]) => {
+        return array
+            .map((value) => ({ value, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ value }) => value);
+    };
+
+    const shuffledOptions = useMemo(() => shuffleArray(props.card.options), [props.card.options]);
+
     return (
         <div>
             <div className="flex flex-wrap gap-2 items-start">
@@ -34,7 +43,7 @@ export const QuizCardSlide = (props: QuizCardSlideProps) => {
                 </div>
             </div>
             <div className="space-y-3 mt-4">
-                {props.card.options.map((option, index) => {
+                {shuffledOptions.map((option, index) => {
                     const isCorrect = option === props.card.answer;
                     const isSelected = index === currentIndex;
 

@@ -1,8 +1,4 @@
-const difficulties = [
-    { value: "easy", label: "Easy" },
-    { value: "medium", label: "Medium" },
-    { value: "hard", label: "Hard" },
-];
+import { useTranslation } from "react-i18next";
 
 export function DifficultyChoose({
     value,
@@ -13,6 +9,14 @@ export function DifficultyChoose({
     onChange: (val: string) => void;
     name?: string;
 }) {
+    const { t } = useTranslation();
+
+    const difficulties = [
+        { value: "easy", label: t("difficulty.0") },
+        { value: "medium", label: t("difficulty.1") },
+        { value: "hard", label: t("difficulty.2") },
+    ];
+
     return (
         <div className="flex flex-col gap-3">
             {difficulties.map((diff) => (

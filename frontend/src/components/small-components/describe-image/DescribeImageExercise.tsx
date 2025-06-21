@@ -160,48 +160,52 @@ export const DescribeImageExercise = ({
                          text-blue-900 rounded-b-md p-4 space-y-3"
                     >
                         <div>
-                            <span className="font-semibold">
+                            <span className="font-extrabold">
                                 {t("imageDesc.collapsible.generalImpression")}
                             </span>
-                            <div className="ml-4">
+                            <span className="ml-1 font-medium">
                                 {t("imageDesc.collapsible.generalImpressionHint")}
-                            </div>
+                            </span>
                         </div>
                         <div>
-                            <span className="font-semibold">
+                            <span className="font-extrabold">
                                 {t("imageDesc.collapsible.peopleObjects")}
                             </span>
-                            <div className="ml-4">
+                            <span className="ml-1 font-medium">
                                 {t("imageDesc.collapsible.peopleObjectsHint")}
-                            </div>
+                            </span>
                         </div>
                         <div>
-                            <span className="font-semibold">
+                            <span className="font-extrabold">
                                 {t("imageDesc.collapsible.actions")}
                             </span>
-                            <div className="ml-4">{t("imageDesc.collapsible.actionsHint")}</div>
+                            <span className="ml-1 font-medium">
+                                {t("imageDesc.collapsible.actionsHint")}
+                            </span>
                         </div>
                         <div>
-                            <span className="font-semibold">
+                            <span className="font-extrabold">
                                 {t("imageDesc.collapsible.appearanceDetails")}
                             </span>
-                            <div className="ml-4">
+                            <span className="ml-1 font-medium">
                                 {t("imageDesc.collapsible.appearanceDetailsHint")}
-                            </div>
+                            </span>
                         </div>
                         <div>
-                            <span className="font-semibold">
+                            <span className="font-extrabold">
                                 {t("imageDesc.collapsible.atmosphere")}
                             </span>
-                            <div className="ml-4">{t("imageDesc.collapsible.atmosphereHint")}</div>
+                            <span className="ml-1 font-medium">
+                                {t("imageDesc.collapsible.atmosphereHint")}
+                            </span>
                         </div>
                         <div>
-                            <span className="font-semibold">
+                            <span className="font-extrabold">
                                 {t("imageDesc.collapsible.personalOpinion")}
                             </span>
-                            <div className="ml-4">
+                            <span className="ml-1 font-medium">
                                 {t("imageDesc.collapsible.personalOpinionHint")}
-                            </div>
+                            </span>
                         </div>
                     </Collapsible.Content>
                 </Collapsible.Root>

@@ -1,6 +1,6 @@
 import Select from "react-select";
 import { useEffect, useRef, useState } from "react";
-import { Box, Flex, RadioCards } from "@radix-ui/themes";
+import { Box, Flex, RadioCards, Slider } from "@radix-ui/themes";
 import { CustomTooltip } from "./small-components/CustomTooltip.tsx";
 import { DifficultyChoose } from "./small-components/DifficultyChoose.tsx";
 import { HintCard } from "./small-components/HintCard.tsx";
@@ -14,9 +14,9 @@ import { useTranslation } from "react-i18next";
 import {
     generateBlanks,
     generateCards,
-    generateText,
-    generateQuizCards,
     generateEssayTopic,
+    generateQuizCards,
+    generateText,
 } from "../services/ai.ts";
 import { useAuthState } from "../../store/auth.ts";
 
@@ -290,31 +290,26 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                     />
                                 )}
                             </div>
-                            <div className="w-full md:w-[200px]">
+                            <div className="w-full md:w-[230px]">
                                 <label
                                     htmlFor="visitors"
                                     className="block mb-2 text-sm font-medium text-gray-900"
                                 >
                                     {t("work.selectNumber")}
                                 </label>
-                                <input
-                                    type="number"
-                                    id="visitors"
-                                    max={10}
-                                    min={1}
-                                    defaultValue={5}
-                                    disabled={
-                                        exercise === "translation" ||
-                                        exercise === "imageDesc" ||
-                                        exercise === "essay"
-                                    }
-                                    onInput={(e) =>
-                                        setField("exerciseNumber", e.currentTarget.value)
-                                    }
-                                    className="bg-gray-50 border py-2 border-gray-300 text-gray-900 text-sm
-                                    rounded-lg disabled:cursor-not-allowed focus:ring-blue-500 focus:border-blue-500
-                                    block w-full p-2.5 disabled:opacity-50"
-                                />
+                                <div className="flex items-center gap-2">
+                                    <Slider
+                                        onValueChange={(value) =>
+                                            setField("exerciseNumber", value[0].toString())
+                                        }
+                                        step={1}
+                                        max={30}
+                                        min={1}
+                                        defaultValue={[5]}
+                                        radius="small"
+                                    />
+                                    <p>{exerciseNumber}</p>
+                                </div>
                             </div>
                             <div className="w-full flex flex-col items-center sm:block space-y-6">
                                 <div className="flex flex-wrap gap-3 justify-between items-end">

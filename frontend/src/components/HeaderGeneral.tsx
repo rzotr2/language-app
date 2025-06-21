@@ -119,7 +119,7 @@ export default function HeaderGeneral() {
                                                     className={itemClassName}
                                                     disabled={true}
                                                 >
-                                                    <div className="flex items-center mx-auto px-4 py-2 gap-3">
+                                                    <div className="flex items-center px-4 py-2 gap-3">
                                                         <img
                                                             src={userLogo}
                                                             alt="user logo"
@@ -131,7 +131,11 @@ export default function HeaderGeneral() {
                                                     </div>
                                                 </DropdownMenu.Item>
                                                 <DropdownMenuSeparator className="h-[1px] bg-gray-300" />
-                                                <DropdownMenu.Item className={itemClassName}>
+                                                <DropdownMenu.Item
+                                                    className={itemClassName}
+                                                    asChild
+                                                    onSelect={() => {}}
+                                                >
                                                     <Link
                                                         to="/manage"
                                                         from="/"
@@ -140,11 +144,12 @@ export default function HeaderGeneral() {
                                                         {t("nav.manageAccount")}
                                                     </Link>
                                                 </DropdownMenu.Item>
-                                                <DropdownMenu.Item className={itemClassName}>
-                                                    <button
-                                                        onClick={logOut}
-                                                        className="text-red-500 px-4 py-2 w-full h-full text-start cursor-pointer"
-                                                    >
+                                                <DropdownMenu.Item
+                                                    className={itemClassName}
+                                                    asChild
+                                                    onSelect={logOut}
+                                                >
+                                                    <button className="text-red-500 px-4 py-2 w-full h-full text-start cursor-pointer">
                                                         {t("nav.signOut")}
                                                     </button>
                                                 </DropdownMenu.Item>
@@ -164,7 +169,8 @@ export default function HeaderGeneral() {
                             </div>
                         </li>
                     </ul>
-                    <div className="md:hidden">
+                    <div className="md:hidden flex gap-2">
+                        <LanguageSelect />
                         <DropdownMenu.Root modal={false}>
                             <DropdownMenu.Trigger
                                 className="focus:outline-0 flex gap-2 items-center text-gray-900 rounded-full
@@ -188,7 +194,7 @@ export default function HeaderGeneral() {
                                                 className={itemClassName}
                                                 disabled={true}
                                             >
-                                                <div className="flex items-center mx-auto px-4 py-2 gap-3">
+                                                <div className="flex items-center px-4 py-2 gap-3">
                                                     <img
                                                         src={userLogo}
                                                         alt="user logo"
@@ -203,7 +209,11 @@ export default function HeaderGeneral() {
                                         </div>
                                     )}
                                     {currentUser && (
-                                        <DropdownMenu.Item className={itemClassName}>
+                                        <DropdownMenu.Item
+                                            className={itemClassName}
+                                            asChild
+                                            onSelect={() => {}}
+                                        >
                                             <Link
                                                 to="/manage"
                                                 from="/"
@@ -216,12 +226,10 @@ export default function HeaderGeneral() {
                                     <DropdownMenu.Item
                                         className={itemClassName}
                                         asChild
+                                        onSelect={logOut}
                                     >
                                         {currentUser ? (
-                                            <button
-                                                onClick={logOut}
-                                                className="text-red-500 px-4 py-2 w-full h-full"
-                                            >
+                                            <button className="text-red-500 px-4 py-2 w-full h-full">
                                                 {t("nav.signOut")}
                                             </button>
                                         ) : (

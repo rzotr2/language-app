@@ -56,18 +56,11 @@ export const FillTheBlanks = ({ blanksArray, generateMore, difficulty }: FillThe
             <div className="space-y-5 text-sm md:text-lg font-medium md:py-3 py-2 px-5">
                 {blanksArray.map((task, index) => {
                     const parts = task.sentence.split(" ");
-
                     return (
                         <div key={index}>
                             <div className="flex flex-wrap gap-[5px] text-[1rem] items-center">
                                 {parts.map((word, index) => {
-                                    if (
-                                        word === "___" ||
-                                        word === "___." ||
-                                        word === "___," ||
-                                        word === "___?" ||
-                                        word === "___!"
-                                    ) {
+                                    if (/(___)([.,?!-])?$/.test(word)) {
                                         return (
                                             <div key={index}>
                                                 <BlanksSelectAnswer

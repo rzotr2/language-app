@@ -487,5 +487,11 @@
     },
     "iSpeak": "I speak:",
     "iWantToLearn": "I want to learn:"
-  }
+  },
+  "difficulty": [
+    "Easy",
+    "Medium",
+    "Hard"
+  ],
+  "return": "Back to start"
 }

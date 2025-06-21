@@ -86,15 +86,15 @@ export const generateBlanks = (props: DefaultPropsForGeneration) => {
                 has the highest priority!!!:
                 1. ${props.generalPrompt}
                 2. If not mentioned in Preferences, my interests are: ${props.interests} and goals: ${props.goals}.
-                3. The sentences must be in  ${props.languageToLearn} language (if null, then ${props.selectedLanguageToLearn?.value})..
+                3. The sentences must be in  ${props.languageToLearn} language (if null, then ${props.selectedLanguageToLearn?.value}).
                 4. My current language level is ${props.level}.
                 5. The difficulty must be ${props.difficulty} according to my current level.
                 6. Each object must have:
                     "id": a unique integer starting from 1,
                     "sentence": a sentence with a single blank (use ___ for the blank),
-                    "options": an array of 4 possible answers (strings), only one is correct,
+                    "options": an array of 4 possible answers (strings), only one is correct.
                     "answer": the correct answer (string),
-                    "explanation": a short explanation (1-2 sentences) why the answer is correct in ${props.nativeLanguage} language (if null, then ${props.nativeLanguage}).
+                    "explanation": a short explanation (1-2 sentences) why the answer is correct in ${props.nativeLanguage} language (if null, then ${props.selectedNativeLanguage}). Return explanation as a plain string, not as an object or array..
                 
                 Output only the JSON array, nothing else. Without any "'''json etc.". Do not include any comments or explanations outside the array.`,
     );
@@ -117,7 +117,7 @@ export const generateCards = (props: DefaultPropsForGeneration) => {
                         "translation": translation of the word/phrase into my native language ${props.nativeLanguage} language (if null, then in ${props.selectedNativeLanguage?.value} language) - (FROM CAPITAL LETTER);
                         "meaning": explanation/meaning of the word/phrase in my native language ${props.nativeLanguage} language (if null, then in ${props.selectedNativeLanguage?.value} language).;
                         "example": a sentence/example using the word/phrase in the target language,
-                        "transcription": transcription, as "[ɪkˈspɪəriəns]" format,
+                        "transcription": transcription, as "[ɪkˈspɪəriəns]" format
                     }
                 ]
                 
@@ -139,7 +139,7 @@ export const generateQuizCards = (props: DefaultPropsForGeneration) => {
                 [
                     {
                         "question": question;
-                        "options": [options for choose (variants)] - array of strings;
+                        "options": [options for choose (variants)] - array of strings
                         "answer": correct answer;
                         "explanation": correct answer ${props.nativeLanguage} language (if null, then in ${props.selectedNativeLanguage?.value} language).;
                     }
