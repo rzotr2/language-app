@@ -75,7 +75,7 @@ function Manage() {
         const userId = currentUserData?._id;
 
         if (userId) {
-            const updatedUser: User = {
+            const updatedUser: User & { updateEmail: boolean } = {
                 ...currentUserData,
                 email: emailToUpdate!,
                 id: userId,
@@ -86,6 +86,7 @@ function Manage() {
                 level: updatedLanguageLevel,
                 interests: updatedInterests,
                 goals: updatedGoals,
+                updateEmail: emailToUpdate !== currentUserData?.email,
             };
 
             try {
@@ -168,11 +169,10 @@ function Manage() {
                         </label>
                         <input
                             type="text"
-                            value={currentUserData?.firstName || ""}
                             id="first_name"
                             onInput={(event) => setUpdatedFirstName(event.currentTarget.value)}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                            placeholder="John"
+                            placeholder={currentUserData?.firstName || "John"}
                         />
                     </div>
                     <div className="w-full sm:w-1/2">
@@ -185,10 +185,9 @@ function Manage() {
                         <input
                             onInput={(event) => setUpdatedLastName(event.currentTarget.value)}
                             type="text"
-                            value={currentUserData?.lastName || ""}
                             id="first_name"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            placeholder="Doe"
+                            placeholder={currentUserData?.lastName || "Doe"}
                         />
                     </div>
                 </div>
@@ -204,9 +203,9 @@ function Manage() {
                             type="email"
                             disabled={true}
                             id="first_name"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                            className="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg
                             focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed opacity-80"
-                            placeholder={currentUserData?.email || "email"}
+                            placeholder={currentUserData?.email || "Email"}
                         />
                     </div>
                     <div className="w-full sm:w-1/2">

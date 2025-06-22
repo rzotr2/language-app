@@ -46,7 +46,7 @@ router.get("/:id", async (req: Request, res: Response) => {
 });
 
 router.post("/update", authMiddleware, async (req: Request, res: Response) => {
-    const user: UserType = req.body;
+    const user: UserType & { updateEmail: boolean } = req.body;
 
     if (!user.id) {
         res.status(400).json({ message: 'Id is required' });
@@ -54,11 +54,13 @@ router.post("/update", authMiddleware, async (req: Request, res: Response) => {
     }
 
     try {
-        const foundUser = await findUser(user.email);
+        if (user.updateEmail) {
+            const foundUser = await findUser(user.email);
 
-        if (foundUser) {
-            res.status(403).json({message: "Email is already taken"});
-            return;
+            if (foundUser) {
+                res.status(403).json({message: "Email is already taken"});
+                return;
+            }
         }
 
         const updatedUser = await updateUser(user);

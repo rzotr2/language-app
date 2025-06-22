@@ -84,7 +84,7 @@ function MainPageMain({ getIsLoading }: MainPageMainProps) {
             if (userId) {
                 const existingUser: User = await findUserById(userId);
                 if (existingUser) {
-                    const newUser = {
+                    const newUser: User & { updateEmail?: boolean } = {
                         ...existingUser,
                         id: userId,
                         languageToLearn: selectedLanguageToLearn!,
@@ -92,6 +92,7 @@ function MainPageMain({ getIsLoading }: MainPageMainProps) {
                         level: selectedLevel!,
                         interests: selectedTopic!,
                         goals: goal!,
+                        updateEmail: false,
                     };
                     await updateUser(newUser);
                     setFieldAuth("currentUser", newUser);
