@@ -4,7 +4,7 @@ import { LuBrainCircuit } from "react-icons/lu";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useAuthState } from "../../store/auth.ts";
+import { useAuthState } from "../store/auth.ts";
 import { LuNotebookPen } from "react-icons/lu";
 
 function HomePageMain() {

@@ -21,7 +21,7 @@ function WorkPage() {
         <>
             {loading && (
                 <div
-                    className="w-screen h-screen flex flex-col justify-center items-center
+                    className="w-screen h-[calc(100vh+100px)] md:h-screen flex flex-col justify-center items-center
                 fixed bg-gray-400 opacity-90 z-100"
                 >
                     <div className="Buttons mb-5"></div>

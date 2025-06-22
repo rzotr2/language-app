@@ -42,7 +42,12 @@ export const BlanksSelectAnswer = ({ showExplanation, task }: BlanksSelectAnswer
                 </Select.Trigger>
             )}
             <Select.Portal>
-                <Select.Content className="text-sm sm:text-lg shadow-xl bg-gray-300 rounded-md">
+                <Select.Content
+                    className="text-sm sm:text-lg shadow-xl bg-gray-300 rounded-md"
+                    position="popper"
+                    sideOffset={2}
+                    side="bottom"
+                >
                     <Select.Viewport>
                         {shuffledOptions.map((option, idx) => (
                             <Select.Item

@@ -1,0 +1,497 @@
+{
+  "nav": {
+    "aboutMe": "O mně",
+    "projects": "Projekty",
+    "resume": "Životopis",
+    "manageAccount": "Spravovat účet",
+    "feedback": "Zpětná vazba",
+    "signOut": "Odhlásit se",
+    "logIn": "Přihlásit se"
+  },
+  "user": {
+    "loading": "Načítání...",
+    "email": "E-mail"
+  },
+  "buttons": {
+    "save": "Uložit",
+    "cancel": "Zrušit"
+  },
+  "homepage": {
+    "hero": {
+      "mainText": "Začněte svou jazykovou cestu s interaktivními cvičeními a reálnými situacemi. Rozvíjejte své dovednosti krok za krokem v podpůrném a inspirativním prostředí pro studenty všech úrovní.",
+      "subText": "Ovládněte nový jazyk krok za krokem",
+      "getStarted": "Začít",
+      "mobileTitle": "Učte se jazyk online",
+      "mobileText": "Procvičujte různé úkoly s AI. Je to lepší než jiné stránky. Prostě to zkuste a uvidíte!"
+    },
+    "aiSection": {
+      "title": "Učte se jazyk s AI",
+      "description": "Procvičujte se s personalizovanými cvičeními generovanými umělou inteligencí."
+    },
+    "features": {
+      "improveSkillsTitle": "📖 Zlepšujte své dovednosti",
+      "improveSkillsText": "Zlepšujte čtení a poslech pomocí interaktivních úkolů.",
+      "sharpenKnowledgeTitle": "🧠 Prohlubujte znalosti",
+      "sharpenKnowledgeText": "Prohlubujte gramatiku a slovní zásobu s AI výzvami.",
+      "extendVocabularyTitle": "💬 Rozšiřujte slovní zásobu",
+      "extendVocabularyText": "Učte se nová slova a fráze v kontextu, abyste mohli sebevědomě komunikovat na různá témata."
+    },
+    "readyTitle": "Jste připraveni začít svou cestu?",
+    "getStarted": "Začít"
+  },
+  "login": {
+    "login": "Přihlásit se",
+    "signup": "Registrovat se",
+    "yourEmail": "Váš e-mail",
+    "yourPassword": "Vaše heslo",
+    "emailPlaceholder": "email@priklad.com",
+    "passwordPlaceholder": "Heslo",
+    "back": "Zpět",
+    "logIn": "Přihlásit se",
+    "success": "Úspěšné přihlášení. Přesměrování...",
+    "error": {
+      "required": "Toto pole je povinné",
+      "emailFormat": "Neplatný formát e-mailu",
+      "passwordFormat": "Heslo musí mít alespoň 8 znaků",
+      "noResponse": "Žádná odpověď ze serveru"
+    }
+  },
+  "signup": {
+    "login": "Přihlásit se",
+    "signup": "Registrovat se",
+    "yourEmail": "Váš e-mail",
+    "yourPassword": "Vaše heslo",
+    "confirmPassword": "Potvrďte heslo",
+    "emailPlaceholder": "email@priklad.com",
+    "passwordPlaceholder": "Heslo",
+    "confirmPasswordPlaceholder": "Potvrďte heslo",
+    "back": "Zpět",
+    "signUp": "Registrovat se",
+    "success": "Registrace byla úspěšná. Přesměrování...",
+    "error": {
+      "required": "Toto pole je povinné",
+      "emailFormat": "Neplatný formát e-mailu",
+      "passwordFormat": "Heslo musí mít alespoň 8 znaků",
+      "passwordRequired": "Heslo je povinné",
+      "passwordsMatch": "Hesla se musí shodovat",
+      "emailTaken": "E-mail je již používán",
+      "noResponse": "Žádná odpověď ze serveru"
+    }
+  },
+  "loader": {
+    "submitting": "Odesílání vašich odpovědí,",
+    "wait": "prosím, čekejte..."
+  },
+  "languageSelect": {
+    "desiredLanguageChooseTitle": "Jaký jazyk se chcete učit?",
+    "nativeLanguageChooseTitle": "Jakým jazykem mluvíte?",
+    "levelChoose": {
+      "levelChooseTitle": "Vyberte svou aktuální úroveň:",
+      "a1Title": "A1 – Začátečník",
+      "a1Desc": "Rozumí a používá velmi jednoduché fráze; umí klást a odpovídat na jednoduché otázky.",
+      "a2Title": "A2 – Základní",
+      "a2Desc": "Zvládá každodenní úkoly a rutinní výměny; umí jednoduše popsat rodinu, nákupy, okolí.",
+      "b1Title": "B1 – Středně pokročilý",
+      "b1Desc": "Komunikuje na známá témata, vytváří jednoduché souvislé texty; umí vyprávět o zkušenostech a plánech.",
+      "b2Title": "B2 – Vyšší střední",
+      "b2Desc": "Rozumí hlavnímu obsahu složitých textů; dokáže se plynule a spontánně vyjadřovat.",
+      "c1Title": "C1 – Pokročilý",
+      "c1Desc": "Používá jazyk flexibilně pro společenské, akademické a profesní účely; vyjadřuje myšlenky jasně a přesně.",
+      "c2Title": "C2 – Mistrovská úroveň",
+      "c2Desc": "Téměř jako rodilý mluvčí; rozumí všemu slyšenému nebo čtenému, snadno vyjadřuje nuance."
+    },
+    "back": "Zpět",
+    "continue": "Pokračovat"
+  },
+  "interests": {
+    "title": "O co se zajímáte?",
+    "back": "Zpět",
+    "continue": "Pokračovat",
+    "topics": {
+      "technology": {
+        "label": "💻 Technologie a inovace",
+        "desc": "Diskutujte o nejnovějších gadgetech, softwaru a technologických trendech."
+      },
+      "food": {
+        "label": "🍳 Jídlo a vaření",
+        "desc": "Objevujte recepty, kulinářské termíny a recenze restaurací."
+      },
+      "culture": {
+        "label": "🏰 Kultura a historie",
+        "desc": "Ponořte se do tradic, historických událostí a slavných památek."
+      },
+      "sports": {
+        "label": "🏃‍♂️ Sport a fitness",
+        "desc": "Mluvte o trénincích, hrách a zdravém životním stylu."
+      },
+      "environment": {
+        "label": "🌿 Životní prostředí a příroda",
+        "desc": "Učte se slovní zásobu o přírodě, ochraně přírody a udržitelném rozvoji."
+      },
+      "art": {
+        "label": "🎭 Umění a literatura",
+        "desc": "Analyzujte knihy, filmy, divadlo a kreativitu."
+      }
+    }
+  },
+  "goals": {
+    "title": "Proč se chcete učit jazyk?",
+    "back": "Zpět",
+    "submit": "Potvrdit",
+    "options": {
+      "travel": {
+        "label": "🧳 Cestování a každodenní konverzace",
+        "desc": "Orientujte se v reálných situacích, jako je rezervace hotelu nebo objednání jídla."
+      },
+      "business": {
+        "label": "💼 Obchod a profesionální komunikace",
+        "desc": "Zlepšujte psaní e-mailů, prezentace a obchodní komunikaci."
+      },
+      "exam": {
+        "label": "📝 Příprava na zkoušky",
+        "desc": "Procvičujte strategie a vzorové testy, abyste dosáhli požadovaného výsledku."
+      },
+      "academic": {
+        "label": "📚 Akademické dovednosti",
+        "desc": "Zlepšujte čtení, psaní esejí a porozumění přednáškám."
+      },
+      "personal": {
+        "label": "🎨 Osobní rozvoj a koníčky",
+        "desc": "Učte se jazyk prostřednictvím svých oblíbených aktivit: hudby, umění nebo cestování."
+      },
+      "listening": {
+        "label": "🎧 Poslech a výslovnost",
+        "desc": "Zlepšujte porozumění mluvenému slovu a výslovnost."
+      }
+    }
+  },
+  "work": {
+    "whatToGenerate": "Co chcete vygenerovat?",
+    "promptPlaceholder": "Například: vygenerujte cvičení na téma 'Jak jsem strávil léto'. Mělo by to být pro úroveň A2.",
+    "iSpeak": "Mluvím:",
+    "iWantToLearn": "Chci se učit:",
+    "selectNumber": "Vyberte počet cvičení:",
+    "selectType": "Vyberte typ cvičení:",
+    "generate": "Generovat",
+    "difficulty": "Obtížnost",
+    "types": {
+      "translation": {
+        "title": "Překlad textu",
+        "desc": "Procvičujte překlad vět mezi rodným a cílovým jazykem."
+      },
+      "blanks": {
+        "title": "Doplňte mezery",
+        "desc": "Doplňujte věty vkládáním chybějících slov, abyste upevnili gramatiku a slovní zásobu."
+      },
+      "cards": {
+        "title": "Kartičky",
+        "desc": "Učte se slova nebo fráze otáčením kartiček pro zobrazení překladu nebo odpovědi."
+      },
+      "quiz": {
+        "title": "Kvíz",
+        "desc": "Odpovídejte na otázky s výběrem, abyste ověřili své jazykové znalosti."
+      },
+      "imageDesc": {
+        "title": "Popište obrázek",
+        "desc": "Podívejte se na obrázek a napište několik vět, co vidíte."
+      },
+      "essay": {
+        "title": "Napište esej",
+        "desc": "Napište krátkou esej na zadané téma, abyste si procvičili psaní."
+      }
+    }
+  },
+  "essay": {
+    "title": "Napište esej",
+    "subtitle": "Napište esej, ve které vyjádříte své myšlenky a argumenty.",
+    "mainInstruction": "Vyjadřujte své myšlenky a argumenty ve dobře strukturované eseji.",
+    "hint": "Jasně organizujte své nápady a podpořte je příklady.",
+    "topic": "Téma",
+    "plan": "Plán",
+    "textareaPlaceholder": "Napište svou esej zde. Začněte úvodem, rozviňte hlavní myšlenky v samostatných odstavcích a zakončete závěrem. Používejte spojky a dbejte na strukturu, jasnost a gramatiku.",
+    "myVersion": "Moje verze:",
+    "reviewResult": "Hodnocení",
+    "aiVersion": "Jak by AI napsala esej na toto téma:",
+    "checkAnswer": "Zkontrolovat esej",
+    "generateMore": "Vygenerovat znovu",
+    "reset": "Resetovat",
+    "difficulty": "Obtížnost:"
+  },
+  "imageDesc": {
+    "title": "Popište obrázek",
+    "subtitle": "Podívejte se na obrázek a napište podrobný popis toho, co vidíte.",
+    "mainInstruction": "Věnujte pozornost místu, akcím a detailům.",
+    "hint": "Detaily oživují váš popis.",
+    "enterWhatYouSee": "Popište, co vidíte:",
+    "textareaPlaceholder": "Popište, co vidíte na obrázku. Kdo je na obrázku? Co dělají? Jaké je místo, nálada, jaké jsou zajímavé detaily?",
+    "myVersion": "Moje verze:",
+    "reviewResult": "Hodnocení",
+    "aiVersion": "Jak by AI popsala tento obrázek:",
+    "checkAnswer": "Zkontrolovat odpověď",
+    "regenerateImage": "Vygenerovat obrázek znovu",
+    "reset": "Resetovat",
+    "difficulty": "Obtížnost:",
+    "collapsible": {
+      "trigger": "Jak popsat obrázek: krok za krokem",
+      "generalImpression": "1. Celkový dojem:",
+      "generalImpressionHint": "Jaká je celková scéna? (uvnitř/venku, typ místa)",
+      "peopleObjects": "2. Lidé a objekty:",
+      "peopleObjectsHint": "Kdo nebo co je na obrázku? (počet lidí, hlavní objekty)",
+      "actions": "3. Akce:",
+      "actionsHint": "Co dělají lidé? (popište akce nebo interakce)",
+      "appearanceDetails": "4. Vzhled a detaily:",
+      "appearanceDetailsHint": "Jak vypadají lidé? (oblečení, věk, nálada, postoj)\nJaké detaily jsou patrné? (barvy, počasí, denní doba, pozadí)",
+      "atmosphere": "5. Atmosféra:",
+      "atmosphereHint": "Jaká je nálada nebo atmosféra obrázku? (veselá, rušná, klidná atd.)",
+      "personalOpinion": "6. Osobní názor (nepovinné):",
+      "personalOpinionHint": "Co si o obrázku myslíte? (zajímavé, překvapivé atd.)"
+    }
+  },
+  "blanks": {
+    "title": "Doplňte mezery",
+    "subtitle": "Dokončete větu výběrem správných slov",
+    "mainInstruction": "Věnujte pozornost kontextu a vyberte nejlepší slovo pro každou mezeru.",
+    "hint": "Přečtěte si celou větu před vyplněním mezer.",
+    "checkAnswers": "Zkontrolovat odpovědi",
+    "generateMore": "Vygenerovat znovu",
+    "reset": "Resetovat",
+    "difficulty": "Obtížnost:"
+  },
+  "flipCards": {
+    "title": "Kartičky",
+    "subtitle": "Přeložte text do svého rodného jazyka",
+    "mainInstruction": "Procvičujte paměť a učte se nová slova pomocí kartiček.",
+    "hint": "Zkuste si odpověď zapamatovat před otočením kartičky.",
+    "generateMore": "Vygenerovat znovu",
+    "reset": "Resetovat",
+    "difficulty": "Obtížnost:",
+    "flipCardExample": "Příklad:"
+  },
+  "quiz": {
+    "title": "Kvíz",
+    "subtitle": "Vyberte správnou odpověď z nabízených možností",
+    "previous": "Zpět",
+    "next": "Další",
+    "question": "Otázka",
+    "of": "z",
+    "generateMore": "Vygenerovat znovu",
+    "reset": "Resetovat",
+    "difficulty": "Obtížnost:"
+  },
+  "translation": {
+    "title": "Překlad textu",
+    "subtitle": "Přeložte text do svého rodného jazyka",
+    "mainInstruction": "Věnujte pozornost významu, jasnosti a přirozenosti jazyka.",
+    "hint": "Překládejte význam, ne jen slova.",
+    "deviceHint": "Pro toto cvičení je lepší použít zařízení s velkou obrazovkou.",
+    "enterYourTranslation": "Zadejte svůj překlad:",
+    "textareaPlaceholder": "Napište zde svůj překlad. Snažte se jasně a přirozeně předat význam, ne jen překládat slovo od slova.",
+    "myVersion": "Moje verze:",
+    "reviewResult": "Hodnocení",
+    "aiVersion": "Jak by AI přeložila tento text:",
+    "checkAnswer": "Zkontrolovat odpověď",
+    "generateMore": "Vygenerovat znovu",
+    "reset": "Resetovat",
+    "difficulty": "Obtížnost:"
+  },
+  "tooltip": {
+    "information": {
+      "firstPart": "Pro nejlepší zážitek musíte jazyk přidat ručně,",
+      "or": "nebo",
+      "secondPart": "uveďte svůj rodný jazyk a jazyk, který se chcete učit, v tomto poli.",
+      "additionalField": "Toto pole s nápovědou má",
+      "priority": "nejvyšší prioritu."
+    }
+  },
+  "hintCard": {
+    "title": "Nápověda:",
+    "easyDesc": "Jednoduché věty a základní slovní zásoba.",
+    "mediumDesc": "Složitější konstrukce a nová slova.",
+    "hardDesc": "Pokročilá témata, složitá gramatika a výrazy."
+  },
+  "about": {
+    "banner": {
+      "name": "Pavlo Lukin",
+      "position": "Junior Front-End Developer"
+    },
+    "greetingTitle": "Vítejte na mé stránce!",
+    "tooltip": "Velmi si vážím, že jste sem zavítali.",
+    "aboutText": [
+      "Jsem Pavlo, Junior Front-End Developer, který se aktivně rozvíjí v oblasti moderních webových technologií. Po získání právnického vzdělání jsem se rozhodl změnit směr a ponořit se do světa IT.",
+      "Moje cesta začala učením HTML, CSS a JavaScriptu. Později jsem začal vytvářet vlastní projekty s využitím React, TypeScript, TailwindCSS, pracoval jsem s REST API, MongoDB, Node.js a dalšími moderními nástroji. Oceňuji jasnost, strukturu a minimalismus ve vývoji a vždy usiluji o kvalitní výsledek.",
+      "Ačkoliv jsem teprve na začátku své profesní dráhy, jsem připraven zodpovědně přistupovat k učení nových technologií, aktivně spolupracovat v IT týmu, účastnit se reálných projektů a neustále zlepšovat své dovednosti.",
+      "Mým cílem je rozvíjet se ve Front-Endu, pracovat v moderním týmu, vytvářet užitečné produkty a nezastavovat se na dosaženém."
+    ],
+    "contactButton": "Napsat mi",
+    "downloadResumeDE": "Stáhnout životopis v němčině",
+    "downloadResumeEN": "Stáhnout životopis v angličtině"
+  },
+  "projects": {
+    "title": "Moje projekty",
+    "subtitle": "Od nápadu k realizaci: mé nejzajímavější práce v oblasti Front-End.",
+    "taskManager": {
+      "title": "Task Manager",
+      "description": "Task Manager — aplikace pro správu úkolů s funkcí drag & drop, ukládáním do localStorage, integrací API a adaptivním minimalistickým rozhraním v React, TypeScript a TailwindCSS."
+    },
+    "weatherApp": {
+      "title": "Weather App",
+      "description": "Weather App — moderní aplikace pro počasí s vícejazyčnou podporou, integrací OpenWeatherMap API, vlastními ikonami a responzivním designem v React, TypeScript a TailwindCSS."
+    },
+    "languageApp": {
+      "title": "Language App",
+      "description": "Language App — SPA pro výuku jazyků s integrací OpenAI API, generováním personalizovaných cvičení, autentizací, ukládáním dat v MongoDB a dynamickou navigací v React, Node.js (Express) a TypeScript."
+    }
+  },
+  "resume": {
+    "profile": {
+      "name": "Pavlo Lukin",
+      "position": "Front-End Developer",
+      "intern": "Stážista",
+      "age": "Věk:",
+      "ageNumber": "24 let"
+    },
+    "education": {
+      "title": "VZDĚLÁNÍ",
+      "bachelor": {
+        "degree": "Bakalář práv",
+        "institution": "Lvovská státní univerzita vnitřních věcí",
+        "location": "Lvov, Ukrajina"
+      },
+      "master": {
+        "degree": "Magistr práv",
+        "institution": "Lvovská státní univerzita vnitřních věcí",
+        "location": "Lvov, Ukrajina"
+      }
+    },
+    "skills": {
+      "title": "DOVEDNOSTI",
+      "list": [
+        "Node.js (základní úroveň)",
+        "Integrace API"
+      ]
+    },
+    "careerObjective": {
+      "title": "KARIÉRNÍ CÍL",
+      "text": "Změnil jsem profesní oblast po získání právnického vzdělání a mám silnou motivaci rozvíjet se v IT. Po intenzivním samostudiu frontendu (React, TypeScript, TailwindCSS) a realizaci několika praktických projektů hledám pozici stážisty nebo Junior Front-End Developera."
+    },
+    "projects": {
+      "title": "PROJEKTY",
+      "taskManager": {
+        "title": "Task Manager",
+        "subtitle": "Vývoj aplikace pro správu úkolů v React, TypeScript a TailwindCSS.",
+        "points": [
+          "Drag & drop, ukládání do localStorage, integrace API, responzivní design",
+          "Nasazeno na GitHub Pages",
+          "Odkaz na"
+        ]
+      },
+      "weatherApp": {
+        "title": "Weather App",
+        "subtitle": "Vývoj aplikace pro počasí v React, TypeScript a TailwindCSS.",
+        "points": [
+          "Aplikace pro počasí s React, TypeScript, TailwindCSS a OpenWeatherMap API",
+          "Vícejazyčná podpora s přepínačem jazyků",
+          "Nasazeno na Netlify",
+          "Odkaz na"
+        ]
+      },
+      "languageApp": {
+        "title": "Language App",
+        "subtitle": "Aplikace pro výuku jazyků (SPA) v React, Node.js (Express) a MongoDB.",
+        "points": [
+          "Vícejazyčná podpora s přepínačem jazyků",
+          "Integrace OpenAI API pro generování personalizovaných cvičení",
+          "Autentizace uživatele a bezpečné ukládání dat v MongoDB",
+          "Tanstack React Router pro dynamickou navigaci a REST API pro backend",
+          "Odkaz na"
+        ]
+      }
+    },
+    "languages": {
+      "title": "JAZYKY",
+      "list": [
+        "Němčina: B1 (probíhá)",
+        "Angličtina: B2",
+        "Ukrajinština: rodilý mluvčí",
+        "Ruština: plynně"
+      ]
+    },
+    "strengths": {
+      "title": "OSOBNÍ VLASTNOSTI",
+      "list": [
+        "Analytické a logické myšlení",
+        "Vysoká vnitřní motivace a ochota se učit",
+        "Otevřenost novým technologiím a moderním pracovním metodám",
+        "Zodpovědnost a sebekázeň"
+      ]
+    },
+    "downloadResumeDE": "Stáhnout životopis v němčině",
+    "downloadResumeEN": "Stáhnout životopis v angličtině",
+    "contactButton": "Napsat mi"
+  },
+  "account": {
+    "changesApplied": "Změny byly úspěšně uloženy",
+    "password": {
+      "minLength": "Vaše heslo musí mít alespoň 8 znaků",
+      "success": "Heslo bylo úspěšně změněno",
+      "enterBoth": "Zadejte staré i nové heslo",
+      "unknownError": "Neznámá chyba"
+    }
+  },
+  "accountManage": {
+    "title": "Správa účtu",
+    "subtitle": "Nastavte si svůj profil pro studium jazyků",
+    "form": {
+      "firstName": "Jméno",
+      "lastName": "Příjmení",
+      "yourCurrentEmail": "Váš aktuální e-mail",
+      "newEmail": "Nový e-mail",
+      "changePassword": "Změnit heslo",
+      "oldPassword": "Staré heslo",
+      "newPassword": "Nové heslo",
+      "submit": "Uložit změny",
+      "success": "Změny byly úspěšně uloženy",
+      "interests": "Vaše zájmy:",
+      "interestsPlaceholder": "Cestování, hudba, filmy, technologie",
+      "interestsHint": "Uveďte své zájmy, abychom mohli vybrat vhodné studijní materiály",
+      "goals": "Cíle studia:",
+      "goalsPlaceholder": "Chci plynně komunikovat při cestování a číst technickou literaturu v originále",
+      "goalsHint": "Popište, proč se učíte jazyk a čeho chcete dosáhnout"
+    },
+    "level": {
+      "title": "Úroveň jazyka, který se učíte:",
+      "A1": {
+        "label": "A1",
+        "desc": "Začátečník"
+      },
+      "A2": {
+        "label": "A2",
+        "desc": "Základní"
+      },
+      "B1": {
+        "label": "B1",
+        "desc": "Středně pokročilý"
+      },
+      "B2": {
+        "label": "B2",
+        "desc": "Vyšší střední"
+      },
+      "C1": {
+        "label": "C1",
+        "desc": "Pokročilý"
+      },
+      "C2": {
+        "label": "C2",
+        "desc": "Mistrovská úroveň"
+      }
+    },
+    "iSpeak": "Mluvím:",
+    "iWantToLearn": "Chci se učit:"
+  },
+  "difficulty": [
+    "Lehký",
+    "Střední",
+    "Těžký"
+  ],
+  "return": "Zpět na začátek"
+}

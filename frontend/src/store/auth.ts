@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { User } from "../src/models/user.ts";
+import type { User } from "../models/user.ts";
 
 type AuthState = {
     isAuthenticated: boolean;

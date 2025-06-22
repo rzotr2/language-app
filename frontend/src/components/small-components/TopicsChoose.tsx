@@ -26,7 +26,9 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                         columns={{ initial: "1", sm: "2" }}
                         onValueChange={(value) => setSelectedTopic(value)}
                     >
-                        <RadioCards.Item value="Technology and Innovation">
+                        <RadioCards.Item
+                            value={`${t("interests.topics.technology.label")}: ${t("interests.topics.technology.desc")}`}
+                        >
                             <Flex
                                 direction="column"
                                 width="100%"
@@ -37,7 +39,9 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                                 <p>{t("interests.topics.technology.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="Food and Cooking">
+                        <RadioCards.Item
+                            value={`${t("interests.topics.food.label")}: ${t("interests.topics.food.desc")}`}
+                        >
                             <Flex
                                 direction="column"
                                 width="100%"
@@ -46,7 +50,9 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                                 <p>{t("interests.topics.food.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="Culture and History">
+                        <RadioCards.Item
+                            value={`${t("interests.topics.culture.label")}: ${t("interests.topics.culture.desc")}`}
+                        >
                             <Flex
                                 direction="column"
                                 width="100%"
@@ -55,7 +61,9 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                                 <p>{t("interests.topics.culture.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="Sports and Fitness">
+                        <RadioCards.Item
+                            value={`${t("interests.topics.sports.label")}: ${t("interests.topics.sports.desc")}`}
+                        >
                             <Flex
                                 direction="column"
                                 width="100%"
@@ -64,7 +72,9 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                                 <p>{t("interests.topics.sports.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="Environment and Nature">
+                        <RadioCards.Item
+                            value={`${t("interests.topics.environment.label")}: ${t("interests.topics.environment.desc")}`}
+                        >
                             <Flex
                                 direction="column"
                                 width="100%"
@@ -75,7 +85,9 @@ export default function TopicsChoose(props: TopicsChooseProps) {
                                 <p>{t("interests.topics.environment.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="Art and Literature">
+                        <RadioCards.Item
+                            value={`${t("interests.topics.art.label")}: ${t("interests.topics.art.desc")}`}
+                        >
                             <Flex
                                 direction="column"
                                 width="100%"

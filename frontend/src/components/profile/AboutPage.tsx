@@ -61,7 +61,7 @@ export const AboutPage = () => {
                                     {t("about.downloadResumeDE") + " " + "(.pdf)"}
                                 </p>
                                 <a
-                                    href="../../../public/Lebenslauf%20Pavlo%20Lukin.pdf"
+                                    href={`api/uploads/DE`}
                                     download
                                     className="border-2 border-indigo-600 text-indigo-600 px-3 py-1 md:px-6 md:py-2
                                     rounded-lg font-semibold hover:bg-indigo-50 transition"
@@ -74,7 +74,7 @@ export const AboutPage = () => {
                                     {t("about.downloadResumeEN") + " " + "(.pdf)"}
                                 </p>
                                 <a
-                                    href="../../../public/Lebenslauf%20Pavlo%20Lukin%20EN.pdf"
+                                    href={`api/uploads/EN`}
                                     download
                                     className="border-2 border-indigo-600 text-indigo-600 px-3 py-1 md:px-6 md:py-2
                                     rounded-lg font-semibold hover:bg-indigo-50 transition"

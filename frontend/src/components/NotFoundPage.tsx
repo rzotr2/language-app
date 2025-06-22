@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 
-export const notFoundPage = () => {
+export const NotFoundPage = () => {
     return (
-        <section className="bg-white">
+        <section className="bg-white h-[calc(100vh-56px-64px-32px)] flex items-center">
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <div className="mx-auto max-w-screen-sm text-center">
                     <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-blue-600">

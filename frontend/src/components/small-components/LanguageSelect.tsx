@@ -2,8 +2,8 @@ import { Select } from "@radix-ui/themes";
 import { IoLanguageOutline } from "react-icons/io5";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLanguageStore } from "../../../store/language.ts";
-import { useAuthState } from "../../../store/auth.ts";
+import { useLanguageStore } from "../../store/language.ts";
+import { useAuthState } from "../../store/auth.ts";
 
 const languageOptions = [
     { value: "en", label: "English 🇬🇧", emoji: " 🇬🇧" },
@@ -12,6 +12,7 @@ const languageOptions = [
     { value: "fr", label: "French 🇫🇷", emoji: " 🇫🇷" },
     { value: "es", label: "Spanish 🇪🇸", emoji: " 🇪🇸" },
     { value: "pl", label: "Polish 🇵🇱", emoji: " 🇵🇱" },
+    { value: "cz", label: "Czech 🇨🇿", emoji: " 🇨🇿" },
 ];
 
 export const LanguageSelect = () => {
@@ -41,7 +42,7 @@ export const LanguageSelect = () => {
                     <IoLanguageOutline />
                 )}
             </Select.Trigger>
-            <Select.Content>
+            <Select.Content position="popper">
                 {languageOptions.map((lang, index) => (
                     <Select.Item
                         key={index}

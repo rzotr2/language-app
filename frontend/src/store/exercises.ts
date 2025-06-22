@@ -6,7 +6,7 @@ import type {
     LanguageOption,
     PhotoType,
     QuizCard,
-} from "../src/types";
+} from "../types";
 import { create } from "zustand";
 
 type State = {
@@ -39,7 +39,7 @@ export const useExerciseStore = create<State>((set) => ({
     languageResult: null,
     exerciseNumber: "5",
     exercise: "translation",
-    difficulty: "easy",
+    difficulty: "-",
     currentText: null,
     blanksArray: null,
     cardsArray: null,

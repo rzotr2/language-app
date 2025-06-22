@@ -12,9 +12,9 @@ export function DifficultyChoose({
     const { t } = useTranslation();
 
     const difficulties = [
-        { value: "easy", label: t("difficulty.0") },
-        { value: "medium", label: t("difficulty.1") },
-        { value: "hard", label: t("difficulty.2") },
+        { value: t("difficulty.0"), label: t("difficulty.0") },
+        { value: t("difficulty.1"), label: t("difficulty.1") },
+        { value: t("difficulty.2"), label: t("difficulty.2") },
     ];
 
     return (

@@ -5,6 +5,7 @@ import authRouter from './routes/auth';
 import usersRouter from './routes/users';
 import aiRouter from './routes/ai';
 import path from "node:path";
+import uploadsRouter from "./routes/uploads";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,6 +16,7 @@ app.use(cookieParser());
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/ai', aiRouter);
+app.use('/api/uploads', uploadsRouter);
 
 app.use(express.static(path.join(process.cwd(), "assets")))
 

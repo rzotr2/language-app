@@ -6,6 +6,6 @@ type LanguageState = {
 };
 
 export const useLanguageStore = create<LanguageState>((set) => ({
-    language: "en", // мова за замовчуванням
+    language: "en",
     setLanguage: (lang) => set({ language: lang }),
 }));

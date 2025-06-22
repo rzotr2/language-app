@@ -162,7 +162,7 @@ export const TextTranslation = ({
                         <Markdown remarkPlugins={[remarkGfm]}>{checkTextResultMyText}</Markdown>
                     </div>
                 )}
-                <div className="flex w-full justify-center sm:justify-end">
+                <div className="flex w-full justify-center sm:justify-end my-3">
                     <div className="flex gap-3 p-0">
                         <button
                             type="button"
@@ -178,7 +178,7 @@ export const TextTranslation = ({
                             onClick={generateMore}
                             className="text-white bg-blue-700 hover:bg-blue-800
                              font-medium rounded-lg text-sm px-2 py-1.5 sm:px-4 sm:py-2.5
-                            focus:outline-none cursor-pointer flex items-center gap-2 sm:me-3"
+                            focus:outline-none cursor-pointer flex items-center justify-center gap-1 sm:me-3"
                         >
                             {t("translation.generateMore")}
                             <PiShootingStarBold className="text-[14px]" />

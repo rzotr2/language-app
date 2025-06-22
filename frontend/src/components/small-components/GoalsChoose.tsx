@@ -24,7 +24,9 @@ export default function GoalsChoose(props: GoalsChooseProps) {
                         columns={{ initial: "1", sm: "2" }}
                         onValueChange={(value) => setSelectedGoal(value)}
                     >
-                        <RadioCards.Item value="Travel and Everyday Conversation">
+                        <RadioCards.Item
+                            value={`${t("goals.options.travel.label")}: ${t("goals.options.travel.desc")}`}
+                        >
                             <Flex
                                 direction="column"
                                 width="100%"
@@ -33,7 +35,9 @@ export default function GoalsChoose(props: GoalsChooseProps) {
                                 <p>{t("goals.options.travel.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="Business and Professional Communication">
+                        <RadioCards.Item
+                            value={`${t("goals.options.business.label")}: ${t("goals.options.business.desc")}`}
+                        >
                             <Flex
                                 direction="column"
                                 width="100%"
@@ -42,7 +46,9 @@ export default function GoalsChoose(props: GoalsChooseProps) {
                                 <p>{t("goals.options.business.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="Exam Preparation">
+                        <RadioCards.Item
+                            value={`${t("goals.options.exam.label")}: ${t("goals.options.exam.desc")}`}
+                        >
                             <Flex
                                 direction="column"
                                 width="100%"
@@ -51,7 +57,9 @@ export default function GoalsChoose(props: GoalsChooseProps) {
                                 <p>{t("goals.options.exam.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="Academic and Study Skills">
+                        <RadioCards.Item
+                            value={`${t("goals.options.academic.label")}: ${t("goals.options.academic.desc")}`}
+                        >
                             <Flex
                                 direction="column"
                                 width="100%"
@@ -60,7 +68,9 @@ export default function GoalsChoose(props: GoalsChooseProps) {
                                 <p>{t("goals.options.academic.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="Personal Enrichment and Hobbies">
+                        <RadioCards.Item
+                            value={`${t("goals.options.personal.label")}: ${t("goals.options.personal.desc")}`}
+                        >
                             <Flex
                                 direction="column"
                                 width="100%"
@@ -69,7 +79,9 @@ export default function GoalsChoose(props: GoalsChooseProps) {
                                 <p>{t("goals.options.personal.desc")}</p>
                             </Flex>
                         </RadioCards.Item>
-                        <RadioCards.Item value="Listening and Pronunciation">
+                        <RadioCards.Item
+                            value={`${t("goals.options.listening.label")}: ${t("goals.options.listening.desc")}`}
+                        >
                             <Flex
                                 direction="column"
                                 width="100%"

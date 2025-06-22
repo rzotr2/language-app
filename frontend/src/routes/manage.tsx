@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { checkUserAuth } from "../auth/auth.ts";
-import { useAuthState } from "../../store/auth.ts";
+import { useAuthState } from "../store/auth.ts";
 import Select from "react-select";
 import { useTranslation } from "react-i18next";
 import type { LanguageOption } from "../types";
@@ -29,7 +29,7 @@ const languageOptions: LanguageOption[] = [
     { value: "fr", label: "French 🇫🇷" },
     { value: "es", label: "Spanish 🇪🇸" },
     { value: "pl", label: "Polish 🇵🇱" },
-    { value: "other", label: "Other" },
+    { value: "cz", label: "Czech 🇨🇿" },
 ];
 
 function Manage() {
@@ -482,7 +482,7 @@ function Manage() {
                                   disabled:opacity-50 focus:border-blue-500"
                         placeholder={
                             currentUserData?.interests ||
-                            t("accountManage.form.interests.placeholder")
+                            t("accountManage.form.interestsPlaceholder")
                         }
                     ></textarea>
                     <p className="text-sm opacity-70 py-1">
@@ -501,7 +501,7 @@ function Manage() {
                                   disabled:cursor-not-allowed border-gray-300 focus:ring-blue-500
                                   disabled:opacity-50 focus:border-blue-500"
                         placeholder={
-                            currentUserData?.goals || t("accountManage.form.goals.placeholder")
+                            currentUserData?.goals || t("accountManage.form.goalsPlaceholder")
                         }
                     ></textarea>
                     <p className="text-sm opacity-70 py-1">{t("accountManage.form.goalsHint")}</p>

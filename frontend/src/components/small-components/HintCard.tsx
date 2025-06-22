@@ -14,15 +14,15 @@ export const HintCard = () => {
                 </h5>
                 <ul className="leading-0 space-y-1">
                     <li>
-                        <p className="text-sm font-bold inline">{`Easy:\n`}</p>
+                        <p className="text-sm font-bold inline">{t("difficulty.0") + ": "}</p>
                         <p className="text-sm font-normal inline">{t("hintCard.easyDesc")}</p>
                     </li>
                     <li>
-                        <p className="text-sm font-bold inline">{`Medium:\n`}</p>
+                        <p className="text-sm font-bold inline">{t("difficulty.1") + ": "}</p>
                         <p className="text-sm font-normal inline">{t("hintCard.mediumDesc")}</p>
                     </li>
                     <li>
-                        <p className="text-sm font-bold inline">{`Hard:\n`}</p>
+                        <p className="text-sm font-bold inline">{t("difficulty.2") + ": "}</p>
                         <p className="text-sm font-normal inline">{t("hintCard.hardDesc")}</p>
                     </li>
                 </ul>

@@ -5,11 +5,11 @@ import { IoMdEyeOff } from "react-icons/io";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { loginUser } from "../services/users.ts";
 import { BiInfoCircle } from "react-icons/bi";
-import { useUserState } from "../../store/users.ts";
+import { useUserState } from "../store/users.ts";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { createFileRoute } from "@tanstack/react-router";
-import { useAuthState } from "../../store/auth.ts";
+import { useAuthState } from "../store/auth.ts";
 
 type Inputs = {
     email: string;
@@ -39,7 +39,7 @@ function LoginPage() {
 
     const handleLoginSubmit = async () => {
         loginUser({
-            email: watch("email"),
+            email: watch("email").toLowerCase(),
             password: watch("password"),
         })
             .then((user) => {
@@ -49,11 +49,10 @@ function LoginPage() {
                 setFieldUser("error", null);
                 setTimeout(() => {
                     if (user.data.goals) {
-                        navigate({ to: "/workPage", from: "/" });
+                        navigate({ to: "/workPage", from: "/" }).then(() => resetFields());
                     } else {
-                        navigate({ to: "/mainPage", from: "/" });
+                        navigate({ to: "/mainPage", from: "/" }).then(() => resetFields());
                     }
-                    resetFields();
                 }, 1500);
                 errors.email = undefined;
                 errors.password = undefined;

@@ -94,7 +94,7 @@ export const generateBlanks = (props: DefaultPropsForGeneration) => {
                     "sentence": a sentence with a single blank (use ___ for the blank),
                     "options": an array of 4 possible answers (strings), only one is correct.
                     "answer": the correct answer (string),
-                    "explanation": a short explanation (1-2 sentences) why the answer is correct in ${props.nativeLanguage} language (if null, then ${props.selectedNativeLanguage}). Return explanation as a plain string, not as an object or array..
+                    "explanation": a short explanation (1-2 sentences) why the answer is correct in ${props.nativeLanguage} language (if null, then ${props.selectedNativeLanguage?.value}). Return explanation as a plain string, not as an object or array..
                 
                 Output only the JSON array, nothing else. Without any "'''json etc.". Do not include any comments or explanations outside the array.`,
     );
@@ -113,7 +113,7 @@ export const generateCards = (props: DefaultPropsForGeneration) => {
                 6. Each object in the array must have:
                 [
                     {
-                        "word": a word or phrase (in the target language);
+                        "word": a word or phrase (in the target language). If the target language is "de" (German), and the word is a noun, always include the correct article (der, die, das, etc.) as part of the word. For all other parts of speech, do not add an article.
                         "translation": translation of the word/phrase into my native language ${props.nativeLanguage} language (if null, then in ${props.selectedNativeLanguage?.value} language) - (FROM CAPITAL LETTER);
                         "meaning": explanation/meaning of the word/phrase in my native language ${props.nativeLanguage} language (if null, then in ${props.selectedNativeLanguage?.value} language).;
                         "example": a sentence/example using the word/phrase in the target language,

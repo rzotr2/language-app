@@ -7,7 +7,7 @@ import userLogo from "../assets/svg/userLogo.svg";
 import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
 import { useTranslation } from "react-i18next";
 import { LanguageSelect } from "./small-components/LanguageSelect.tsx";
-import { useAuthState } from "../../store/auth.ts";
+import { useAuthState } from "../store/auth.ts";
 
 export default function HeaderGeneral() {
     const navigate = useNavigate();

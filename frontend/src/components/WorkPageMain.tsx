@@ -6,7 +6,7 @@ import { DifficultyChoose } from "./small-components/DifficultyChoose.tsx";
 import { HintCard } from "./small-components/HintCard.tsx";
 import { FaMagic } from "react-icons/fa";
 import { getRandomImage } from "../services/images.ts";
-import { useExerciseStore } from "../../store/exercises.ts";
+import { useExerciseStore } from "../store/exercises.ts";
 import { ExerciseArea } from "./small-components/ExerciseArea.tsx";
 import type { DefaultPropsForGeneration, ExerciseType, LanguageOption, PhotoType } from "../types";
 import { useTranslation } from "react-i18next";
@@ -18,7 +18,7 @@ import {
     generateQuizCards,
     generateText,
 } from "../services/ai.ts";
-import { useAuthState } from "../../store/auth.ts";
+import { useAuthState } from "../store/auth.ts";
 
 type WorkPageMainProps = {
     getIsLoading: (isLoading: boolean) => void;
@@ -31,6 +31,7 @@ const languageOptions: LanguageOption[] = [
     { value: "fr", label: "French 🇫🇷" },
     { value: "es", label: "Spanish 🇪🇸" },
     { value: "pl", label: "Polish 🇵🇱" },
+    { value: "cz", label: "Czech 🇨🇿" },
     { value: "other", label: "Other" },
 ];
 
@@ -208,7 +209,7 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
     return (
         <>
             <div className="flex-1 h-full mt-5">
-                <section className="md:py-5 py-2 px-5 font-bold container mx-auto md:max-w-[75vw] lg:max-w-[55vw] shadow-md">
+                <section className="md:py-5 py-2 px-4 font-bold container mx-auto md:max-w-[75vw] lg:max-w-[55vw] shadow-md">
                     <div className="space-y-3 mb-5">
                         <div className="flex justify-between items-center">
                             <label
@@ -302,6 +303,11 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                         onValueChange={(value) =>
                                             setField("exerciseNumber", value[0].toString())
                                         }
+                                        disabled={
+                                            exercise === "translation" ||
+                                            exercise === "imageDesc" ||
+                                            exercise === "essay"
+                                        }
                                         step={1}
                                         max={30}
                                         min={1}
@@ -321,11 +327,8 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                     </div>
                                     <HintCard />
                                 </div>
-                                <Box className="w-[300px] sm:w-auto">
-                                    <label
-                                        htmlFor="visitors"
-                                        className="block mb-2 text-sm font-medium text-gray-900"
-                                    >
+                                <Box className="sm:w-auto">
+                                    <label className="block mb-2 text-sm font-medium text-gray-900">
                                         {t("work.selectType")}
                                     </label>
                                     <RadioCards.Root

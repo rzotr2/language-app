@@ -8,7 +8,7 @@ import type { User } from "../models/user.ts";
 import { useNavigate } from "@tanstack/react-router";
 import DesiredLanguageChoose from "./small-components/DesiredLanguageChoose.tsx";
 import { useTranslation } from "react-i18next";
-import { useAuthState } from "../../store/auth.ts";
+import { useAuthState } from "../store/auth.ts";
 
 type MainPageMainProps = {
     getIsLoading: (isLoading: boolean) => void;

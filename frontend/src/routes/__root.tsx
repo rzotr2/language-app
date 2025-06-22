@@ -4,16 +4,16 @@ import { useEffect } from "react";
 import { checkUserAuth } from "../auth/auth.ts";
 import HeaderGeneral from "../components/HeaderGeneral.tsx";
 import FooterGeneral from "../components/FooterGeneral.tsx";
-import { useAuthState } from "../../store/auth.ts";
+import { useAuthState } from "../store/auth.ts";
 import { useLocation } from "@tanstack/react-router";
-import { notFoundPage } from "./notFoundPage.tsx";
+import { NotFoundPage } from "../components/NotFoundPage.tsx";
 
 export const Route = createRootRoute({
     loader: async () => {
         await checkUserAuth();
     },
     component: Root,
-    notFoundComponent: notFoundPage,
+    notFoundComponent: NotFoundPage,
 });
 
 export function Root() {

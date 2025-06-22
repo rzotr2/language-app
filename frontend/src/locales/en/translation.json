@@ -378,7 +378,7 @@
       "title": "PROJECTS",
       "taskManager": {
         "title": "Task Manager",
-        "subtitle": "Development of a modern task management app using React, TypeScript, and TailwindCSS.",
+        "subtitle": "Development of a task management app using React, TypeScript, and TailwindCSS.",
         "points": [
           "Drag & drop, localStorage saving, API integration, responsive design",
           "Deployed on GitHub Pages",
@@ -387,7 +387,7 @@
       },
       "weatherApp": {
         "title": "Weather App",
-        "subtitle": "Development of a modern weather app using React, TypeScript, and TailwindCSS.",
+        "subtitle": "Development of a weather app using React, TypeScript, and TailwindCSS.",
         "points": [
           "Weather application built with React, TypeScript, TailwindCSS, and OpenWeatherMap API",
           "Multilingual support with language switcher",
@@ -397,7 +397,7 @@
       },
       "languageApp": {
         "title": "Language App",
-        "subtitle": "Modern language learning application (SPA) built with React, Node.js (Express), and MongoDB.",
+        "subtitle": "Language learning application (SPA) built with React, Node.js (Express), and MongoDB.",
         "points": [
           "Multilingual support with language switcher",
           "Integration of the OpenAI API to generate personalized exercises",

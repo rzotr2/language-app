@@ -6,11 +6,11 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { signUp, findUser } from "../services/users.ts";
 import axios from "axios";
 import { BiInfoCircle } from "react-icons/bi";
-import { useUserState } from "../../store/users.ts";
+import { useUserState } from "../store/users.ts";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { createFileRoute } from "@tanstack/react-router";
-import { useAuthState } from "../../store/auth.ts";
+import { useAuthState } from "../store/auth.ts";
 
 type Inputs = {
     signUpEmail: string;
@@ -47,7 +47,7 @@ function SignUpPage() {
     } = useUserState();
 
     const handleSignupSubmit = () => {
-        findUser(watch("signUpEmail"))
+        findUser(watch("signUpEmail").toLowerCase())
             .then(() => {
                 setFieldUser("userAlreadyExists", true);
             })
@@ -56,7 +56,7 @@ function SignUpPage() {
                     if (err.response.status === 404) {
                         setFieldUser("userAlreadyExists", false);
                         signUp({
-                            email: watch("signUpEmail"),
+                            email: watch("signUpEmail").toLowerCase(),
                             password: watch("signUpPassword"),
                         }).then((user) => {
                             setFieldAuth("currentUser", user.data);
@@ -64,9 +64,10 @@ function SignUpPage() {
                             setFieldUser("authSuccess", true);
                             setFieldUser("error", null);
                             setTimeout(() => {
-                                navigate({ to: "/mainPage" });
-                                setFieldUser("authSuccess", false);
-                                resetFields();
+                                navigate({ to: "/mainPage" }).then(() => {
+                                    setFieldUser("authSuccess", false);
+                                    resetFields();
+                                });
                             }, 1500);
                             errors.signUpEmail = undefined;
                             errors.signUpPassword = undefined;
