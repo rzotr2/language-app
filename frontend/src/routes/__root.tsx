@@ -25,6 +25,7 @@ export function Root() {
 
     useEffect(() => {
         const currentLanguage = localStorage?.getItem("currentLanguage");
+        document.documentElement.dir = i18n.language === "ar" ? "rtl" : "ltr";
         if (currentLanguage) {
             i18n.changeLanguage(currentLanguage);
         } else if (currentUser) {

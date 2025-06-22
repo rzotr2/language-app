@@ -1,6 +1,6 @@
 import { Select } from "@radix-ui/themes";
 import { IoLanguageOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLanguageStore } from "../../store/language.ts";
 import { useAuthState } from "../../store/auth.ts";
@@ -13,6 +13,7 @@ const languageOptions = [
     { value: "es", label: "Spanish 🇪🇸", emoji: " 🇪🇸" },
     { value: "pl", label: "Polish 🇵🇱", emoji: " 🇵🇱" },
     { value: "cz", label: "Czech 🇨🇿", emoji: " 🇨🇿" },
+    { value: "ar", label: "Arabic العربية", emoji: " العربية" },
 ];
 
 export const LanguageSelect = () => {
@@ -20,6 +21,14 @@ export const LanguageSelect = () => {
     const [value, setValue] = useState<string | null>(
         localStorage.getItem("currentLanguage") || currentUser?.nativeLanguage || null,
     );
+
+    useEffect(() => {
+        if (value === "ar") {
+            document.documentElement.dir = "rtl";
+        } else {
+            document.documentElement.dir = "ltr";
+        }
+    }, [value]);
 
     const { i18n } = useTranslation();
 

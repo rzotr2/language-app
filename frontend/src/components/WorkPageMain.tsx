@@ -32,6 +32,7 @@ const languageOptions: LanguageOption[] = [
     { value: "es", label: "Spanish 🇪🇸" },
     { value: "pl", label: "Polish 🇵🇱" },
     { value: "cz", label: "Czech 🇨🇿" },
+    { value: "ar", label: "Arabic العربية" },
     { value: "other", label: "Other" },
 ];
 

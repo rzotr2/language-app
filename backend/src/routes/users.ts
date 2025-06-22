@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import { findUser, findUserById, updateUser } from "../services/users";
 import { authMiddleware } from "../middlewares/auth";
+import {UserType} from "../types/user";
 
 const router = Router();
 
@@ -45,18 +46,22 @@ router.get("/:id", async (req: Request, res: Response) => {
 });
 
 router.post("/update", authMiddleware, async (req: Request, res: Response) => {
-    const { id, languageToLearn, nativeLanguage, level, interests, goals } = req.body;
+    const user: UserType = req.body;
 
-    console.log(req.user, "LOl");
-    if (!id) {
+    if (!user.id) {
         res.status(400).json({ message: 'Id is required' });
         return;
     }
 
     try {
-        const updatedUser = await updateUser({
-            id, languageToLearn, nativeLanguage, level, interests, goals
-        });
+        const foundUser = await findUser(user.email);
+
+        if (foundUser) {
+            res.status(403).json({message: "Email is already taken"});
+            return;
+        }
+
+        const updatedUser = await updateUser(user);
         if (!updatedUser) {
             res.status(404).json({ message: 'User not found' });
             return;

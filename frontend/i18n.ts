@@ -7,6 +7,7 @@ import uk from "./src/locales/uk/translation.json";
 import es from "./src/locales/es/translation.json";
 import pl from "./src/locales/pl/translation.json";
 import cz from "./src/locales/cz/translation.json";
+import ar from "./src/locales/ar/translation.json";
 
 i18n.use(initReactI18next).init({
     resources: {
@@ -17,6 +18,7 @@ i18n.use(initReactI18next).init({
         es: { translation: es },
         pl: { translation: pl },
         cz: { translation: cz },
+        ar: { translation: ar },
     },
     lng: "en",
     fallbackLng: "en",

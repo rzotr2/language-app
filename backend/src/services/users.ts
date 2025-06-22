@@ -29,16 +29,8 @@ export async function findUserById(id: string){
     return User.findOne({_id: id});
 }
 
-export async function updateUser(user: {
-    id?: string;
-    languageToLearn?: string | null;
-    nativeLanguage?: string | null;
-    level?: string | null;
-    interests?: string | null;
-    goals?: string | null
-}){
-    const { id, languageToLearn, nativeLanguage, level, interests, goals } = user;
-    return User.findByIdAndUpdate(id, { languageToLearn, nativeLanguage, level, interests, goals }, {new: true});
+export async function updateUser(user: UserType){
+    return User.findByIdAndUpdate(user.id, user, { new: true });
 }
 
 export async function updatePassword(id: ObjectId, newPassword: string) {

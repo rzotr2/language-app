@@ -10,10 +10,9 @@ import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { Box, Callout, Flex, RadioCards } from "@radix-ui/themes";
 import { changePassword, findUserById, updateUser } from "../services/users.ts";
 import { Collapsible } from "radix-ui";
-import { FaChevronUp } from "react-icons/fa";
-import { FaChevronDown } from "react-icons/fa6";
 import { BiInfoCircle } from "react-icons/bi";
 import axios from "axios";
+import { LuChevronsUpDown } from "react-icons/lu";
 
 export const Route = createFileRoute("/manage")({
     loader: async () => {
@@ -30,6 +29,7 @@ const languageOptions: LanguageOption[] = [
     { value: "es", label: "Spanish 🇪🇸" },
     { value: "pl", label: "Polish 🇵🇱" },
     { value: "cz", label: "Czech 🇨🇿" },
+    { value: "ar", label: "Arabic العربية" },
 ];
 
 function Manage() {
@@ -51,7 +51,7 @@ function Manage() {
     const [changePasswordError, setChangePasswordError] = useState<string | null>(null);
     const [changePasswordSuccess, setChangePasswordSuccess] = useState<string | null>(null);
     const [formSubmitSuccess, setFormSubmitSuccess] = useState<string | null>(null);
-    const [collapsibleOpened, setCollapsibleOpened] = useState(false);
+    const [formSubmitError, setFormSubmitError] = useState<string | null>(null);
     const [updatedNativeLanguage, setUpdatedNativeLanguage] = useState(
         currentUserData?.nativeLanguage,
     );
@@ -69,26 +69,40 @@ function Manage() {
     const handleUpdateSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
+        setFormSubmitError(null);
+        setFormSubmitSuccess(null);
+
         const userId = currentUserData?._id;
+
         if (userId) {
-            const existingUser: User = await findUserById(userId);
-            if (existingUser) {
-                const updatedUser: User = {
-                    ...currentUserData,
-                    id: userId,
-                    firstName: updatedFirstName,
-                    lastName: updatedLastName,
-                    email: emailToUpdate as string,
-                    languageToLearn: updatedLanguageToLearn,
-                    nativeLanguage: updatedNativeLanguage,
-                    level: updatedLanguageLevel,
-                    interests: updatedInterests,
-                    goals: updatedGoals,
-                };
+            const updatedUser: User = {
+                ...currentUserData,
+                email: emailToUpdate!,
+                id: userId,
+                firstName: updatedFirstName,
+                lastName: updatedLastName,
+                languageToLearn: updatedLanguageToLearn,
+                nativeLanguage: updatedNativeLanguage,
+                level: updatedLanguageLevel,
+                interests: updatedInterests,
+                goals: updatedGoals,
+            };
+
+            try {
                 const responseUpdatedUser = await updateUser(updatedUser);
+
                 setFieldAuth("currentUser", responseUpdatedUser);
+                console.log(responseUpdatedUser);
                 setFormSubmitSuccess(t("account.changesApplied"));
                 setCurrentUserData(responseUpdatedUser);
+            } catch (err) {
+                if (axios.isAxiosError(err) && err.response) {
+                    if (err.response.status === 403) {
+                        setFormSubmitError("Email is already taken");
+                    }
+                } else {
+                    setFormSubmitError(t("account.password.unknownError"));
+                }
             }
         }
     };
@@ -156,10 +170,11 @@ function Manage() {
                         </label>
                         <input
                             type="text"
+                            value={currentUserData?.firstName || ""}
                             id="first_name"
                             onInput={(event) => setUpdatedFirstName(event.currentTarget.value)}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                            placeholder={currentUserData?.firstName || "John"}
+                            placeholder="John"
                         />
                     </div>
                     <div className="w-full sm:w-1/2">
@@ -172,9 +187,10 @@ function Manage() {
                         <input
                             onInput={(event) => setUpdatedLastName(event.currentTarget.value)}
                             type="text"
+                            value={currentUserData?.lastName || ""}
                             id="first_name"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            placeholder={currentUserData?.lastName || "Doe"}
+                            placeholder="Doe"
                         />
                     </div>
                 </div>
@@ -190,7 +206,6 @@ function Manage() {
                             type="email"
                             disabled={true}
                             id="first_name"
-                            onInput={(event) => setEmailToUpdate(event.currentTarget.value)}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                             focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed opacity-80"
                             placeholder={currentUserData?.email || "email"}
@@ -213,23 +228,18 @@ function Manage() {
                     </div>
                 </div>
                 <Collapsible.Root className="w-[95%] mx-auto my-5">
-                    <div className="flex justify-end">
+                    <div>
                         <Collapsible.Trigger
-                            onClick={() => setCollapsibleOpened(!collapsibleOpened)}
-                            className="bg-red-500 text-white px-3 py-1.5 cursor-pointer rounded-t-md gap-3
-                            flex items-center justify-end font-medium hover:bg-red-400 transition-colors"
+                            className="text-sm bg-blue-100 hover:bg-blue-200 px-3 py-1.5 cursor-pointer rounded-md gap-3
+                            flex items-center justify-end font-medium transition-colors duration-300"
                         >
                             {t("accountManage.form.changePassword")}
-                            {collapsibleOpened ? (
-                                <FaChevronUp className="text-base" />
-                            ) : (
-                                <FaChevronDown className="text-base" />
-                            )}
+                            <LuChevronsUpDown className="" />
                         </Collapsible.Trigger>
                     </div>
                     <Collapsible.Content
                         className="CollapsibleContent text-sm bg-gray-50
-                         text-blue-900 rounded-b-md p-4 space-y-3"
+                         text-blue-900 rounded-b-md space-y-3"
                     >
                         <div>
                             <div className="flex items-center mx-auto flex-wrap sm:flex-nowrap gap-5 w-[95%] mt-5">
@@ -296,14 +306,14 @@ function Manage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex justify-end pt-5">
+                            <div className="flex justify-end mt-4 mb-3 w-[95%] mx-auto">
                                 <button
                                     onClick={handlePasswordChange}
                                     type="button"
                                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
-                                    focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
+                                    focus:ring-blue-300 font-medium rounded-lg text-sm md:px-3 md:py-2
                                     dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
-                                    dark:focus:ring-blue-800 cursor-pointer"
+                                    dark:focus:ring-blue-800 cursor-pointer px-2 py-1.5"
                                 >
                                     {t("accountManage.form.changePassword")}
                                 </button>
@@ -526,6 +536,18 @@ function Manage() {
                                 <BiInfoCircle />
                             </Callout.Icon>
                             <Callout.Text>{formSubmitSuccess}</Callout.Text>
+                        </Callout.Root>
+                    )}
+                    {formSubmitError && (
+                        <Callout.Root
+                            color="red"
+                            size="1"
+                            className="mt-2 mb-4"
+                        >
+                            <Callout.Icon>
+                                <BiInfoCircle />
+                            </Callout.Icon>
+                            <Callout.Text>{formSubmitError}</Callout.Text>
                         </Callout.Root>
                     )}
                 </div>
