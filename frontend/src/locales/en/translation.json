@@ -494,5 +494,10 @@
     "Medium",
     "Hard"
   ],
-  "return": "Back to start"
+  "return": "Back to start",
+  "notFound": {
+    "title": "Something's missing.",
+    "description": "Sorry, we can't find that page. You'll find lots to explore on the home page.",
+    "backToHome": "Back to Homepage"
+  }
 }

@@ -494,5 +494,10 @@
     "Medio",
     "Difícil"
   ],
-  "return": "Volver al inicio"
+  "return": "Volver al inicio",
+  "notFound": {
+    "title": "Falta algo.",
+    "description": "Lo sentimos, no podemos encontrar esa página. Hay mucho que explorar en la página principal.",
+    "backToHome": "Volver a la página principal"
+  }
 }

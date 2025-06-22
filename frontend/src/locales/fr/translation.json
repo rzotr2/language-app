@@ -494,5 +494,10 @@
     "Moyen",
     "Difficile"
   ],
-  "return": "Retour au début"
+  "return": "Retour au début",
+  "notFound": {
+    "title": "Quelque chose manque.",
+    "description": "Désolé, nous ne trouvons pas cette page. Vous trouverez beaucoup à explorer sur la page d'accueil.",
+    "backToHome": "Retour à la page d'accueil"
+  }
 }

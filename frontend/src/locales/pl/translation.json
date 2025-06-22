@@ -494,5 +494,10 @@
     "Średni",
     "Trudny"
   ],
-  "return": "Powrót na początek"
+  "return": "Powrót na początek",
+  "notFound": {
+    "title": "Czegoś brakuje.",
+    "description": "Przepraszamy, nie możemy znaleźć tej strony. Na stronie głównej znajdziesz wiele do odkrycia.",
+    "backToHome": "Powrót na stronę główną"
+  }
 }
