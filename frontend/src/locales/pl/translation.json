@@ -431,6 +431,7 @@
   },
   "account": {
     "changesApplied": "Zmiany zostały pomyślnie zastosowane",
+    "emailTaken": "Ten adres e-mail jest już zarejestrowany",
     "password": {
       "minLength": "Twoje hasło musi mieć co najmniej 8 znaków",
       "success": "Hasło zostało pomyślnie zmienione",

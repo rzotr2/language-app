@@ -92,13 +92,12 @@ function Manage() {
                 const responseUpdatedUser = await updateUser(updatedUser);
 
                 setFieldAuth("currentUser", responseUpdatedUser);
-                console.log(responseUpdatedUser);
                 setFormSubmitSuccess(t("account.changesApplied"));
                 setCurrentUserData(responseUpdatedUser);
             } catch (err) {
                 if (axios.isAxiosError(err) && err.response) {
                     if (err.response.status === 403) {
-                        setFormSubmitError("Email is already taken");
+                        setFormSubmitError(t("account.emailTaken"));
                     }
                 } else {
                     setFormSubmitError(t("account.password.unknownError"));
@@ -120,7 +119,6 @@ function Manage() {
                 try {
                     if (newPasswordToUpdate && oldPasswordToUpdate) {
                         if (newPasswordToUpdate.length < 8) {
-                            console.log(newPasswordToUpdate.length);
                             setChangePasswordError(t("account.password.minLength"));
                         } else {
                             await changePassword(
@@ -323,7 +321,7 @@ function Manage() {
                             <Callout.Root
                                 color="red"
                                 size="1"
-                                className="mt-2 mb-4"
+                                className="mt-3 md:mt-5 mb-4 w-[95%] mx-auto"
                             >
                                 <Callout.Icon>
                                     <BiInfoCircle />
@@ -335,7 +333,7 @@ function Manage() {
                             <Callout.Root
                                 color="green"
                                 size="1"
-                                className="mt-2 mb-4"
+                                className="mt-3 md:mt-5 mb-4 w-[95%] mx-auto"
                             >
                                 <Callout.Icon>
                                     <BiInfoCircle />

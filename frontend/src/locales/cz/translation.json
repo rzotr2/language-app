@@ -431,6 +431,7 @@
   },
   "account": {
     "changesApplied": "Změny byly úspěšně uloženy",
+    "emailTaken": "Tato e-mailová adresa je již zaregistrována",
     "password": {
       "minLength": "Vaše heslo musí mít alespoň 8 znaků",
       "success": "Heslo bylo úspěšně změněno",

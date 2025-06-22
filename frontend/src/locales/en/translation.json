@@ -431,6 +431,7 @@
   },
   "account": {
     "changesApplied": "Changes applied successfully",
+    "emailTaken": "This email address is already registered",
     "password": {
       "minLength": "Your password must have at least 8 characters",
       "success": "Password changed successfully",

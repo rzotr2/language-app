@@ -256,7 +256,10 @@ function SignUpPage() {
                                     </Callout.Root>
                                 )}
                                 {authSuccess && (
-                                    <Callout.Root color="green">
+                                    <Callout.Root
+                                        color="green"
+                                        className="mt-2 mb-4"
+                                    >
                                         <Callout.Icon>
                                             <BiInfoCircle />
                                         </Callout.Icon>

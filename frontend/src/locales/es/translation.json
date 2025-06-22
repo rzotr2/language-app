@@ -431,6 +431,7 @@
   },
   "account": {
     "changesApplied": "Los cambios se han aplicado correctamente",
+    "emailTaken": "Esta dirección de correo electrónico ya está registrada",
     "password": {
       "minLength": "Tu contraseña debe tener al menos 8 caracteres",
       "success": "Contraseña cambiada con éxito",

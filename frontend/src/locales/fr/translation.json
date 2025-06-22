@@ -431,6 +431,7 @@
   },
   "account": {
     "changesApplied": "Les modifications ont été appliquées avec succès",
+    "emailTaken": "Cette adresse e-mail est déjà enregistrée",
     "password": {
       "minLength": "Votre mot de passe doit comporter au moins 8 caractères",
       "success": "Mot de passe changé avec succès",
