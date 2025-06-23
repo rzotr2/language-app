@@ -21,7 +21,7 @@ export const generateText = (props: DefaultPropsForGeneration) => {
             2. If not mentioned in Preferences, my interests are: ${props.interests} and goals: ${props.goals}.
             3. Native language: ${props.nativeLanguage} (if null, then ${props.selectedNativeLanguage?.value}).
             4. The text must be in: ${props.languageToLearn} language (if null, then ${props.selectedLanguageToLearn?.value}).
-            5. My current language level: ${props.level}, and the difficulty: ${props.difficulty}.
+            5. My current language level: ${props.level}, and the difficulty: ${props.difficulty}/3.
             Always use the highest priority information if there is a conflict (e.g., if "Ukrainian".
             is listed first as my native language, use Ukrainian, even if "German" is mentioned later).
             Return only a JSON object with two fields:
@@ -88,7 +88,7 @@ export const generateBlanks = (props: DefaultPropsForGeneration) => {
                 2. If not mentioned in Preferences, my interests are: ${props.interests} and goals: ${props.goals}.
                 3. The sentences must be in  ${props.languageToLearn} language (if null, then ${props.selectedLanguageToLearn?.value}).
                 4. My current language level is ${props.level}.
-                5. The difficulty must be ${props.difficulty} according to my current level.
+                5. The difficulty must be ${props.difficulty}/3 according to my current level.
                 6. Each object must have:
                     "id": a unique integer starting from 1,
                     "sentence": a sentence with a single blank (use ___ for the blank),
@@ -109,7 +109,7 @@ export const generateCards = (props: DefaultPropsForGeneration) => {
                 2. If not specified above, use my interests: ${props.interests} and goals: ${props.goals}
                 3. Language: Fields "word" and "example" must be in ${props.languageToLearn} language (if null, then in ${props.selectedLanguageToLearn?.value} language).
                 4. My current language level: ${props.level}
-                5. Difficulty: The content must match the difficulty ${props.difficulty} for my level.
+                5. Difficulty: The content must match the difficulty ${props.difficulty}/3 for my level.
                 6. Each object in the array must have:
                 [
                     {
@@ -134,7 +134,7 @@ export const generateQuizCards = (props: DefaultPropsForGeneration) => {
                 2. If not specified above, use my interests: ${props.interests} and goals: ${props.goals}
                 3. Language: All sentences and examples must be in ${props.languageToLearn} language (if null, then in ${props.selectedLanguageToLearn?.value} language).
                 4. My current language level: ${props.level}
-                5. Difficulty: The content must match the difficulty ${props.difficulty} for my level.
+                5. Difficulty: The content must match the difficulty ${props.difficulty}/3 for my level.
                 6. Each object in the array must have:
                 [
                     {

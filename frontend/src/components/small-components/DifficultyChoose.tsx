@@ -12,10 +12,12 @@ export function DifficultyChoose({
     const { t } = useTranslation();
 
     const difficulties = [
-        { value: t("difficulty.0"), label: t("difficulty.0") },
-        { value: t("difficulty.1"), label: t("difficulty.1") },
-        { value: t("difficulty.2"), label: t("difficulty.2") },
+        { value: "1", label: t("difficulty.0") },
+        { value: "2", label: t("difficulty.1") },
+        { value: "3", label: t("difficulty.2") },
     ];
+
+    const difficultyLabels = [t("difficulty.0"), t("difficulty.1"), t("difficulty.2")];
 
     return (
         <div className="flex flex-col gap-3">
@@ -44,7 +46,7 @@ export function DifficultyChoose({
                     <span
                         className={`text-base font-medium ${value === diff.value ? "text-blue-700" : "text-gray-700"}`}
                     >
-                        {diff.label}
+                        {difficultyLabels[Number(diff.value) - 1]}
                     </span>
                 </label>
             ))}

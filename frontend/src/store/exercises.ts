@@ -39,7 +39,7 @@ export const useExerciseStore = create<State>((set) => ({
     languageResult: null,
     exerciseNumber: "5",
     exercise: "translation",
-    difficulty: "-",
+    difficulty: "1",
     currentText: null,
     blanksArray: null,
     cardsArray: null,

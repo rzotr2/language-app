@@ -36,7 +36,6 @@ router.post("/signup", async (req: Request, res: Response) => {
         res.status(200).json(createdUser);
 
     } catch (error) {
-        console.log(error);
         res.status(500).send("Internal server error");
     }
 });
@@ -58,8 +57,6 @@ router.post(
                 res.status(401).send('Wrong password or email');
                 return;
             }
-
-            console.log(remember)
 
             const token = jwt.sign(
                 { userId: user._id },
@@ -121,8 +118,6 @@ router.post(
             }
 
             const updatedUser = await updatePassword(user._id, newPassword);
-
-            console.log(updatedUser)
 
             res.status(200).json(updatedUser);
         } catch (err) {
