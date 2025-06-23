@@ -7,7 +7,7 @@ export const signUp = (newUser: User) => {
     return axios.post("api/auth/signup", newUser);
 };
 
-export const loginUser = (user: User) => {
+export const loginUser = (user: User & { remember: boolean }) => {
     return axios.post("api/auth/login", user);
 };
 

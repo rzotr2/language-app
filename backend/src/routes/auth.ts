@@ -29,9 +29,8 @@ router.post("/signup", async (req: Request, res: Response) => {
 
         res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
-            maxAge: 1000 * 60 * 60,
+            maxAge: 1000 * 60 * 60 * 24,
         });
 
         res.status(200).json(createdUser);
@@ -45,7 +44,7 @@ router.post("/signup", async (req: Request, res: Response) => {
 router.post(
     '/login',
     async (req: Request, res: Response): Promise<void> => {
-        const { email, password } = req.body;
+        const { email, password, remember } = req.body;
 
         try {
             const user = await User.findOne({ email }).exec();
@@ -60,18 +59,19 @@ router.post(
                 return;
             }
 
+            console.log(remember)
+
             const token = jwt.sign(
                 { userId: user._id },
                 process.env.JWT_SECRET!,
-                { expiresIn: '1h' }
+                { expiresIn: remember ? "30d" : "24h" }
             );
 
             res
                 .cookie('token', token, {
                     httpOnly: true,
-                    secure: process.env.NODE_ENV === 'production',
                     sameSite: 'lax',
-                    maxAge: 1000 * 60 * 60, // 1 година
+                    maxAge: remember ? 1000 * 60 * 60 * 24 * 30 : 1000 * 60 * 60 * 24,
                 })
                 .status(200)
                 .json(user);

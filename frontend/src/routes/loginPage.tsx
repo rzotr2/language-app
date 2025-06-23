@@ -1,4 +1,4 @@
-import { Callout } from "@radix-ui/themes";
+import { Callout, Switch } from "@radix-ui/themes";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { createFileRoute } from "@tanstack/react-router";
 import { useAuthState } from "../store/auth.ts";
+import { useState } from "react";
 
 type Inputs = {
     email: string;
@@ -36,11 +37,13 @@ function LoginPage() {
 
     const { showPassword, error, authSuccess, setFieldUser, resetFields } = useUserState();
     const { setFieldAuth } = useAuthState();
+    const [rememberMeState, setRememberMeState] = useState<boolean>(false);
 
     const handleLoginSubmit = async () => {
         loginUser({
             email: watch("email").toLowerCase(),
             password: watch("password"),
+            remember: rememberMeState,
         })
             .then((user) => {
                 setFieldAuth("currentUser", user.data);
@@ -154,6 +157,10 @@ function LoginPage() {
                                         <IoMdEyeOff className="text-xl" />
                                     )}
                                 </div>
+                            </div>
+                            <div className="my-5 flex justify-end items-center gap-4">
+                                <p>{t("rememberMe")}</p>
+                                <Switch onClick={() => setRememberMeState(!rememberMeState)} />
                             </div>
                             {errors.password && (
                                 <Callout.Root
