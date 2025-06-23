@@ -310,7 +310,7 @@ function WorkPageMain({ getIsLoading }: WorkPageMainProps) {
                                             exercise === "essay"
                                         }
                                         step={1}
-                                        max={30}
+                                        max={15}
                                         min={1}
                                         defaultValue={[5]}
                                         radius="small"
