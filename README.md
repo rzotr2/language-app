@@ -1,4 +1,4 @@
-# 🗣️ Language App
+# 🗣️ Language App - [DEMO](https://rzotr-language-app.xyz)
 
 <div align="center">
   <img src="frontend/src/assets/svg/logo.svg" alt="Logo" width="100" />
